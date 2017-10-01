@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "GL/freeglut.h"
+#include <GL/freeglut.h>
 
 int nWindow, nChildWindow = -1;
 int nLoopMain = 0;
