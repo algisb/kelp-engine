@@ -15,9 +15,10 @@ set(FREEGLUT_BUILD_SHARED_LIBS OFF CACHE BOOL "")
 #set(FREEGLUT_BUILD_STATIC_LIBS OFF CACHE BOOL "")
 #set(FREEGLUT_BUILD_PRINT_WARNINGS OFF CACHE BOOL "")
 
-include_directories ("./freeglut3/include")
+include_directories ("./external/freeglut/include")
 #link_directories("./freeglut3/lib")
-add_subdirectory("./freeglut3")
+add_subdirectory("./external/freeglut")
+add_definitions(-DFREEGLUT_STATIC)
 
 #-----------------------------------------------------------
 add_executable(kelp-engine "./src/main.cpp")
