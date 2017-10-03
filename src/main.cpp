@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#include "GL/glew.h"
+
 #include "GL/freeglut.h"
 
 int nWindow, nChildWindow = -1;
@@ -375,6 +377,9 @@ int main(int argc, char* argv[])
     glutWindowStatusFunc( WindowStatus );
 
     glutTimerFunc(300, Timer, 0);
+
+    glewExperimental = GL_TRUE;
+    glewInit();
 
     glutMainLoop();
     printf("glutMainLoop returned\n");
