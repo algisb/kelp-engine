@@ -4,7 +4,7 @@ project (kelp-engine)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "./bin")
 
-#glew------------------------------------------------
+#glew------------------------------------------------------
 #include_directories ("./external/glew/include")
 add_subdirectory("./external/glew/build/cmake")
 include_directories (${GLEW_DIR}/include)
@@ -12,23 +12,23 @@ add_definitions(-DGLEW_STATIC)
 
 
 
-#opengl----------------------------------------------
+#opengl----------------------------------------------------
 find_package(OpenGL)
 include_directories( ${OPENGL_INCLUDE_DIRS} )
 
 
-#freeglut--------------------------------------------
-set(FREEGLUT_BUILD_DEMOS OFF CACHE BOOL "")
-set(FREEGLUT_BUILD_SHARED_LIBS OFF CACHE BOOL "")
-#set(FREEGLUT_BUILD_STATIC_LIBS OFF CACHE BOOL "")
-#set(FREEGLUT_BUILD_PRINT_WARNINGS OFF CACHE BOOL "")
+#glfw------------------------------------------------------
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "")
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "")
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "")
+set(GLFW_INSTALL OFF CACHE BOOL "")
 
-include_directories ("./external/freeglut/include")
-#link_directories("./freeglut3/lib")
-add_subdirectory("./external/freeglut")
-add_definitions(-DFREEGLUT_STATIC)
+include_directories ("./external/glfw/include")
+add_subdirectory("./external/glfw")
+add_definitions(-DGLFW_STATIC)
 
 #-----------------------------------------------------------
 add_executable(kelp-engine "./src/main.cpp")
 #target_link_libraries (kelp-engine ${OPENGL_LIBRARIES} freeglut)
-target_link_libraries (kelp-engine ${OPENGL_LIBRARIES} freeglut_static glew_s )
+target_link_libraries (kelp-engine ${OPENGL_LIBRARIES} glfw glew_s )
