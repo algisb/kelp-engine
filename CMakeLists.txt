@@ -7,7 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "./bin")
 #glew------------------------------------------------------
 #include_directories ("./external/glew/include")
 add_subdirectory("./external/glew/build/cmake")
-include_directories (${GLEW_DIR}/include)
+include_directories ("./external/glew/include")
 add_definitions(-DGLEW_STATIC)
 
 
