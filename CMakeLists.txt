@@ -31,5 +31,5 @@ add_definitions(-DGLFW_STATIC)
 #kelp engine-----------------------------------------------
 include_directories ("./include")
 file(GLOB KELP_SRC "./src/*.cpp")
-add_executable(kelp-engine "./src/main.cpp")
+add_executable(kelp-engine ${KELP_SRC})
 target_link_libraries (kelp-engine ${OPENGL_LIBRARIES} glfw glew_s )

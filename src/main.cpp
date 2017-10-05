@@ -12,22 +12,19 @@ static void error_callback(int error, const char *description)
     fputs(description, stderr);
 }
 
+
+static kelp::Input input;
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) 
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
     
-    if(key == GLFW_KEY_UP && action == GLFW_PRESS)
-        printf("up pressed \n");
-    
+    input.update(key, action);
         
 }
 
 
-static void render(GLFWwindow *window)
-{
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_ACCUM_BUFFER_BIT);
-}
+
 
 
 int main(void)
@@ -58,15 +55,16 @@ int main(void)
     glfwMakeContextCurrent(window);
 
     glfwSetKeyCallback(window, key_callback);
-    glClearColor(1,0,0,1);
-    kelp::Input input; 
+    
     while (!glfwWindowShouldClose(window))
     {
-        
-        render(window);
+        glClearColor(1,0,0,1);
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_ACCUM_BUFFER_BIT);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+        input.printKeyList();
+        input.clear();
         //glfwWaitEvents();
     }
 
