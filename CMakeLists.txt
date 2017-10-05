@@ -28,7 +28,8 @@ include_directories ("./external/glfw/include")
 add_subdirectory("./external/glfw")
 add_definitions(-DGLFW_STATIC)
 
-#-----------------------------------------------------------
+#kelp engine-----------------------------------------------
+include_directories ("./include")
+file(GLOB KELP_SRC "./src/*.cpp")
 add_executable(kelp-engine "./src/main.cpp")
-#target_link_libraries (kelp-engine ${OPENGL_LIBRARIES} freeglut)
 target_link_libraries (kelp-engine ${OPENGL_LIBRARIES} glfw glew_s )
