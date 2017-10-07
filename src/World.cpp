@@ -9,3 +9,8 @@ World::~World()
 {
     
 }
+
+void World::update()
+{
+    
+}

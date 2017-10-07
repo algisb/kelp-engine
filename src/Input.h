@@ -1,4 +1,7 @@
-#pragma once
+
+#ifndef INPUT_H
+#define INPUT_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
@@ -153,3 +156,4 @@ namespace kelp
             static bool isHeld(Key _key);
     };
 };
+#endif
