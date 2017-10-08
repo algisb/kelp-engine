@@ -58,8 +58,10 @@ int main(void)
     kelp::Core * core = new kelp::Core();
     while (!glfwWindowShouldClose(window))
     {
-        kelp::Time::calc(glfwGetTime());
-        printf("fps: %d \n", kelp::Time::frameRate);
+        kelp::Time::calc();
+        //printf("fps: %d \n", kelp::Time::frameRate);
+        //printf("deltaT: %f \n", kelp::Time::deltaT);
+        
         glClearColor(0.0f, 0.1f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT/*|GL_DEPTH_BUFFER_BIT|GL_ACCUM_BUFFER_BIT*/);
         glfwPollEvents();
@@ -85,19 +87,7 @@ int main(void)
         //       .'--''   .   `-..__.--.
         //    ~-=  =-~_-   `-..___(  ===;
         //    ~-=  - -    .'       `---'
-/*        if(kelp::Time::deltaT < kelp::Config::targetDeltaT)
-        {
-            float delay = kelp::Config::targetDeltaT - kelp::Time::deltaT;
-            float elapsedT = 0.0f;
-            float prevT = glfwGetTime();
-            while(elapsedT < delay)
-            {
-                float t = glfwGetTime();
-                float diff = t-prevT;
-                elapsedT += diff;
-                prevT = t;
-            }
-        } */       
+        kelp::Time::calcEnd();
     }
 
     
