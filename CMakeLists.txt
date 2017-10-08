@@ -28,6 +28,9 @@ include_directories ("./external/glfw/include")
 add_subdirectory("./external/glfw")
 add_definitions(-DGLFW_STATIC)
 
+#glm-------------------------------------------------------
+include_directories ("./external/glm/glm")
+
 #kelp engine-----------------------------------------------
 include_directories ("./src" "./src/Component")
 file(GLOB KELP_SRC "./src/*.cpp" "./src/Component/*.cpp")

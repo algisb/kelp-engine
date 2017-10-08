@@ -35,8 +35,6 @@ namespace kelp
         Core();
         ~Core();
         void update();
-        
-        
     };
 };
 #endif
