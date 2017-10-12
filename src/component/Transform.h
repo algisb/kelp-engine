@@ -15,6 +15,7 @@ namespace kelp
         
         Transform(kep::Vector3 _position, kep::Quaternion _orientation, kep::Vector3 _scale);
         ~Transform();
+        void init();
         void update();
         
         void dump();

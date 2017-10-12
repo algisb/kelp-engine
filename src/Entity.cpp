@@ -22,6 +22,12 @@ void Entity::update()
         m_components[i]->update();
 }
 
+void Entity::render()
+{
+    for(int i = 0; i< m_components.size(); i++)
+        m_components[i]->render();
+}
+
 void Entity::addComponent(Component * io_c)
 {
     io_c->m_owner = this;

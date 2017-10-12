@@ -14,6 +14,7 @@ namespace kelp
         std::vector<Entity*> m_entities;
         World();
         virtual ~World()=0;
+        virtual void updateV()=0;
         void update();
         inline void addEntity(Entity * _e)
         {

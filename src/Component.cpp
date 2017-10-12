@@ -15,3 +15,7 @@ Component::~Component()
 {
     
 }
+void Component::render()
+{
+    
+}

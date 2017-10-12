@@ -4,16 +4,22 @@ using namespace kelp;
 
 World_0::World_0() : World()
 {
-    Entity * entity = new Entity("empty");
-    entity->addComponent(
+    empty[0] = new Entity("empty");
+    empty[0]->addComponent(
         new Transform(kep::Vector3(),
                       kep::Quaternion(), 
                       kep::Vector3(1.0f, 1.0f, 1.0f)
                      )
                         );
+    empty[0]->addComponent(new Controller());
+    addEntity(empty[0]);
 }
 World_0::~World_0()
 {
     
 }
 
+void World_0::updateV()
+{
+    empty[0]->getComponent<Transform>()->dump();
+}

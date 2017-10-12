@@ -17,6 +17,7 @@ namespace kelp
         Entity(std::string _tag);
         ~Entity();
         virtual void update();
+        virtual void render();
         void addComponent(Component * io_c);
         template<typename ComponentType> ComponentType * getComponent()
         {
