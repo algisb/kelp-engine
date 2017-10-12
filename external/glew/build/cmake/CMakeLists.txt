@@ -207,13 +207,13 @@ install(FILES ${GLEW_DIR}/glew.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
 )
 
-if(WIN32 AND MSVC AND (NOT MSVC_VERSION LESS 1600) AND (NOT CMAKE_VERSION VERSION_LESS "3.1"))
-    install(
-        FILES $<TARGET_PDB_FILE:glew>
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        CONFIGURATIONS Debug RelWithDebInfo
-    )
-endif()
+#if(WIN32 AND MSVC AND (NOT MSVC_VERSION LESS 1600) AND (NOT CMAKE_VERSION VERSION_LESS "3.1"))
+#    install(
+#        FILES $<TARGET_PDB_FILE:glew>
+#        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#        CONFIGURATIONS Debug RelWithDebInfo
+#    )
+#endif()
 
 install (FILES
     ${GLEW_DIR}/include/GL/wglew.h
