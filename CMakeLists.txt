@@ -32,7 +32,7 @@ add_definitions(-DGLFW_STATIC)
 include_directories ("./external/glm/glm")
 
 #kelp engine-----------------------------------------------
-include_directories ("./src" "./src/Component")
-file(GLOB KELP_SRC "./src/*.cpp" "./src/Component/*.cpp")
+include_directories ("./src")
+file(GLOB KELP_SRC "./src/*.cpp" "./src/component/*.cpp" "./src/kep/*.cpp" "./src/world/*.cpp")
 add_executable(kelp-engine ${KELP_SRC})
 target_link_libraries (kelp-engine ${OPENGL_LIBRARIES} glfw glew_s )

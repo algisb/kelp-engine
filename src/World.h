@@ -1,17 +1,25 @@
-#ifndef WORLD_H
-#define WORLD_H
+#ifndef WORLD_H_
+#define WORLD_H_
+
+#include <vector>
 #include "glm.hpp"
+#include "Entity.h"
+
 //Made up of entities
 namespace kelp
 {
     class World
     {
     public:
-        glm::vec3 v1;
+        std::vector<Entity*> m_entities;
         World();
-        ~World();
+        virtual ~World()=0;
         void update();
+        inline void addEntity(Entity * _e)
+        {
+            m_entities.push_back(_e);
+        }
         
     };
 };
-#endif
+#endif // WORLD_H_

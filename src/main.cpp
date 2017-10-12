@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "GL/glew.h"
+#include "GLFW/glfw3.h"
 
 #include "Config.h"
 #include "Input.h"
@@ -41,8 +41,8 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     window = glfwCreateWindow(
-        kelp::Config::windowWidth, 
-        kelp::Config::windowHeight,
+        kelp::Config::s_windowWidth, 
+        kelp::Config::s_windowHeight,
         "kelp-engine", 
         NULL, 
         NULL);
@@ -58,14 +58,9 @@ int main(void)
     kelp::Core * core = new kelp::Core();
     while (!glfwWindowShouldClose(window))
     {
-        kelp::Time::calc();
-        //printf("fps: %d \n", kelp::Time::frameRate);
-        //printf("deltaT: %f \n", kelp::Time::deltaT);
-        
-        glClearColor(0.0f, 0.1f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT/*|GL_DEPTH_BUFFER_BIT|GL_ACCUM_BUFFER_BIT*/);
+        kelp::Time::calc();//start timer
         glfwPollEvents();
-        kelp::Input::printKeyList();
+
         core->update();
         
         glfwSwapBuffers(window);
@@ -87,7 +82,7 @@ int main(void)
         //       .'--''   .   `-..__.--.
         //    ~-=  =-~_-   `-..___(  ===;
         //    ~-=  - -    .'       `---'
-        kelp::Time::calcEnd();
+        kelp::Time::calcEnd();//end timer
     }
 
     

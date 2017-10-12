@@ -1,3 +1,7 @@
+///
+///  @file Input.cpp
+///  @brief globals that deals with control input
+
 #include "Input.h"
 
 using namespace kelp;

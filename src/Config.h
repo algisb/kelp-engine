@@ -1,18 +1,18 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef CONFIG_H_
+#define CONFIG_H_
 
 namespace kelp
 {
     class Config
     {
     public:
-        static int windowWidth;
-        static int windowHeight;
-        static bool capFrameRate;
-        static int targetFrameRate;
-        static float targetDeltaT;
+        static int s_windowWidth;
+        static int s_windowHeight;
+        static bool s_capFrameRate;
+        static int s_targetFrameRate;
+        static float s_targetDeltaT;
         
     };
     
 };
-#endif
+#endif // CONFIG_H_

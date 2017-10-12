@@ -1,6 +1,6 @@
 
-#ifndef INPUT_H
-#define INPUT_H
+#ifndef INPUT_H_
+#define INPUT_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -156,4 +156,4 @@ namespace kelp
             static bool isHeld(Key _key);
     };
 };
-#endif
+#endif // INPUT_H_

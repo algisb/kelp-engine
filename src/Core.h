@@ -1,6 +1,3 @@
-#ifndef CORE_H
-#define CORE_H
-
 //      .--..--..--..--..--..--.
 //    .' \  (`._   (_)      ---\------------<<<//END ME
 //  .'    |  '._)         (_)  |
@@ -22,20 +19,31 @@
 //             ||       ||
 //             ||_.-.   ||_.-.
 //            (_.--__) (_.--__)
+#ifndef CORE_H_
+#define CORE_H_
 
+#include "GL/glew.h"
+#include "Config.h"
+#include "Input.h"
+#include "Time.h"
 
 #include "World.h"
+#include "Entity.h"
+#include "component/Transform.h"
+#include "kep/Core.h"
+#include "world/World_0.h"
+
 //Fore initialising worlds
 namespace kelp
 {
     class Core
     {
     public:
-        World * world;
+        World * m_world;
         Core();
         ~Core();
         void update();
     };
 };
-#endif
+#endif // CORE_H_
 

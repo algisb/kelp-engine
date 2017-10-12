@@ -1,18 +1,23 @@
-#ifndef COMPONENT_H
-#define COMPONENT_H
+
+#ifndef COMPONENT_H_
+#define COMPONENT_H_
+#include "Entity.h"
+
 
 namespace kelp
 {
+    class Entity;
     class Component
     {
     public:
-        Component();
-        ~Component();
+        Entity * m_owner;//owner is aded by add component
+        bool m_enabled;
         
+        Component();
+        virtual ~Component()=0;
+        virtual void update()=0;
         
     };
 };
 
-
-
-#endif
+#endif // COMPONENT_H_
