@@ -28,10 +28,7 @@ static void error_callback(int error, const char *description)
 int main(void)
 {
     GLFWwindow *window;
-    
-    glewExperimental = GL_TRUE;
-    glewInit();
-    
+        
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
         exit(EXIT_FAILURE);
@@ -54,6 +51,12 @@ int main(void)
 
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
+    
+    glewExperimental = GL_TRUE;
+    glewInit();
+    printf( "VENDOR = %s\n", glGetString( GL_VENDOR ) ) ;
+    printf( "RENDERER = %s\n", glGetString( GL_RENDERER ) ) ;
+    printf( "VERSION = %s\n", glGetString( GL_VERSION ) ) ;
     //////////////////////////////////////////////////////////////
     kelp::Core * core = new kelp::Core();
     while (!glfwWindowShouldClose(window))

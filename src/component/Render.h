@@ -7,8 +7,8 @@ namespace kelp
     class Render : public Component
     {
     public:
-        void Render();
-        void ~Render();
+        Render();
+        ~Render();
         
         
     };

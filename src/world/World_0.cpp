@@ -8,6 +8,7 @@ using namespace kelp;
 
 World_0::World_0() : World()
 {
+    Shader shader0("./shaders/minimal_v.glsl", "./shaders/minimal_f.glsl");
     empty[0] = new Entity("empty");
     empty[0]->addComponent(
         new Transform(kep::Vector3(),
@@ -25,5 +26,5 @@ World_0::~World_0()
 
 void World_0::updateV()
 {
-    empty[0]->getComponent<Transform>()->dump();
+    //empty[0]->getComponent<Transform>()->dump();
 }
