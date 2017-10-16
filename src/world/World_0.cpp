@@ -1,3 +1,7 @@
+///
+///  @file World_0.cpp
+///  @brief holds all the entities that get created also loads assets and other shared objects
+
 #include "World_0.h"
 
 using namespace kelp;
@@ -11,7 +15,7 @@ World_0::World_0() : World()
                       kep::Vector3(1.0f, 1.0f, 1.0f)
                      )
                         );
-    empty[0]->addComponent(new Controller());
+    empty[0]->addComponent(new InputController());
     addEntity(empty[0]);
 }
 World_0::~World_0()

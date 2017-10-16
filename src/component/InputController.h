@@ -1,18 +1,18 @@
-#ifndef CONTROLLER_H_
-#define CONTROLLER_H_
+#ifndef INPUTCONTROLLER_H_
+#define INPUTCONTROLLER_H_
 #include "Input.h"
 #include "Component.h"
 #include "Transform.h"
 #include "Time.h"
-#include <functional>
+
 
 namespace kelp
 {
-    class Controller : public Component
+    class InputController : public Component
     {
     public:
-        Controller();
-        ~Controller();
+        InputController();
+        ~InputController();
         void init();
         void update();
         
@@ -20,4 +20,4 @@ namespace kelp
 };
 
 
-#endif // CONTROLLER_H_
+#endif // INPUTCONTROLLER_H_

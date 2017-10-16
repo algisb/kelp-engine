@@ -1,6 +1,6 @@
 ///
 ///  @file World.cpp
-///  @brief holds all the entities that get created also loads models and other shared objects
+///  @brief all worlds are derived from this class
 
 #include "World.h"
 using namespace kelp;
