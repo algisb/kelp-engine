@@ -6,3 +6,11 @@
 using namespace kelp;
 
 
+Asset::Asset(Shader * _shader)
+{
+    m_shader = _shader;
+}
+Asset::~Asset()
+{
+    delete m_shader;
+}

@@ -16,11 +16,9 @@ namespace kelp
         int m_shaderLocation;
 
         //matrix locations
-        int m_shaderModelMatLocation;
-        int m_shaderViewMatLocation;
-        int m_shaderProjMatLocation;
-        //texture sample locations
-        //int m_shaderText1SamplerLocation;
+        //int m_shaderModelMatLocation;
+        //int m_shaderViewMatLocation;
+        //int m_shaderProjMatLocation;
 
 
         Shader(const char * _vertexShaderPath,const char * _fragmentShaderPath);
@@ -31,6 +29,7 @@ namespace kelp
         void BuildShader(int &_shaderLocation, const char * _vertexShaderPath, const char * _fragmentShaderPath);
 
     };
+    
 };
 
 #endif // SHADER_H_

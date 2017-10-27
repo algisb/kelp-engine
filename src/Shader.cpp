@@ -9,10 +9,9 @@ using namespace kelp;
 Shader::Shader(const char * _vertexShaderPath, const char * _fragmentShaderPath)
 {
     BuildShader(m_shaderLocation, _vertexShaderPath, _fragmentShaderPath);
-    m_shaderModelMatLocation = glGetUniformLocation(m_shaderLocation, "modelMat");
-    m_shaderViewMatLocation = glGetUniformLocation(m_shaderLocation, "viewMat");
-    m_shaderProjMatLocation = glGetUniformLocation(m_shaderLocation, "projMat");
-    //m_shaderText1SamplerLocation = glGetUniformLocation(m_shaderLocation, "tex1");
+    //m_shaderModelMatLocation = glGetUniformLocation(m_shaderLocation, "modelMat");
+    //m_shaderViewMatLocation = glGetUniformLocation(m_shaderLocation, "viewMat");
+    //m_shaderProjMatLocation = glGetUniformLocation(m_shaderLocation, "projMat");
 }
 Shader::~Shader()
 {
@@ -51,7 +50,7 @@ bool Shader::CheckShaderCompiled(int _shaderLocation)
         glGetShaderiv(_shaderLocation, GL_INFO_LOG_LENGTH, &len);
         GLchar* log = new GLchar[len + 1];
         glGetShaderInfoLog(_shaderLocation, len, &len, log);
-        std::cerr << "ERROR: Shader compilation failed: " << log << std::endl;
+        std::cout << "ERROR: Shader compilation failed: " << log << std::endl;
         delete[] log;
 
         return false;

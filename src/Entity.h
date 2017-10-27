@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "Component.h"
-
+//TODO ------------------------------------- DERIVE GAME_ENTITY CLASS AS  AS THIS ONE CAN ALSO BE USED FOR UI AND OTHER CRAP BAKA!!!!
 namespace kelp
 {
     class Component;

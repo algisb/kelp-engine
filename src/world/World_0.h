@@ -1,8 +1,8 @@
 #ifndef WORLD_0_H
 #define WORLD_0_H
 
-#include "Shader.h"
 #include "World.h"
+#include "Shader.h"
 #include "component/Transform.h"
 #include "component/InputController.h"
 
