@@ -16,18 +16,26 @@ namespace kelp
         int m_shaderLocation;
 
         //matrix locations
-        //int m_shaderModelMatLocation;
-        //int m_shaderViewMatLocation;
-        //int m_shaderProjMatLocation;
+        int m_shaderModelMatLocation;
+        int m_shaderViewMatLocation;
+        int m_shaderProjMatLocation;
 
 
         Shader(const char * _vertexShaderPath,const char * _fragmentShaderPath);
-        ~Shader();
+        virtual ~Shader()=0;
         
         std::string LoadShader(const char *_shaderPath);
         bool CheckShaderCompiled(int _shaderLocation);
         void BuildShader(int &_shaderLocation, const char * _vertexShaderPath, const char * _fragmentShaderPath);
 
+    };
+    
+    class ShaderUnlit : public Shader
+     {
+    public:
+        ShaderUnlit(const char* _vertexShaderPath = "./shaders/minimal_v.glsl", const char* _fragmentShaderPath = "./shaders/minimal_f.glsl");
+        ~ShaderUnlit();
+        
     };
     
 };

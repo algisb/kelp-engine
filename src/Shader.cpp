@@ -9,9 +9,9 @@ using namespace kelp;
 Shader::Shader(const char * _vertexShaderPath, const char * _fragmentShaderPath)
 {
     BuildShader(m_shaderLocation, _vertexShaderPath, _fragmentShaderPath);
-    //m_shaderModelMatLocation = glGetUniformLocation(m_shaderLocation, "modelMat");
-    //m_shaderViewMatLocation = glGetUniformLocation(m_shaderLocation, "viewMat");
-    //m_shaderProjMatLocation = glGetUniformLocation(m_shaderLocation, "projMat");
+    m_shaderModelMatLocation = glGetUniformLocation(m_shaderLocation, "modelMat");
+    m_shaderViewMatLocation = glGetUniformLocation(m_shaderLocation, "viewMat");
+    m_shaderProjMatLocation = glGetUniformLocation(m_shaderLocation, "projMat");
 }
 Shader::~Shader()
 {
@@ -109,4 +109,14 @@ void Shader::BuildShader(int &_shaderLocation, const char * _vertexShaderPath, c
 
         return;
     }
+}
+
+
+ShaderUnlit::ShaderUnlit(const char* _vertexShaderPath, const char* _fragmentShaderPath) : Shader(_vertexShaderPath, _fragmentShaderPath)
+{
+}
+
+ShaderUnlit::~ShaderUnlit()
+{
+    
 }

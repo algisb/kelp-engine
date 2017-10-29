@@ -3,8 +3,10 @@
 
 #include "World.h"
 #include "Shader.h"
+#include "Mesh.h"
 #include "component/Transform.h"
 #include "component/InputController.h"
+#include "component/Render.h"
 
 namespace kelp
 {

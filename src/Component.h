@@ -10,7 +10,7 @@ namespace kelp
     class Component
     {
     public:
-        Entity * m_owner;//owner is aded by add component
+        Entity * m_owner;//owner is added by add component
         bool m_enabled;
         
         Component();

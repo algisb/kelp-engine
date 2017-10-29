@@ -11,6 +11,16 @@ Mesh::~Mesh()
     
 }
 
+
+MeshGen::MeshGen()
+{
+    
+}
+MeshGen::~MeshGen()
+{
+    
+}
+
 void MeshGen::addTri(glm::vec3 _p0, glm::vec3 _p1, glm::vec3 _p2)
 {
     m_verticies.push_back(_p0);

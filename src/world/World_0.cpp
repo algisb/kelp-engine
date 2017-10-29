@@ -8,7 +8,12 @@ using namespace kelp;
 
 World_0::World_0() : World()
 {
-    Shader * shader0 = new Shader("./shaders/minimal_v.glsl", "./shaders/minimal_f.glsl");
+    MeshGen * meshGen = new MeshGen();
+    meshGen->addTri(glm::vec3(-2.0,0,0), glm::vec3(2.0f,0,0), glm::vec3(0,3.0f,0));
+    meshGen->gen();
+    ShaderUnlit * shaderUnlit = new ShaderUnlit();
+    
+    ///////////////////////////////////////////////
     
     empty[0] = new Entity("empty");
     empty[0]->addComponent(
@@ -18,6 +23,8 @@ World_0::World_0() : World()
                      )
                         );
     empty[0]->addComponent(new InputController());
+    empty[0]->addComponent(new Render(meshGen, shaderUnlit));
+    
     addEntity(empty[0]);
 }
 World_0::~World_0()
