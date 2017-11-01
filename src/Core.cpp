@@ -23,7 +23,7 @@ void Core::update()
     //printf("fps: %d \n", Time::s_frameRate);
     //printf("deltaT: %f \n", kelp::Time::s_deltaT);
     //Input::printKeyList();
-    glClearColor(0.0f, 0.1f, 0.0f, 1.0f);
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT/*|GL_DEPTH_BUFFER_BIT|GL_ACCUM_BUFFER_BIT*/);
     
     

@@ -7,7 +7,8 @@ using namespace kelp;
 
 World::World()
 {
-    
+    m_init = false;
+    m_renderCamera = NULL;
 }
 World::~World()
 {
@@ -19,6 +20,12 @@ World::~World()
 void World::update()
 {
     updateV();
+    if(!m_init)
+    {
+        for(int i = 0; i< m_entities.size(); i++)
+            m_entities[i]->init();
+        m_init = true;
+    }
     for(int i = 0; i< m_entities.size(); i++)
         m_entities[i]->update();
     

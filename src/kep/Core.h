@@ -1,23 +1,32 @@
-#pragma once
+#ifndef CORE_KEP_H_
+#define CORE_KEP_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 //#include <cmath>
 #include "precision.h"
 namespace kep
 {
-    //typedef float real;
-    
+    const real PI = 3.14159265359f;
     class Vector3
     {
     public:
-        real m_x;
-        real m_y;
-        real m_z;
+        union
+        {
+            real data[3];
+            struct
+            {
+                real x;
+                real y;
+                real z;
+            };
+
+        };
     private:
-        real pad;
+        //real pad; //fucks with opengl when passing stuff to buffers
     public:
-        Vector3() : m_x(0) , m_y(0), m_z(0){}
-        Vector3(real _x, real _y, real _z) : m_x(_x), m_y(_y), m_z(_z){}
+        Vector3() : x(0) , y(0), z(0){}
+        Vector3(real _x, real _y, real _z) : x(_x), y(_y), z(_z){}
         ~Vector3(){}
         
         void operator *=(const real _value);
@@ -112,8 +121,11 @@ namespace kep
     class Matrix4
     {
     public:
-        real data[16];
-        
+        union
+        {
+            real d[4][4];
+            real data[16];
+        };
         Matrix4(    
         real _d0 = 1.0f, real _d1 = 0.0f, real _d2 = 0.0f, real _d3 = 0.0f,
         real _d4 = 0.0f, real _d5 = 1.0f, real _d6 = 0.0f, real _d7 = 0.0f,
@@ -152,5 +164,20 @@ namespace kep
         
         return inverseTransform * _world;
     }
-    
+    inline Matrix4 perspectiveProjection(real _fov, real _width, real _height, real _near, real _far)
+    {
+        real aspect = _width/_height;
+        real top = tan((_fov/2)*(kep::PI/180.0f));
+        real bottom = -top;
+        real right = top * aspect;
+        real left = -top * aspect;
+        return Matrix4((2*_near)/(right-left),0,(right + left)/(right - left),0,
+                       0,(2*_near)/(top-bottom),(top + bottom)/(top - bottom),0,
+                       0,0,-((_far + _near)/(_far - _near)),-((2*_far*_near)/(_far - _near)),
+                       0,0,-1.0f,0);
+        
+        
+        
+    }
 }
+#endif // CORE_KEP_H_

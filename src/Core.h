@@ -19,8 +19,8 @@
 //             ||       ||
 //             ||_.-.   ||_.-.
 //            (_.--__) (_.--__)
-#ifndef CORE_H_
-#define CORE_H_
+#ifndef CORE_KELP_H_
+#define CORE_KELP_H_
 
 #include "GL/glew.h"
 #include "Config.h"
@@ -45,5 +45,5 @@ namespace kelp
         void update();
     };
 };
-#endif // CORE_H_
+#endif // CORE_KELP_H_
 

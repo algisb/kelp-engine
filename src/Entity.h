@@ -4,18 +4,23 @@
 #include <vector>
 #include <string>
 #include "Component.h"
+#include "World.h"
 //TODO ------------------------------------- DERIVE GAME_ENTITY CLASS AS  AS THIS ONE CAN ALSO BE USED FOR UI AND OTHER CRAP BAKA!!!!
+
 namespace kelp
 {
+    class World;
     class Component;
     class Entity
     {
     public:
+        World * m_world;
         std::string m_tag;
         std::vector<Component*> m_components;
 
-        Entity(std::string _tag);
+        Entity(World * _world, std::string _tag);
         ~Entity();
+        void init();
         void update();
         void render();
         void addComponent(Component * io_c);

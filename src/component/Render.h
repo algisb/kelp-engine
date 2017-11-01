@@ -4,10 +4,11 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Transform.h"
-#include "glm.hpp"
-#include "gtc/type_ptr.hpp"
-#include "gtc/matrix_transform.hpp"
+//#include "glm.hpp"
+//#include "gtc/type_ptr.hpp"
+//#include "gtc/matrix_transform.hpp"
 #include "Config.h"
+#include "kep/Core.h"
 namespace kelp
 {
     class Render : public Component
@@ -18,11 +19,11 @@ namespace kelp
         Shader * m_shader;
         Transform * m_transform;
         
-        glm::mat4 m_modelMat;
-        glm::mat4 m_viewMat;
-        glm::mat4 m_projectionMat;
+        kep::Matrix4 m_modelMat;
+        kep::Matrix4 m_viewMat;
+        kep::Matrix4 m_projectionMat;
         
-        Render(Mesh * _mesh, Shader * _shader);
+        Render(Mesh* _mesh, Shader* _shader);
         ~Render();
         void init();
         void update();

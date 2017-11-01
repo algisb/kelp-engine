@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PRECISION_H_
+#define PRECISION_H_
 #include <cmath>
 #include <stdint.h>
 namespace kep
@@ -13,3 +14,5 @@ namespace kep
 #define real_sqrt sqrtf
 
 };
+
+#endif // PRECISION_H_

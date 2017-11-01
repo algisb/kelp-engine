@@ -2,53 +2,53 @@
 using namespace kep;
 void Vector3::operator *=(const real _value)
 {
-    m_x *= _value;
-    m_y *= _value;
-    m_z *= _value;
+    x *= _value;
+    y *= _value;
+    z *= _value;
 }
 Vector3 Vector3::operator *(const real _value)
 {
-    return Vector3(m_x*_value, m_y*_value, m_z*_value);
+    return Vector3(x*_value, y*_value, z*_value);
 }
         
 void Vector3::operator +=(const Vector3 & _v)
 {
-    m_x += _v.m_x;
-    m_y += _v.m_y;
-    m_z += _v.m_z;
+    x += _v.x;
+    y += _v.y;
+    z += _v.z;
 }
 Vector3 Vector3::operator +(const Vector3 & _v)
 {
-    return Vector3(m_x + _v.m_x, m_y + _v.m_y, m_z + _v.m_z);
+    return Vector3(x + _v.x, y + _v.y, z + _v.z);
 }
 
 void Vector3::operator -=(const Vector3 & _v)
 {
-    m_x -= _v.m_x;
-    m_y -= _v.m_y;
-    m_z -= _v.m_z;
+    x -= _v.x;
+    y -= _v.y;
+    z -= _v.z;
 }
 Vector3 Vector3::operator -(const Vector3 & _v)
 {
-    return Vector3(m_x - _v.m_x, m_y - _v.m_y, m_z - _v.m_z);
+    return Vector3(x - _v.x, y - _v.y, z - _v.z);
 }
 
 
 void Vector3::invert()
 {
-    m_x = -m_x;
-    m_y = -m_y;
-    m_z = -m_z;
+    x = -x;
+    y = -y;
+    z = -z;
 }
 
 real Vector3::magnitude()
 {
-    return sqrt( m_x*m_x + m_y*m_y + m_z*m_z);
+    return sqrt( x*x + y*y + z*z);
 }
 
 real Vector3::squareMagnitude()
 {
-    return m_x*m_x + m_y*m_y + m_z*m_z;
+    return x*x + y*y + z*z;
 }
 void Vector3::normalize()
 {
@@ -61,31 +61,31 @@ void Vector3::normalize()
 
 void Vector3::addScaledVector(const Vector3 & _vector, const real _scale)
 {
-    m_x += _vector.m_x * _scale;
-    m_y += _vector.m_y * _scale;
-    m_z += _vector.m_z * _scale;
+    x += _vector.x * _scale;
+    y += _vector.y * _scale;
+    z += _vector.z * _scale;
 }
 
 Vector3 Vector3::componentProduct(const Vector3 & _vector)
 {
-    return Vector3 (m_x * _vector.m_x, m_y * _vector.m_y, m_z * _vector.m_z );
+    return Vector3 (x * _vector.x, y * _vector.y, z * _vector.z );
 }
 
 real Vector3::scalarProduct(const Vector3 & _vector)
 {
-    return m_x*_vector.m_x + m_y*_vector.m_y + m_x*_vector.m_z;
+    return x*_vector.x + y*_vector.y + x*_vector.z;
 }
 real Vector3::operator * (const Vector3 & _vector)
 {
-    return m_x*_vector.m_x + m_y*_vector.m_y + m_z*_vector.m_z;
+    return x*_vector.x + y*_vector.y + z*_vector.z;
 }
 
 Vector3 Vector3::vectorProduct(const Vector3 & _vector)
 {
     return Vector3(
-        m_y*_vector.m_z - m_z*_vector.m_y,
-        m_z*_vector.m_x - m_x*_vector.m_z,
-        m_x*_vector.m_y - m_y*_vector.m_x
+        y*_vector.z - z*_vector.y,
+        z*_vector.x - x*_vector.z,
+        x*_vector.y - y*_vector.x
     );
 }
 
@@ -96,14 +96,14 @@ void Vector3::operator %=(const Vector3 & _vector)
 Vector3 Vector3::operator %(const Vector3 & _vector)
 
 {
-    return Vector3(m_y*_vector.m_z - m_z*_vector.m_y,
-                    m_z*_vector.m_x - m_x*_vector.m_z,
-                    m_x*_vector.m_y - m_y*_vector.m_x);
+    return Vector3(y*_vector.z - z*_vector.y,
+                    z*_vector.x - x*_vector.z,
+                    x*_vector.y - y*_vector.x);
 }
 
 void Vector3::dump()
 {
-    printf("x: %f, y: %f, z: %f \n", m_x, m_y, m_z );
+    printf("x: %f, y: %f, z: %f \n", x, y, z );
 }
 
 
@@ -175,16 +175,16 @@ Quaternion Quaternion::operator * (const Quaternion &_multiplier)
 
 void Quaternion::rotateByVector(const Vector3 &_vector)
 {
-    Quaternion q(0, _vector.m_x, _vector.m_y, _vector.m_z);
+    Quaternion q(0, _vector.x, _vector.y, _vector.z);
     (*this) *= q;
 }
 
 void Quaternion::addScaledVector(const Vector3 &_vector, real _scale)
 {
     Quaternion q(0,
-        _vector.m_x * _scale,
-        _vector.m_y * _scale,
-        _vector.m_z * _scale);
+        _vector.x * _scale,
+        _vector.y * _scale,
+        _vector.z * _scale);
     q *= *this;
     
     r += q.r *((real)0.5);
@@ -215,9 +215,9 @@ setEuler(Vector3 _axis, real _angle)
     float ang = _angle*(3.14159265358979323846 / 180.0f);
     r = cos(ang/2);
     
-    i = _axis.m_x*sin(ang/2);
-    j = _axis.m_y*sin(ang/2);
-    k = _axis.m_z*sin(ang/2);
+    i = _axis.x*sin(ang/2);
+    j = _axis.y*sin(ang/2);
+    k = _axis.z*sin(ang/2);
 }
 
 
@@ -270,9 +270,9 @@ Matrix3 Matrix3::operator*(const Matrix3 &_o) const
 Vector3 Matrix3::operator*(const Vector3 &_vector) const
 {
     return Vector3(
-        data[0]*_vector.m_x + data[1]*_vector.m_y + data[2]*_vector.m_z,
-        data[3]*_vector.m_x + data[4]*_vector.m_y + data[5]*_vector.m_z,
-        data[6]*_vector.m_x + data[7]*_vector.m_y + data[8]*_vector.m_z
+        data[0]*_vector.x + data[1]*_vector.y + data[2]*_vector.z,
+        data[3]*_vector.x + data[4]*_vector.y + data[5]*_vector.z,
+        data[6]*_vector.x + data[7]*_vector.y + data[8]*_vector.z
     );
 }
 real Matrix3::determinant() const
@@ -399,9 +399,9 @@ Matrix4::~Matrix4()
 
 Vector3 Matrix4::operator*(const Vector3 & _vector) const
 {
-    return Vector3(data[0]*_vector.m_x + data[1]*_vector.m_y + data[2]*_vector.m_z + data[3], 
-                   data[4]*_vector.m_x + data[5]*_vector.m_y + data[6]*_vector.m_z + data[7],
-                   data[8]*_vector.m_x + data[9]*_vector.m_y + data[10]*_vector.m_z + data[11]);
+    return Vector3(data[0]*_vector.x + data[1]*_vector.y + data[2]*_vector.z + data[3], 
+                   data[4]*_vector.x + data[5]*_vector.y + data[6]*_vector.z + data[7],
+                   data[8]*_vector.x + data[9]*_vector.y + data[10]*_vector.z + data[11]);
 }
 
 Matrix4 Matrix4::operator*(const Matrix4 &_o) const
@@ -618,17 +618,17 @@ void Matrix4::setOrientationAndPos(const Quaternion &_q, const Vector3 &_pos)
     data[0] = 1 - (2*_q.j*_q.j + 2*_q.k*_q.k);
     data[1] = 2*_q.i*_q.j + 2*_q.k*_q.r;
     data[2] = 2*_q.i*_q.k - 2*_q.j*_q.r;
-    data[3] = _pos.m_x;
+    data[3] = _pos.x;
     
     data[4] = (2*_q.i*_q.j - 2*_q.k*_q.r);
     data[5] = 1 - (2*_q.i*_q.i + 2*_q.k*_q.k);
     data[6] = 2*_q.j*_q.k + 2*_q.i*_q.r;
-    data[7] = _pos.m_y;
+    data[7] = _pos.y;
     
     data[8] = 2*_q.i*_q.k + 2*_q.j*_q.r;
     data[9] = 2*_q.j*_q.k - 2*_q.i*_q.r;
     data[10] = 1 - (2*_q.i*_q.i + 2*_q.j*_q.j);
-    data[11] = _pos.m_z;
+    data[11] = _pos.z;
     
     data[12] = 0.0f;
     data[13] = 0.0f;
@@ -639,34 +639,34 @@ void Matrix4::setOrientationAndPos(const Quaternion &_q, const Vector3 &_pos)
 Vector3 Matrix4::transformInverseDirection(const Vector3 &_vector) const
 {
     return Vector3(
-        _vector.m_x * data[0] +
-        _vector.m_y * data[4] +
-        _vector.m_z * data[8],
+        _vector.x * data[0] +
+        _vector.y * data[4] +
+        _vector.z * data[8],
         
-        _vector.m_x * data[1] +
-        _vector.m_y * data[5] +
-        _vector.m_z * data[9],
+        _vector.x * data[1] +
+        _vector.y * data[5] +
+        _vector.z * data[9],
         
-        _vector.m_x * data[2] +
-        _vector.m_y * data[6] +
-        _vector.m_z * data[10]
+        _vector.x * data[2] +
+        _vector.y * data[6] +
+        _vector.z * data[10]
     );
 }
 
 Vector3 Matrix4::transformDirection(const Vector3 &_vector) const
 {
     return Vector3(
-        _vector.m_x * data[0] +
-        _vector.m_y * data[1] +
-        _vector.m_z * data[2],
+        _vector.x * data[0] +
+        _vector.y * data[1] +
+        _vector.z * data[2],
         
-        _vector.m_x * data[4] +
-        _vector.m_y * data[5] +
-        _vector.m_z * data[6],
+        _vector.x * data[4] +
+        _vector.y * data[5] +
+        _vector.z * data[6],
         
-        _vector.m_x * data[8] +
-        _vector.m_y * data[9] +
-        _vector.m_z * data[10]
+        _vector.x * data[8] +
+        _vector.y * data[9] +
+        _vector.z * data[10]
     );
 }
 

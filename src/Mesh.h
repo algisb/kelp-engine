@@ -4,22 +4,22 @@
 #include <stdio.h>
 #include <vector>
 #include "GL/glew.h"
-#include "glm.hpp"
+#include "kep/Core.h"
 namespace kelp
 {
     class Mesh
     {
     public:
-        std::vector<glm::vec3> m_verticies;
+        std::vector<kep::Vector3> m_verticies;
 
-        std::vector<glm::vec2> m_uvs;
-
-        std::vector<glm::vec3> m_normals;
-
-
-        std::vector<glm::vec3> m_tangents;
-
-        std::vector<glm::vec3> m_bitangents;
+//         std::vector<glm::vec2> m_uvs;
+// 
+//         std::vector<glm::vec3> m_normals;
+// 
+// 
+//         std::vector<glm::vec3> m_tangents;
+// 
+//         std::vector<glm::vec3> m_bitangents;
 
 
         GLuint m_vao;
@@ -35,7 +35,7 @@ namespace kelp
     public:
         MeshGen();
         ~MeshGen();
-        void addTri(glm::vec3 _p0, glm::vec3 _p1, glm::vec3 _p2);
+        void addTri(kep::Vector3 _p0, kep::Vector3 _p1, kep::Vector3 _p2);
         void gen();
     };
     

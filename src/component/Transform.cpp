@@ -25,5 +25,5 @@ void Transform::update()
 
 void Transform::dump()
 {
-    printf("pos: %f %f %f\n", m_position.m_x, m_position.m_y, m_position.m_z);
+    printf("pos: %f %f %f\n", m_position.x, m_position.y, m_position.z);
 }
