@@ -10,9 +10,9 @@ namespace kelp
     class Camera : public Component
     {
     public:
-        kep::Matrix4 m_projectionMat;
         Transform * m_transform;
-        
+        kep::Matrix4 m_projectionMat;
+        kep::Matrix4 m_viewMat;
         
         Camera(kep::Matrix4 _projectionMat);
         ~Camera();

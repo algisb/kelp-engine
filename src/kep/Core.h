@@ -171,10 +171,10 @@ namespace kep
         real bottom = -top;
         real right = top * aspect;
         real left = -top * aspect;
-        return Matrix4((2*_near)/(right-left),0,(right + left)/(right - left),0,
-                       0,(2*_near)/(top-bottom),(top + bottom)/(top - bottom),0,
-                       0,0,-((_far + _near)/(_far - _near)),-((2*_far*_near)/(_far - _near)),
-                       0,0,-1.0f,0);
+        return Matrix4((2*_near)/(right-left), 0, (right + left)/(right - left), 0,
+                       0, (2*_near)/(top-bottom),(top + bottom)/(top - bottom), 0,
+                       0, 0, -(_far + _near)/(_far - _near) ,-(2*_far*_near)/(_far - _near),
+                       0, 0, -1.0f, 0);
         
         
         

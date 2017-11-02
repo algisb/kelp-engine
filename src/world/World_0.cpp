@@ -16,17 +16,17 @@ World_0::World_0() : World()
     //////////////////////CAM/////////////////////////
     empty[0] = new Entity(this, "camera");
     empty[0]->addComponent(
-        new Transform(kep::Vector3(),
+        new Transform(kep::Vector3(0.0f, 0.0f, 10.0f),
                   kep::Quaternion(), 
-                  kep::Vector3(1.0f, 1.0f, -10.0f)
+                  kep::Vector3(1.0f, 1.0f, .0f)
                  ));
     empty[0]->addComponent(new Camera(
         kep::perspectiveProjection(
             45.0f, 
             Config::s_windowWidth, 
             Config::s_windowHeight, 
-            0.1f, 
-            2000.0f).transpose()
+            1.0f, 
+            1000.0f).transpose()
                                      ));
     //m_renderCamera = empty[0]->getComponent<Camera>();
     //////////////////////////////////////////////////
@@ -34,7 +34,7 @@ World_0::World_0() : World()
     
     empty[1] = new Entity(this, "empty");
     empty[1]->addComponent(
-        new Transform(kep::Vector3(),
+        new Transform(kep::Vector3(0.0f, 0.0f, 0.0f),
                       kep::Quaternion(), 
                       kep::Vector3(1.0f, 1.0f, 1.0f)
                      ));

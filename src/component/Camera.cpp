@@ -5,12 +5,6 @@ using namespace kelp;
 Camera::Camera(kep::Matrix4 _projectionMat)
 {
     m_projectionMat = _projectionMat;
-//     m_projectionMat = kep::perspectiveProjection(
-//         45.0f, 
-//         Config::s_windowWidth, 
-//         Config::s_windowHeight, 
-//         0.1f, 
-//         2000.0f).transpose();
 }
 Camera::~Camera()
 {
@@ -18,13 +12,16 @@ Camera::~Camera()
 
 void Camera::init()
 {
-    //printf("kektus\n");
     if(m_owner->m_world->m_renderCamera == NULL)
         m_owner->m_world->m_renderCamera = this;
     m_transform = m_owner->getComponent<Transform>();
 }
 void Camera::update()
 {
+    m_transform->m_orientation.normalize();
+    m_viewMat.setOrientationAndPos(m_transform->m_orientation, m_transform->m_position);
+    m_viewMat.invert();
+    m_viewMat = m_viewMat.transpose(); //cuz opengl is idgaf-major
 }
 
 void Camera::render()

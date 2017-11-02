@@ -4,9 +4,6 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Transform.h"
-//#include "glm.hpp"
-//#include "gtc/type_ptr.hpp"
-//#include "gtc/matrix_transform.hpp"
 #include "Config.h"
 #include "kep/Core.h"
 namespace kelp
