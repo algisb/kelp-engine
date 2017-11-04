@@ -175,9 +175,18 @@ namespace kep
                        0, (2*_near)/(top-bottom),(top + bottom)/(top - bottom), 0,
                        0, 0, -(_far + _near)/(_far - _near) ,-(2*_far*_near)/(_far - _near),
                        0, 0, -1.0f, 0);
-        
-        
-        
+    }
+    inline real dot(Vector3 _v0, Vector3 _v1)
+    {
+        return (_v0.x*_v1.x + _v0.y*_v1.y + _v0.z*_v1.z);
+    }
+    inline Vector3 cross(Vector3 _v0, Vector3 _v1)
+    {
+        return Vector3(
+            _v0.y*_v1.z - _v0.z*_v1.y,
+            _v0.z*_v1.x - _v0.x*_v1.z,
+            _v0.x*_v1.y - _v0.y*_v1.x
+        );
     }
 }
 #endif // CORE_KEP_H_

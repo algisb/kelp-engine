@@ -5,6 +5,8 @@
 #include <vector>
 #include "GL/glew.h"
 #include "kep/Core.h"
+
+
 namespace kelp
 {
     class Mesh
@@ -23,6 +25,7 @@ namespace kelp
 
 
         GLuint m_vao;
+        GLuint m_vbo;
         unsigned int m_numVertices;
         
         Mesh();
@@ -41,6 +44,9 @@ namespace kelp
     
     class MeshLoad : public Mesh
     {
+    public:
+        MeshLoad(const char * _objPath, const char * _mtlDir);
+        ~MeshLoad();
     };
 };
 

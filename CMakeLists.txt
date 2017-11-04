@@ -28,8 +28,8 @@ include_directories ("./external/glfw/include")
 add_subdirectory("./external/glfw")
 add_definitions(-DGLFW_STATIC)
 
-#glm-------------------------------------------------------
-include_directories ("./external/glm/glm")
+#tinyobjloader-------------------------------------------------------
+include_directories ("./external/tinyobjloader")
 
 #kelp engine-----------------------------------------------
 include_directories ("./src")

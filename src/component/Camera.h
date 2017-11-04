@@ -14,7 +14,11 @@ namespace kelp
         kep::Matrix4 m_projectionMat;
         kep::Matrix4 m_viewMat;
         
-        Camera(kep::Matrix4 _projectionMat);
+        kep::Vector3 m_up;  
+        kep::Vector3 m_front;
+        kep::Vector3 m_left;
+        
+        Camera(kep::Vector3 _up, kep::Matrix4 _projectionMat);
         ~Camera();
         
         void init();

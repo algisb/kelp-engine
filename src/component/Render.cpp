@@ -8,10 +8,11 @@
 
 using namespace kelp;
 
-Render::Render(Mesh * _mesh, Shader * _shader) : Component()
+Render::Render(Mesh * _mesh, Shader * _shader, RenderMode _renderMode) : Component()
 {
     m_mesh = _mesh;
     m_shader = _shader;
+    m_renderMode = _renderMode;
 }
 Render::~Render()
 {
@@ -44,13 +45,13 @@ void Render::render()
     glUniformMatrix4fv(m_shader->m_shaderProjMatLocation, 1, 
                        GL_FALSE, &m_projectionMat.d[0][0]);
 
-    switch(1)
+    switch(m_renderMode)
     {
-        case 1:
+        case RenderMode::SOLID:
             glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
             break;
         
-        case 2:
+        case RenderMode::WIRE:
             glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
             break;
     }
