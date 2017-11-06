@@ -12,30 +12,26 @@ namespace kelp
     class Mesh
     {
     public:
-        std::vector<kep::Vector3> m_verticies;
-
-//         std::vector<glm::vec2> m_uvs;
-// 
-//         std::vector<glm::vec3> m_normals;
-// 
-// 
-//         std::vector<glm::vec3> m_tangents;
-// 
-//         std::vector<glm::vec3> m_bitangents;
+        
 
 
         GLuint m_vao;
-        GLuint m_vbo;
+        GLuint m_vboV;//vertex data
+        GLuint m_vboN;//normal data
+        GLuint m_vboT;//Texture data
+        
         unsigned int m_numVertices;
         
         Mesh();
         virtual ~Mesh()=0;
+        void clear();
         
     };
     
     class MeshGen : public Mesh
     {
     public:
+        std::vector<kep::Vector3> m_verticies;
         MeshGen();
         ~MeshGen();
         void addTri(kep::Vector3 _p0, kep::Vector3 _p1, kep::Vector3 _p2);
