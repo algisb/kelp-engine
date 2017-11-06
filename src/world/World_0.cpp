@@ -14,7 +14,7 @@ World_0::World_0() : World()
     
     
     
-    MeshLoad * mesh0 = new MeshLoad("./models/cube.obj", "./models/");
+    MeshLoad * mesh0 = new MeshLoad("./models/city.obj", "./models/");
     ShaderMin * shaderMin = new ShaderMin();//TODO : this needs to be derived from entity and later automatically deleted
     ShaderDefault * shaderDefault = new ShaderDefault();
     

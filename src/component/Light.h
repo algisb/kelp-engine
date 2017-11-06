@@ -8,7 +8,7 @@ namespace kelp
     {
     public:
         Light();
-        ~Light();
+        ~Light() = 0;
     };
 };
 
