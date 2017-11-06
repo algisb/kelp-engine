@@ -14,8 +14,9 @@ World_0::World_0() : World()
     
     
     
-    MeshLoad * meshLoad = new MeshLoad("./models/cube.obj", "./models/");
-    ShaderUnlit * shaderUnlit = new ShaderUnlit();//TODO : this needs to be derived from entity and later automatically deleted
+    MeshLoad * mesh0 = new MeshLoad("./models/cube.obj", "./models/");
+    ShaderMin * shaderMin = new ShaderMin();//TODO : this needs to be derived from entity and later automatically deleted
+    ShaderDefault * shaderDefault = new ShaderDefault();
     
     Entity * refEntity = NULL;
     //////////////////////CAM/////////////////////////
@@ -44,7 +45,7 @@ World_0::World_0() : World()
                                           kep::Vector3(1.0f, 1.0f, 1.0f)
                                          ));
     
-    refEntity->addComponent(new Render(meshGen, shaderUnlit, RenderMode::WIRE));
+    refEntity->addComponent(new Render(meshGen, shaderDefault, RenderMode::WIRE));
     
     
     refEntity = new Entity(this, "empty");
@@ -54,7 +55,7 @@ World_0::World_0() : World()
                                           kep::Vector3(1.0f, 1.0f, 1.0f)
                                          ));
     
-    refEntity->addComponent(new Render(meshLoad, shaderUnlit, RenderMode::SOLID));
+    refEntity->addComponent(new Render(mesh0, shaderDefault, RenderMode::SOLID));
     
 }
 World_0::~World_0()

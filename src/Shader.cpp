@@ -112,11 +112,21 @@ void Shader::BuildShader(int &_shaderLocation, const char * _vertexShaderPath, c
 }
 
 
-ShaderUnlit::ShaderUnlit(const char* _vertexShaderPath, const char* _fragmentShaderPath) : Shader(_vertexShaderPath, _fragmentShaderPath)
+ShaderMin::ShaderMin(const char* _vertexShaderPath, const char* _fragmentShaderPath) : Shader(_vertexShaderPath, _fragmentShaderPath)
 {
 }
 
-ShaderUnlit::~ShaderUnlit()
+ShaderMin::~ShaderMin()
+{
+    
+}
+
+
+ShaderDefault::ShaderDefault(const char* _vertexShaderPath, const char* _fragmentShaderPath) : Shader(_vertexShaderPath, _fragmentShaderPath)
+{
+}
+
+ShaderDefault::~ShaderDefault()
 {
     
 }

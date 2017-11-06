@@ -30,11 +30,18 @@ namespace kelp
 
     };
     
-    class ShaderUnlit : public Shader
+    class ShaderMin : public Shader
      {
     public:
-        ShaderUnlit(const char* _vertexShaderPath = "./shaders/minimal_v.glsl", const char* _fragmentShaderPath = "./shaders/minimal_f.glsl");
-        ~ShaderUnlit();
+        ShaderMin(const char* _vertexShaderPath = "./shaders/minimal_v.glsl", const char* _fragmentShaderPath = "./shaders/minimal_f.glsl");
+        ~ShaderMin();
+        
+    };
+    class ShaderDefault : public Shader 
+    {
+    public:
+        ShaderDefault(const char* _vertexShaderPath = "./shaders/default_v.glsl", const char* _fragmentShaderPath = "./shaders/default_f.glsl");
+        ~ShaderDefault();
         
     };
     

@@ -143,6 +143,10 @@ MeshLoad::MeshLoad(const char * _objPath, const char * _mtlDir)
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m_numVertices * 3, dataV, GL_STATIC_DRAW);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
         glEnableVertexAttribArray(0);
+        
+
+        //delete data from heap
+        delete[] dataV;
 
 
     }
@@ -155,9 +159,11 @@ MeshLoad::MeshLoad(const char * _objPath, const char * _mtlDir)
         UNPACK_OBJ(
                     for(size_t i = 0; i<3; i++)
                     {
-                        dataN[dataN_i] = attrib.normals[3*idx.vertex_index+i];
+                        
+                        dataN[dataN_i] = attrib.normals[3*idx.normal_index+i];
                         dataN_i++;
                     }
+                    //printf("%f %f %f \n", attrib.normals[3*idx.normal_index+0], attrib.normals[3*idx.normal_index+1], attrib.normals[3*idx.normal_index+2]);
                   );
         
         glGenBuffers(1, &m_vboN);
@@ -166,10 +172,6 @@ MeshLoad::MeshLoad(const char * _objPath, const char * _mtlDir)
 
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
         glEnableVertexAttribArray(1);
-        
-        //unbind evrything////////////////////////////////////
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
         
         //delete data from heap
         delete[] dataN;
@@ -185,7 +187,7 @@ MeshLoad::MeshLoad(const char * _objPath, const char * _mtlDir)
         UNPACK_OBJ(
                     for(size_t i = 0; i<2; i++)
                     {
-                        dataT[dataT_i] = attrib.texcoords[3*idx.vertex_index+i];
+                        dataT[dataT_i] = attrib.texcoords[3*idx.texcoord_index+i];
                         dataT_i++;
                     }
                   );
@@ -196,14 +198,16 @@ MeshLoad::MeshLoad(const char * _objPath, const char * _mtlDir)
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
         glEnableVertexAttribArray(2);
         
-        //unbind evrything////////////////////////////////////
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
-        
         //delete data from heap
         delete[] dataT;
         
     }
+    
+    //unbind evrything////////////////////////////////////
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    
 
 }
 
