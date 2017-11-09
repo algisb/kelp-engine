@@ -15,12 +15,6 @@ namespace kelp
     public:
         int m_shaderLocation;
 
-        //matrix locations
-        int m_shaderModelMatLocation;
-        int m_shaderViewMatLocation;
-        int m_shaderProjMatLocation;
-
-
         Shader(const char * _vertexShaderPath,const char * _fragmentShaderPath);
         virtual ~Shader()=0;
         

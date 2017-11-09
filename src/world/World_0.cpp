@@ -8,9 +8,9 @@ using namespace kelp;
 
 World_0::World_0() : World()
 {
-    MeshGen * meshGen = new MeshGen();//TODO : this needs to be derived from entity and later automatically deleted
-    meshGen->addTri(kep::Vector3(-2.0,0,0), kep::Vector3(2.0f,0,0), kep::Vector3(0,3.0f,0));
-    meshGen->gen();
+    //MeshGen * meshGen = new MeshGen();//TODO : this needs to be derived from entity and later automatically deleted
+    //meshGen->addTri(kep::Vector3(-2.0,0,0), kep::Vector3(2.0f,0,0), kep::Vector3(0,3.0f,0));
+    //meshGen->gen();
     
     
     
@@ -41,8 +41,20 @@ World_0::World_0() : World()
     
     refEntity = new Entity(this, "Directional Light");
     refEntity->addComponent(new LightDirectional(shaderDefault, 0.5f, kep::Vector3(0.0f,0.0f,0.0f), kep::Vector3(1.0f, 1.0f, 1.0f)));
+    
+    refEntity = new Entity(this, "Point Light");
+    refEntity->addComponent(new Transform(
+                                        kep::Vector3(2.0f, 4.0f, 0.0f),
+                                        kep::Quaternion(), 
+                                        kep::Vector3(0.2f, 0.2f, 0.2f)
+                                        ));
+    refEntity->addComponent(new LightPoint(shaderDefault, 10.0f, kep::Vector3(0.0f,0.0f,0.0f)));
+    refEntity->addComponent(new Render(mesh1, shaderMin, RenderMode::SOLID));
+    
     //m_renderCamera = empty[0]->getComponent<Camera>();
     //////////////////////////////////////////////////
+    
+    
     refEntity = new Entity(this, "empty");
     refEntity->addComponent(new Transform(
                                           kep::Vector3(0.0f, 0.0f, 0.0f),
@@ -50,17 +62,26 @@ World_0::World_0() : World()
                                           kep::Vector3(1.0f, 1.0f, 1.0f)
                                          ));
     
-    refEntity->addComponent(new Render(mesh1, shaderDefault, RenderMode::SOLID));
+    refEntity->addComponent(new Render(mesh0, shaderDefault, RenderMode::SOLID));
     
     
     refEntity = new Entity(this, "empty");
     refEntity->addComponent(new Transform(
-                                          kep::Vector3(5.0f, 0.0f, 0.0f),
+                                          kep::Vector3(-5.0f, 0.0f, 0.0f),
                                           kep::Quaternion(), 
                                           kep::Vector3(1.0f, 1.0f, 1.0f)
                                          ));
     
-    refEntity->addComponent(new Render(mesh0, shaderDefault, RenderMode::SOLID));
+    refEntity->addComponent(new Render(mesh1, shaderDefault, RenderMode::SOLID));
+    
+    refEntity = new Entity(this, "empty");
+    refEntity->addComponent(new Transform(
+                                          kep::Vector3(-5.0f, 0.0f, 3.0f),
+                                          kep::Quaternion(), 
+                                          kep::Vector3(1.0f, 1.0f, 1.0f)
+                                         ));
+    
+    refEntity->addComponent(new Render(mesh1, shaderDefault, RenderMode::SOLID));
     
 }
 World_0::~World_0()

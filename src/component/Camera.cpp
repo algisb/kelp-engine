@@ -34,3 +34,9 @@ void Camera::update()
 void Camera::render()
 {
 }
+
+void Camera::setAsRenderCamera()
+{
+    m_owner->m_world->m_renderCamera = this;
+}
+

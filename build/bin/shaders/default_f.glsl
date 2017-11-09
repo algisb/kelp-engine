@@ -41,36 +41,30 @@ void main()
     {
         vec3 eyeDirection_cs = normalize(vec3(0, 0, 0) - vPosition_cs);
         vec3 normal = normalize(vNormal_cs);
-
         switch(light[i].type)
         {
-        case 0://DIRECTIONAL LIGHT
-        {
-            vec3 lightDirection_cs = light[i].direction;
-            vec3 texColour = vec3(0.5f, 0.5f, 0.5f);//vec3(texture(tex1, vTexCoordOut)); //No texturing yet
-            vec3 phong = phong(texColour, vec3(1.0f, 1.0f, 1.0f), normal, eyeDirection_cs, lightDirection_cs);
+            case 0://DIRECTIONAL LIGHT
+            {
+                vec3 lightDirection_cs = light[i].direction;
+                vec3 texColour = vec3(0.5f, 0.5f, 0.5f);//vec3(texture(tex1, vTexCoordOut)); //No texturing yet
+                vec3 phong = phong(texColour, vec3(1.0f, 1.0f, 1.0f), normal, eyeDirection_cs, lightDirection_cs);
+                
+                fragColour = fragColour + vec4(light[i].colour + phong * light[i].strength, 1.0f);
+                break;
+            }
             
-            fragColour = fragColour + vec4(light[i].colour + phong * light[i].strength, 1.0f);
-            break;
-        }
-        
-        case 1://POINT LIGHT
-        {
-            vec3 lightDirection_cs = light[i].position - vPosition_cs;
-            float att = 1 / pow(length(lightDirection_cs), 2);
-            lightDirection_cs = normalize(lightDirection_cs);
-            vec3 texColour = vec3(0.5f, 0.5f, 0.5f);//vec3(texture(tex1, vTexCoordOut));
-            vec3 phong = phong(texColour, vec3(1.0f, 1.0f, 1.0f), normal, eyeDirection_cs, lightDirection_cs);
-            
-            fragColour = fragColour + vec4(light[i].colour + phong * att * light[i].strength, 1.0f);
-            break;
-        }
+            case 1://POINT LIGHT
+            {
+                vec3 lightDirection_cs = light[i].position - vPosition_cs;
+                float att = 1 / pow(length(lightDirection_cs), 2);
+                lightDirection_cs = normalize(lightDirection_cs);
+                vec3 texColour = vec3(0.5f, 0.5f, 0.5f);//vec3(texture(tex1, vTexCoordOut));
+                vec3 phong = phong(texColour, vec3(1.0f, 1.0f, 1.0f), normal, eyeDirection_cs, lightDirection_cs);
+                
+                fragColour = fragColour + vec4(light[i].colour + phong * att * light[i].strength, 1.0f);
+                break;
+            }
         };
-        
     }
-
-
-
-
 }
 

@@ -13,6 +13,7 @@ Render::Render(Mesh * _mesh, Shader * _shader, RenderMode _renderMode) : Compone
     m_mesh = _mesh;
     m_shader = _shader;
     m_renderMode = _renderMode;
+
 }
 Render::~Render()
 {
@@ -22,12 +23,19 @@ Render::~Render()
 void Render::init()
 {
     m_transform = m_owner->getComponent<Transform>();
+    m_shaderModelMatLocation = glGetUniformLocation(m_shader->m_shaderLocation, "modelMat");
+    m_shaderViewMatLocation = glGetUniformLocation(m_shader->m_shaderLocation, "viewMat");
+    m_shaderProjMatLocation = glGetUniformLocation(m_shader->m_shaderLocation, "projMat");
 
 }
 void Render::update()
 {
     m_transform->m_orientation.normalize();
     m_modelMat.setOrientationAndPos(m_transform->m_orientation, m_transform->m_position);
+    m_modelMat = m_modelMat * kep::Matrix4(m_transform->m_scale.x, 0.0f, 0.0f, 0.0f,
+                                           0.0f, m_transform->m_scale.y, 0.0f, 0.0f,
+                                           0.0f, 0.0f, m_transform->m_scale.z, 0.0f,
+                                           0.0f, 0.0f, 0.0f, 1.0f);
     m_modelMat = m_modelMat.transpose();
     
     Camera * rc = m_owner->m_world->m_renderCamera;
@@ -38,11 +46,11 @@ void Render::render()
 {
     glUseProgram(m_shader->m_shaderLocation);
 
-    glUniformMatrix4fv(m_shader->m_shaderModelMatLocation, 1, 
+    glUniformMatrix4fv(m_shaderModelMatLocation, 1, 
                        GL_FALSE, &m_modelMat.d[0][0]);
-    glUniformMatrix4fv(m_shader->m_shaderViewMatLocation, 1, 
+    glUniformMatrix4fv(m_shaderViewMatLocation, 1, 
                        GL_FALSE, &m_viewMat.d[0][0]);
-    glUniformMatrix4fv(m_shader->m_shaderProjMatLocation, 1, 
+    glUniformMatrix4fv(m_shaderProjMatLocation, 1, 
                        GL_FALSE, &m_projectionMat.d[0][0]);
 
     switch(m_renderMode)

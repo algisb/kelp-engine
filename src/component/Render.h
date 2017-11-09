@@ -27,6 +27,10 @@ namespace kelp
         kep::Matrix4 m_viewMat;
         kep::Matrix4 m_projectionMat;
         
+        int m_shaderModelMatLocation;
+        int m_shaderViewMatLocation;
+        int m_shaderProjMatLocation;
+        
         Render(Mesh* _mesh, Shader* _shader, RenderMode _renderMode);
         ~Render();
         void init();

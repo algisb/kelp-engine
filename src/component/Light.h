@@ -3,7 +3,7 @@
 #include "Component.h"
 #include "kep/Core.h"
 #include "Shader.h"
-
+#include "Transform.h"
 namespace kelp
 {
     class Light : public Component
@@ -46,9 +46,13 @@ namespace kelp
     class LightPoint : public Light
     {
     public:
+        Transform * m_transform;
+        int m_shaderPositionLocation;
         LightPoint(Shader * _shader, float _stength, kep::Vector3 _colour);
         ~LightPoint();
+        void init();
         void update();
+        void render();
     };
 };
 

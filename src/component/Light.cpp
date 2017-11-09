@@ -87,7 +87,7 @@ void LightDirectional::init()
     ss >> loc;
 
     
-    glUseProgram(m_shader->m_shaderLocation);
+    //glUseProgram(m_shader->m_shaderLocation);
     nameInShader.clear();
     nameInShader = "light[" + loc + "].direction";
     m_shaderDirectionLocation = glGetUniformLocation(m_shader->m_shaderLocation, nameInShader.c_str());
@@ -96,14 +96,10 @@ void LightDirectional::init()
 void LightDirectional::update()
 {
     Light::update();
-    glUseProgram(m_shader->m_shaderLocation);
     kep::Matrix4 viewMat = m_owner->m_world->m_renderCamera->m_viewMat;
-    kep::Vector3 direction = m_direction;
-    direction.normalize();
-    direction = kep::Matrix3(viewMat).transpose() * direction;
-    glUseProgram(m_shader->m_shaderLocation);
+    kep::Vector3 direction = kep::Matrix3(viewMat).transpose() * m_direction.normalized();
     glUniform3fv(m_shaderDirectionLocation, 1, &direction.data[0]);
-    glUniform1i(m_shaderTypeLocation, 0);
+    glUniform1i(m_shaderTypeLocation, 0);//0 is directional light inside the shader
 }
 
 void LightDirectional::render()
@@ -124,6 +120,34 @@ LightPoint::~LightPoint()
 {
     
 }
+void LightPoint::init()
+{
+    Light::init();
+    
+    m_transform = m_owner->getComponent<Transform>();
+    std::string nameInShader;
+    std::stringstream ss;
+    
+    ss << m_owner->m_world->m_lights.size()-1;
+    std::string loc;
+    ss >> loc;
+
+    nameInShader.clear();
+    nameInShader = "light[" + loc + "].position";
+    m_shaderPositionLocation = glGetUniformLocation(m_shader->m_shaderLocation, nameInShader.c_str());
+}
+
 void LightPoint::update()
 {
+    Light::update();
+    kep::Matrix4 viewMat = m_owner->m_world->m_renderCamera->m_viewMat;
+    kep::Vector3 position = viewMat.transpose() * m_transform->m_position;
+    glUniform3fv(m_shaderPositionLocation, 1, &position.data[0]);
+    glUniform1i(m_shaderTypeLocation, 1);//1 is point light inside the shader
+    
+}
+
+void LightPoint::render()
+{
+    
 }

@@ -8,10 +8,8 @@ using namespace kelp;
 
 Shader::Shader(const char * _vertexShaderPath, const char * _fragmentShaderPath)
 {
+    
     BuildShader(m_shaderLocation, _vertexShaderPath, _fragmentShaderPath);
-    m_shaderModelMatLocation = glGetUniformLocation(m_shaderLocation, "modelMat");
-    m_shaderViewMatLocation = glGetUniformLocation(m_shaderLocation, "viewMat");
-    m_shaderProjMatLocation = glGetUniformLocation(m_shaderLocation, "projMat");
 }
 Shader::~Shader()
 {

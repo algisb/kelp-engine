@@ -24,6 +24,8 @@ namespace kelp
         void init();
         void update();
         void render();
+        
+        void setAsRenderCamera();
     };
 };
 
