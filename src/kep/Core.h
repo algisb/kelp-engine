@@ -45,6 +45,7 @@ namespace kep
         
         real squareMagnitude();
         void normalize();
+        Vector3 normalized();
         
         void addScaledVector(const Vector3 & _vector, const real _scale);
         
@@ -90,16 +91,22 @@ namespace kep
         void setEuler(Vector3 _axis, real _angle);
     };
     
+    class Matrix4;
     class Matrix3
     {
     public:
-        real data[9];
+        union
+        {
+            real d[3][3];
+            real data[9];
+        };
         
         Matrix3(    
         real _d0 = 1.0f, real _d1 = 0.0f, real _d2 = 0.0f,
         real _d3 = 0.0f, real _d4 = 1.0f, real _d5 = 0.0f,
         real _d6 = 0.0f, real _d7 = 0.0f, real _d8 = 1.0f
         );
+        Matrix3(Matrix4 _m);
         ~Matrix3();
         
         Matrix3 operator*(const Matrix3 &_o) const;

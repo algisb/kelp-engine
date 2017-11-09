@@ -53,10 +53,15 @@ real Vector3::squareMagnitude()
 void Vector3::normalize()
 {
     real m = magnitude();
-    if(m > 0)
-    {
+    //if(m > 0)
+    //{
         (*this) *= ((real)1)/m;
-    }
+    //}
+}
+Vector3 Vector3::normalized()
+{
+    real m = magnitude();
+    return (*this)*(((real)1)/m);
 }
 
 void Vector3::addScaledVector(const Vector3 & _vector, const real _scale)
@@ -235,6 +240,13 @@ Matrix3::Matrix3(
     data[3] = _d3; data[4] = _d4; data[5] = _d5; 
     data[6] = _d6; data[7] = _d7; data[8] = _d8;
 }
+Matrix3::Matrix3(Matrix4 _m)
+{
+    d[0][0] = _m.d[0][0]; d[0][1] = _m.d[0][1]; d[0][2] = _m.d[0][2]; 
+    d[1][0] = _m.d[1][0]; d[1][1] = _m.d[1][1]; d[1][2] = _m.d[1][2];
+    d[2][0] = _m.d[2][0]; d[2][1] = _m.d[2][1]; d[2][2] = _m.d[2][2];
+}
+
 
 Matrix3 Matrix3::operator*(const Matrix3 &_o) const
 {

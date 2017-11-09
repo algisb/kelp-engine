@@ -8,6 +8,7 @@
 #include "component/InputController.h"
 #include "component/Render.h"
 #include "component/Camera.h"
+#include "component/Light.h"
 
 namespace kelp
 {

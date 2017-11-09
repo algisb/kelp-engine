@@ -9,14 +9,18 @@
 //Made up of entities
 namespace kelp
 {
-    class Camera;
+    
     class Component;
+    
     class Entity;
+    class Camera;
+    class Light;
     class World
     {
     public:
         bool m_init;
         Camera * m_renderCamera;
+        std::vector<Light*> m_lights;
         std::vector<Entity*> m_entities;
         World();
         virtual ~World()=0;

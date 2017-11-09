@@ -15,12 +15,13 @@ World_0::World_0() : World()
     
     
     MeshLoad * mesh0 = new MeshLoad("./models/city.obj", "./models/");
+    MeshLoad * mesh1 = new MeshLoad("./models/sphereUV.obj", "./models/");
     ShaderMin * shaderMin = new ShaderMin();//TODO : this needs to be derived from entity and later automatically deleted
     ShaderDefault * shaderDefault = new ShaderDefault();
     
     Entity * refEntity = NULL;
     //////////////////////CAM/////////////////////////
-    refEntity = new Entity(this, "camera");
+    refEntity = new Entity(this, "camera");//TODO: allow it so this can insted be another entity acting as a root node(scenegraph)
     refEntity->addComponent(new Transform(
                                           kep::Vector3(0.0f, 0.0f, 10.0f),
                                           kep::Quaternion(), 
@@ -36,6 +37,10 @@ World_0::World_0() : World()
                                 1000.0f).transpose()
                             ));
     refEntity->addComponent(new InputController());
+    
+    
+    refEntity = new Entity(this, "Directional Light");
+    refEntity->addComponent(new LightDirectional(shaderDefault, 0.5f, kep::Vector3(0.0f,0.0f,0.0f), kep::Vector3(1.0f, 1.0f, 1.0f)));
     //m_renderCamera = empty[0]->getComponent<Camera>();
     //////////////////////////////////////////////////
     refEntity = new Entity(this, "empty");
@@ -45,7 +50,7 @@ World_0::World_0() : World()
                                           kep::Vector3(1.0f, 1.0f, 1.0f)
                                          ));
     
-    refEntity->addComponent(new Render(meshGen, shaderDefault, RenderMode::WIRE));
+    refEntity->addComponent(new Render(mesh1, shaderDefault, RenderMode::SOLID));
     
     
     refEntity = new Entity(this, "empty");
