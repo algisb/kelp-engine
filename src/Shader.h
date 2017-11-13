@@ -13,7 +13,11 @@ namespace kelp
     class Shader
     {
     public:
+        static std::vector<Shader*> s_shaders;//mainly needed for lighting
         int m_shaderLocation;
+        int m_shaderModelMatLocation;
+        int m_shaderViewMatLocation;
+        int m_shaderProjMatLocation;
 
         Shader(const char * _vertexShaderPath,const char * _fragmentShaderPath);
         virtual ~Shader()=0;

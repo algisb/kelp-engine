@@ -5,11 +5,14 @@
 
 using namespace kelp;
 
-
+std::vector<Shader*> Shader::s_shaders = std::vector<Shader*>();
 Shader::Shader(const char * _vertexShaderPath, const char * _fragmentShaderPath)
 {
-    
+    s_shaders.push_back(this);
     BuildShader(m_shaderLocation, _vertexShaderPath, _fragmentShaderPath);
+    m_shaderModelMatLocation = glGetUniformLocation(m_shaderLocation, "modelMat");
+    m_shaderViewMatLocation = glGetUniformLocation(m_shaderLocation, "viewMat");
+    m_shaderProjMatLocation = glGetUniformLocation(m_shaderLocation, "projMat");
 }
 Shader::~Shader()
 {

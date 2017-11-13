@@ -9,6 +9,7 @@
 #include "component/Render.h"
 #include "component/Camera.h"
 #include "component/Light.h"
+#include "component/RenderLine.h"
 
 namespace kelp
 {
@@ -17,7 +18,7 @@ namespace kelp
     public:
         Entity * empty[10];
         
-        World_0();
+        World_0(Core * _core);
         ~World_0();
         void updateV();
     };

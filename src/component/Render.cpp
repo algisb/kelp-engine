@@ -23,9 +23,7 @@ Render::~Render()
 void Render::init()
 {
     m_transform = m_owner->getComponent<Transform>();
-    m_shaderModelMatLocation = glGetUniformLocation(m_shader->m_shaderLocation, "modelMat");
-    m_shaderViewMatLocation = glGetUniformLocation(m_shader->m_shaderLocation, "viewMat");
-    m_shaderProjMatLocation = glGetUniformLocation(m_shader->m_shaderLocation, "projMat");
+
 
 }
 void Render::update()
@@ -46,11 +44,11 @@ void Render::render()
 {
     glUseProgram(m_shader->m_shaderLocation);
 
-    glUniformMatrix4fv(m_shaderModelMatLocation, 1, 
+    glUniformMatrix4fv(m_shader->m_shaderModelMatLocation, 1, 
                        GL_FALSE, &m_modelMat.d[0][0]);
-    glUniformMatrix4fv(m_shaderViewMatLocation, 1, 
+    glUniformMatrix4fv(m_shader->m_shaderViewMatLocation, 1, 
                        GL_FALSE, &m_viewMat.d[0][0]);
-    glUniformMatrix4fv(m_shaderProjMatLocation, 1, 
+    glUniformMatrix4fv(m_shader->m_shaderProjMatLocation, 1, 
                        GL_FALSE, &m_projectionMat.d[0][0]);
 
     switch(m_renderMode)

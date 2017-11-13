@@ -21,7 +21,7 @@ namespace kelp
         int m_shaderNumLightsLocation;
 
         
-        Light(Shader * _shader, float _stength, kep::Vector3 _colour);
+        Light(Shader * _shader, float _strength, kep::Vector3 _colour);
         virtual ~Light() = 0;
         virtual void init();
         virtual void update();
@@ -34,7 +34,7 @@ namespace kelp
         kep::Vector3 m_direction;
         int m_shaderDirectionLocation;
         
-        LightDirectional(Shader * _shader, float _stength, kep::Vector3 _colour, kep::Vector3 _direction);
+        LightDirectional(Shader * _shader, float _strength, kep::Vector3 _colour, kep::Vector3 _direction);
         ~LightDirectional();
         void init();
         void update();
@@ -48,7 +48,7 @@ namespace kelp
     public:
         Transform * m_transform;
         int m_shaderPositionLocation;
-        LightPoint(Shader * _shader, float _stength, kep::Vector3 _colour);
+        LightPoint(Shader * _shader, float _strength, kep::Vector3 _colour);
         ~LightPoint();
         void init();
         void update();

@@ -1,6 +1,6 @@
 ///
 ///  @file Core.cpp
-///  @brief core engine components usually unrelated to the game world and generic
+///  @brief core engine components really generic, can be reused in multiple worlds
 
 #include "Core.h"
 
@@ -13,12 +13,26 @@ Core::Core()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    m_world = new World_0();
     ///////////////////////////////////////
+    //MeshGen * meshGen = new MeshGen();
+    //meshGen->addTri(kep::Vector3(-2.0,0,0), kep::Vector3(2.0f,0,0), kep::Vector3(0,3.0f,0));
+    //meshGen->gen();
     
+    
+    
+    m_cityMesh = new MeshLoad("./models/city.obj", "./models/");
+    m_sphereMesh = new MeshLoad("./models/sphereUV.obj", "./models/");
+    m_shaderMinimal = new ShaderMin();
+    m_shaderDefault = new ShaderDefault();
+    
+    m_world = new World_0(this);
 }
 Core::~Core()
 {
+    delete m_cityMesh;
+    delete m_sphereMesh;
+    delete m_shaderMinimal;
+    delete m_shaderDefault;
     delete m_world;
 }
 

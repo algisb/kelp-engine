@@ -3,11 +3,11 @@
 #include "Camera.h"
 using namespace kelp;
 
-Light::Light(Shader * _shader, float _stength, kep::Vector3 _colour)
+Light::Light(Shader * _shader, float _strength, kep::Vector3 _colour)
 {
     
     m_shader = _shader;
-    m_strength = _stength;
+    m_strength = _strength;
     m_colour = _colour;
     m_enabled = 1;
 }
@@ -23,7 +23,7 @@ void Light::init()
     std::string nameInShader;
     std::stringstream ss;
     
-    ss << m_owner->m_world->m_lights.size()-1;//TODO: no coping mechanism for deleteing entities of lights sources
+    ss << m_owner->m_world->m_lights.size()-1;//TODO: no mechanism for deleteing lights sources
     std::string loc;
     ss >> loc;
 
@@ -65,7 +65,7 @@ void Light::render()
 }
 
 
-LightDirectional::LightDirectional(Shader * _shader, float _stength, kep::Vector3 _colour, kep::Vector3 _direction) : Light(_shader, _stength, _colour)
+LightDirectional::LightDirectional(Shader * _shader, float _strength, kep::Vector3 _colour, kep::Vector3 _direction) : Light(_shader, _strength, _colour)
 {
     m_direction = _direction;
 }
@@ -111,7 +111,7 @@ void LightDirectional::render()
 
 
 
-LightPoint::LightPoint(Shader * _shader, float _stength, kep::Vector3 _colour) : Light(_shader, _stength, _colour)
+LightPoint::LightPoint(Shader * _shader, float _strength, kep::Vector3 _colour) : Light(_shader, _strength, _colour)
 {
     
 }

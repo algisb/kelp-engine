@@ -5,7 +5,6 @@
 #include <string>
 #include "Component.h"
 #include "World.h"
-//TODO ------------------------------------- DERIVE GAME_ENTITY CLASS AS  AS THIS ONE CAN ALSO BE USED FOR UI AND OTHER CRAP BAKA!!!!
 
 namespace kelp
 {

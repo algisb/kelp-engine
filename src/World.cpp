@@ -3,12 +3,15 @@
 ///  @brief all worlds are derived from this class
 
 #include "World.h"
+#include "component/RenderLine.h"
+#include "Core.h"
 using namespace kelp;
 
-World::World()
+World::World(Core * _core)
 {
     m_init = false;
     m_renderCamera = NULL;
+    m_core = _core;
 }
 World::~World()
 {
@@ -31,6 +34,7 @@ void World::update()
     
     for(int i = 0; i< m_entities.size(); i++)
         m_entities[i]->render();
+    RenderLine::renderLines(m_core->m_shaderMinimal, m_renderCamera);
     
 }
 
