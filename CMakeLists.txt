@@ -3,7 +3,8 @@ cmake_minimum_required (VERSION 3.1.0)
 project (kelp-engine)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "./bin")
-
+SET( CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "./bin")
+SET( CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "./bin")
 #glew------------------------------------------------------
 #include_directories ("./external/glew/include")
 add_subdirectory("./external/glew/build/cmake")
