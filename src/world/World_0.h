@@ -5,7 +5,6 @@
 #include "Shader.h"
 #include "Mesh.h"
 #include "component/Transform.h"
-#include "component/InputController.h"
 #include "component/Render.h"
 #include "component/Camera.h"
 #include "component/Light.h"

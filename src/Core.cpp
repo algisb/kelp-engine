@@ -7,8 +7,9 @@
 
 using namespace kelp;
 
-Core::Core()
+Core::Core(int _argc, char ** _argv)
 {
+    
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
@@ -20,8 +21,13 @@ Core::Core()
     
     
     
-    m_cityMesh = new MeshLoad("./models/city.obj", "./models/");
+    m_plane = new MeshLoad("./models/plane.obj", "./models/");
     m_sphereMesh = new MeshLoad("./models/sphereUV.obj", "./models/");
+    m_cubeMesh = new MeshLoad("./models/cube.obj", "./models/");
+    m_highPolyMesh = new MeshLoad("./models/peps.obj", "./models/");
+    m_sphereSmoothMesh = new MeshLoad("./models/sphereUVsmooth.obj", "./models/");
+    m_monkeyMesh = new MeshLoad("./models/monkey.obj", "./models/");
+    
     m_shaderMinimal = new ShaderMin();
     m_shaderDefault = new ShaderDefault();
     
@@ -29,8 +35,10 @@ Core::Core()
 }
 Core::~Core()
 {
-    delete m_cityMesh;
+    delete m_plane;
     delete m_sphereMesh;
+    delete m_cubeMesh;
+    
     delete m_shaderMinimal;
     delete m_shaderDefault;
     delete m_world;

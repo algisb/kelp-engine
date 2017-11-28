@@ -13,6 +13,9 @@ namespace kelp
         kep::Quaternion m_orientation;
         kep::Vector3 m_scale;
         
+        kep::Matrix4 m_modelMat;
+        kep::Matrix4 m_modelMatUnscaled;
+        
         Transform(kep::Vector3 _position, kep::Quaternion _orientation, kep::Vector3 _scale);
         ~Transform();
         void init();

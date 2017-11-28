@@ -39,13 +39,20 @@ namespace kelp
     class Core
     {
     public:
-        MeshLoad * m_cityMesh;
+        MeshLoad * m_plane;
         MeshLoad * m_sphereMesh;
+        MeshLoad * m_cubeMesh;
+        MeshLoad * m_highPolyMesh;
+        MeshLoad * m_sphereSmoothMesh;
+        MeshLoad * m_monkeyMesh;
+        
+        MeshLoad * m_externalMesh;
+        
         ShaderMin * m_shaderMinimal;
         ShaderDefault * m_shaderDefault;
         
         World * m_world;
-        Core();
+        Core(int _argc, char ** _argv);
         ~Core();
         void update();
     };

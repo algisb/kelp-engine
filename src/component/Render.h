@@ -24,12 +24,10 @@ namespace kelp
         RenderMode m_renderMode;
         
         kep::Matrix4 m_modelMat;
-        kep::Matrix4 m_viewMat;
-        kep::Matrix4 m_projectionMat;
-        
+        kep::Vector3 m_colour;
 
         
-        Render(Mesh* _mesh, Shader* _shader, RenderMode _renderMode);
+        Render(Mesh* _mesh, Shader* _shader, RenderMode _renderMode, kep::Vector3 _colour = kep::Vector3(1.0f, 0.0f, 0.0f));
         ~Render();
         void init();
         void update();

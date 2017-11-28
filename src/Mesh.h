@@ -12,15 +12,14 @@ namespace kelp
     class Mesh
     {
     public:
-        
-
-
         GLuint m_vao;
         GLuint m_vboV;//vertex data
         GLuint m_vboN;//normal data
         GLuint m_vboT;//Texture data
         
         unsigned int m_numVertices;
+        float * m_dataV;
+        float * m_dataN;
         
         Mesh();
         virtual ~Mesh()=0;
@@ -44,8 +43,6 @@ namespace kelp
         MeshLoad(const char * _objPath, const char * _mtlDir);
         ~MeshLoad();
     };
-    
-    
 };
 
 
