@@ -99,11 +99,18 @@ void Vector3::operator %=(const Vector3 & _vector)
     *this = vectorProduct(_vector);
 }
 Vector3 Vector3::operator %(const Vector3 & _vector)
-
 {
     return Vector3(y*_vector.z - z*_vector.y,
                     z*_vector.x - x*_vector.z,
                     x*_vector.y - y*_vector.x);
+}
+
+bool Vector3::operator==(const Vector3 & _vector)
+{
+    if(_vector.data[0] == data[0] && _vector.data[1] == data[1] && _vector.data[2] == data[2])
+        return true;
+    else
+        return false;
 }
 
 void Vector3::dump()

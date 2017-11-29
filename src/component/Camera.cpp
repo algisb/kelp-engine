@@ -8,6 +8,7 @@ Camera::Camera(kep::Vector3 _up, kep::Matrix4 _projectionMat, bool _possessed)
     m_up = _up;
     m_projectionMat = _projectionMat;
     m_possessed = _possessed;
+    m_angleLeft = 0;
 }
 Camera::~Camera()
 {
@@ -79,19 +80,30 @@ void Camera::possessedControls()
     if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_UP, Input::Keyboard::KeyboardAction::HELD))
     {
         //rc->m_transform->m_orientation.addScaledVector(kep::Vector3(0.0f, 1.0f, 0.0f), 0.01f);
-        
-        kep::Quaternion q;
-        q.setEuler(m_left, -rotSpd);
-        m_transform->m_orientation *= q;
+        float tmpAng = m_angleLeft;
+        tmpAng = tmpAng - rotSpd;
+        if(tmpAng > -90.0f)
+        {
+            m_angleLeft = tmpAng;
+            kep::Quaternion q;
+            q.setEuler(m_left, -rotSpd);
+            m_transform->m_orientation *= q;
+        }
     }
     
     if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_DOWN, Input::Keyboard::KeyboardAction::HELD))
     {
         //rc->m_transform->m_orientation.addScaledVector(kep::Vector3(0.0f, 1.0f, 0.0f), 0.01f);
+        float tmpAng = m_angleLeft;
+        tmpAng = tmpAng + rotSpd;
         
-        kep::Quaternion q;
-        q.setEuler(m_left, rotSpd);
-        m_transform->m_orientation *= q;
+        if(tmpAng < 90.0f)
+        {
+            m_angleLeft = tmpAng;
+            kep::Quaternion q;
+            q.setEuler(m_left, rotSpd);
+            m_transform->m_orientation *= q;
+        }
     }
 }
 void Camera::setAsRenderCamera()

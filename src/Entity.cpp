@@ -9,13 +9,17 @@ Entity::Entity(World * _world, std::string _tag)
 {
     m_world = _world;
     m_tag = _tag;
-    m_world->m_entities.push_back(this);
+    m_world->m_newEntities.push_back(this);
 }
 Entity::~Entity()
 {
     for(int i = 0; i< m_components.size(); i++)
+    {
         delete m_components[i];
+        m_components[i]= NULL;
+    }
     m_components.clear();
+    m_world = NULL;
 }
 
 void Entity::init()

@@ -9,9 +9,9 @@ using namespace kelp;
 
 World_0::World_0(Core * _core) : World(_core)
 {
-
-    
     Entity * refEntity = NULL;
+    refEntity = new Entity(this, "empty");//empty structure for having global components and testing stuff
+    refEntity->addComponent(new Empty());
     //////////////////////CAM/////////////////////////
     refEntity = new Entity(this, "camera");//TODO: allow it so this can insted be another entity acting as a root node(scenegraph)
     refEntity->addComponent(new Transform(
@@ -33,9 +33,9 @@ World_0::World_0(Core * _core) : World(_core)
 
     
     refEntity = new Entity(this, "Directional Light");
-    refEntity->addComponent(new LightDirectional(m_core->m_shaderDefault, 0.5f, kep::Vector3(0.0f,0.0f,0.0f), kep::Vector3(0.0f, 1.0f, 1.0f)));
+    //refEntity->addComponent(new LightDirectional(m_core->m_shaderDefault, 0.5f, kep::Vector3(0.0f,0.0f,0.0f), kep::Vector3(0.0f, 1.0f, 1.0f)));
     
-    refEntity = new Entity(this, "Point Light");
+    //refEntity = new Entity(this, "Point Light");
     refEntity->addComponent(new Transform(
                                         kep::Vector3(-4.0f, 8.0f, 2.0f),
                                         kep::Quaternion(), 
@@ -71,13 +71,13 @@ World_0::World_0(Core * _core) : World(_core)
     refEntity->addComponent(new Render(m_core->m_sphereSmoothMesh, m_core->m_shaderDefault, RenderMode::SOLID));
     
     
-    refEntity = new Entity(this, "wall");
-    refEntity->addComponent(new Transform(
+    wall = new Entity(this, "wall");
+    wall->addComponent(new Transform(
                                         kep::Vector3(0.0f, 10.0f, -10.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(100.0f, 10.0f, 1.0f)
                                         ));
-    refEntity->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, RenderMode::SOLID));
+    wall->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, RenderMode::SOLID));
     
 
 

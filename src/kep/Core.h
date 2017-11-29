@@ -61,6 +61,8 @@ namespace kep
         
         Vector3 operator %(const Vector3 & _vector);
         
+        bool operator ==(const Vector3 & _vector);
+        
         void dump();
     };
     

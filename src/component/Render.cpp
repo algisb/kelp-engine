@@ -18,7 +18,9 @@ Render::Render(Mesh * _mesh, Shader * _shader, RenderMode _renderMode, kep::Vect
 }
 Render::~Render()
 {
-    
+    m_mesh = NULL;
+    m_shader = NULL;
+    m_transform = NULL;
 }
 
 void Render::init()
