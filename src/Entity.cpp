@@ -3,12 +3,14 @@
 ///  @brief Thing made up of smaller things
 
 #include "Entity.h"
+#include "component/Transform.h"
 using namespace kelp;
 
-Entity::Entity(World * _world, std::string _tag)
+Entity::Entity(World * _world, std::string _tag, Entity * _parent)
 {
     m_world = _world;
     m_tag = _tag;
+    m_parent = _parent;
     m_world->m_newEntities.push_back(this);
 }
 Entity::~Entity()
@@ -30,6 +32,7 @@ void Entity::init()
         m_components.push_back(m_newComponents[i]);
     }
     m_newComponents.clear();
+    m_transform = getComponent<Transform>();
 }
 
 void Entity::update()
@@ -59,10 +62,11 @@ void Entity::render()
         m_components[i]->render();
 }
 
-void Entity::addComponent(Component * _c)
+Component * Entity::addComponent(Component * _c)
 {
     _c->m_owner = this;
     m_newComponents.push_back(_c);
+    return _c;
 }
 
 int Entity::deleteComponent(Component* _c)

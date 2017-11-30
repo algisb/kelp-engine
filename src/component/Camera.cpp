@@ -108,6 +108,7 @@ void Camera::possessedControls()
 }
 void Camera::setAsRenderCamera()
 {
+    m_owner->m_world->m_renderCamera->m_possessed = false;
     m_owner->m_world->m_renderCamera = this;
 }
 

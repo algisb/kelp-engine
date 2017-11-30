@@ -5,11 +5,11 @@
 #include <string>
 #include "Component.h"
 #include "World.h"
-
 namespace kelp
 {
     class World;
     class Component;
+    class Transform;
     class Entity
     {
     public:
@@ -18,20 +18,28 @@ namespace kelp
         std::vector<Component*> m_components;
         std::vector<Component*> m_newComponents;
         std::vector<Component*> m_exiledComponents;
+        
+        Transform * m_transform;
         Entity * m_parent;
-        Entity(World * _world, std::string _tag);
+        Entity(World * _world, std::string _tag, Entity * _parent = NULL);
         ~Entity();
         void init();
         void update();
         void render();
-        void addComponent(Component * _c);
+        Component * addComponent(Component * _c);
         int deleteComponent(Component * _c);
         int deleteComponentNextFrame(Component * _c);
         template<typename ComponentType> inline ComponentType * getComponent()
         {
-            for (int i = 0; i < this->m_components.size(); i++)
+            for (int i = 0; i < m_components.size(); i++)
             {
-                ComponentType * tempComp = dynamic_cast<ComponentType*>(this->m_components[i]);
+                ComponentType * tempComp = dynamic_cast<ComponentType*>(m_components[i]);
+                if (tempComp != NULL)
+                    return tempComp;
+            }
+            for (int i = 0; i < m_newComponents.size(); i++)
+            {
+                ComponentType * tempComp = dynamic_cast<ComponentType*>(m_newComponents[i]);
                 if (tempComp != NULL)
                     return tempComp;
             }

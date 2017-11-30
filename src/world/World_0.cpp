@@ -54,21 +54,21 @@ World_0::World_0(Core * _core) : World(_core)
                                         ));
     refEntity->addComponent(new Render(m_core->m_plane, m_core->m_shaderDefault, RenderMode::SOLID));
     
-    refEntity = new Entity(this, "cube");
-    refEntity->addComponent(new Transform(
+    cube = new Entity(this, "cube");
+    cube->addComponent(new Transform(
                                         kep::Vector3(0.0f, 1.0f, 0.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
-    refEntity->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, RenderMode::SOLID));
+    cube->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, RenderMode::SOLID));
     
-    refEntity = new Entity(this, "sphere");
-    refEntity->addComponent(new Transform(
-                                        kep::Vector3(-5.0f, 1.0f, 0.0f),
+    sphere = new Entity(this, "sphere", cube);
+    sphere->addComponent(new Transform(
+                                        kep::Vector3(-5.0f, 0.0f, 0.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
-    refEntity->addComponent(new Render(m_core->m_sphereSmoothMesh, m_core->m_shaderDefault, RenderMode::SOLID));
+    sphere->addComponent(new Render(m_core->m_sphereSmoothMesh, m_core->m_shaderDefault, RenderMode::SOLID));
     
     
     wall = new Entity(this, "wall");

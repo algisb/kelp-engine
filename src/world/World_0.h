@@ -17,8 +17,11 @@ namespace kelp
     {
     public:
         Entity * empty[10];
+        
         Entity * wall;
         Entity * plight;
+        Entity * cube;
+        Entity * sphere;
         World_0(Core * _core);
         ~World_0();
         void updateV();
