@@ -22,7 +22,7 @@ namespace kelp
         std::vector<Light*> m_lights;
         std::vector<Entity*> m_entities;
         std::vector<Entity*> m_newEntities;//entities to be added ie. initializer not called yet-- BCUZ ENTITY CANT BE ADDED MID LOOP
-        std::vector<Entity*> m_exiledEntities;//entities to be deleted
+        std::vector<Entity*> m_exiledEntities;//entities to be deleted on the next frame
         World(Core * _core);
         virtual ~World()=0;
         virtual void updateV()=0;

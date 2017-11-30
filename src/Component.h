@@ -12,7 +12,6 @@ namespace kelp
     public:
         Entity * m_owner;//owner is added by add component
         bool m_enabled;
-        
         Component();
         virtual ~Component()=0;
         virtual void init()=0;

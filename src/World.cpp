@@ -26,7 +26,7 @@ void World::update()
     
     for(int j = 0; j< m_exiledEntities.size(); j++)
     {
-        for(int i = 0; i< m_entities.size(); i++)//removes NULLs aka deleted components
+        for(int i = 0; i< m_entities.size(); i++)
         {
             if(m_entities[i] == m_exiledEntities[j])
             {
@@ -72,9 +72,9 @@ int World::deleteEntity(Entity * _entity)
     return 1;//Specified entity does not exist
 }
 
-int World::deleteEntityNextFrame(kelp::Entity* _entity)
+int World::deleteEntityNextFrame(Entity* _entity)
 {
-        for(int i = 0; i< m_entities.size(); i++)
+    for(int i = 0; i< m_entities.size(); i++)
     {
         if(m_entities[i] == _entity)
         {
