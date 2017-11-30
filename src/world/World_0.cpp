@@ -32,17 +32,17 @@ World_0::World_0(Core * _core) : World(_core)
     
 
     
-    refEntity = new Entity(this, "Directional Light");
+    //refEntity = new Entity(this, "Directional Light");
     //refEntity->addComponent(new LightDirectional(m_core->m_shaderDefault, 0.5f, kep::Vector3(0.0f,0.0f,0.0f), kep::Vector3(0.0f, 1.0f, 1.0f)));
     
-    //refEntity = new Entity(this, "Point Light");
-    refEntity->addComponent(new Transform(
+    plight = new Entity(this, "Point Light");
+    plight->addComponent(new Transform(
                                         kep::Vector3(-4.0f, 8.0f, 2.0f),
                                         kep::Quaternion(), 
                                         kep::Vector3(0.2f, 0.2f, 0.2f)
                                         ));
-    refEntity->addComponent(new LightPoint(m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
-    refEntity->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, RenderMode::SOLID));
+    plight->addComponent(new LightPoint(m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
+    plight->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, RenderMode::SOLID));
         
     
    //////////////////////////////////////////////////////////////////////////////////////////// 

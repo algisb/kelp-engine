@@ -6,6 +6,7 @@ namespace kelp
     class Empty : public Component
     {
     public:
+        float kekX;
         Empty();
         ~Empty();
         void init();

@@ -14,7 +14,19 @@ Light::Light(Shader * _shader, float _strength, kep::Vector3 _colour)
 
 Light::~Light()
 {
+    //some sphaghetti with clearing lights incase deleted at runtime
+    std::vector<Light*> lights = m_owner->m_world->m_lights;
+    m_owner->m_world->m_lights.clear();
+    for(int i = 0; i<lights.size(); i++)
+        if(lights[i] == this)
+            lights.erase(lights.begin()+i);
     
+    for(int i = 0; i<lights.size(); i++)
+        lights[i]->init();
+    m_owner->m_world->m_lights = lights;
+    glUseProgram(m_shader->m_shaderLocation);
+    glUniform1i(m_shaderNumLightsLocation, m_owner->m_world->m_lights.size());
+    //printf("light dest %d\n", m_owner->m_world->m_lights.size());
 }
 void Light::init()
 {
@@ -72,8 +84,6 @@ LightDirectional::LightDirectional(Shader * _shader, float _strength, kep::Vecto
 
 LightDirectional::~LightDirectional()
 {
-    
-
 }
 
 void LightDirectional::init()
@@ -118,7 +128,6 @@ LightPoint::LightPoint(Shader * _shader, float _strength, kep::Vector3 _colour) 
 
 LightPoint::~LightPoint()
 {
-    
 }
 void LightPoint::init()
 {

@@ -18,6 +18,7 @@ namespace kelp
         std::vector<Component*> m_components;
         std::vector<Component*> m_newComponents;
         std::vector<Component*> m_exiledComponents;
+        Entity * m_parent;
         Entity(World * _world, std::string _tag);
         ~Entity();
         void init();

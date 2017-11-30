@@ -19,7 +19,7 @@ in vec3 vDirLigt_cs;
 in vec3 vPosition_cs;
 
 uniform int numLights;
-uniform LightProperties light[10];
+uniform LightProperties light[50];//if you think you gonna need more lights kys
 uniform vec3 ambientColour = { 0.05f, 0.05f, 0.05f };
 
 vec3 phong(vec3 _diffColour, vec3 _specColour, vec3 _normal, vec3 _eyeDirection, vec3 _lightDirection)
