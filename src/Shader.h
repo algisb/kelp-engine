@@ -10,6 +10,7 @@
 
 namespace kelp
 {
+#define MAX_LIGHTS 50 //Get also defined in all shaders
     class Shader
     {
     public:

@@ -30,7 +30,10 @@ std::string Shader::LoadShader(const char * _shaderPath)
         std::cerr << "Could not read file " << _shaderPath << ". File does not exist." << std::endl;
         return "";
     }
-
+    char tmpChar[256];
+    sprintf(tmpChar, "#define MAX_LIGHTS %d \n", MAX_LIGHTS);
+    
+    content.append(tmpChar);
     std::string line;
     while (!fileStream.eof())
     {
