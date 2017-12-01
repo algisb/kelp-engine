@@ -35,5 +35,5 @@ include_directories ("./external/tinyobjloader")
 #kelp engine-----------------------------------------------
 include_directories ("./src")
 file(GLOB KELP_SRC "./src/*.cpp" "./src/component/*.cpp" "./src/kep/*.cpp" "./src/world/*.cpp")
-add_executable(kelp-engine ${KELP_SRC})
-target_link_libraries (kelp-engine ${OPENGL_LIBRARIES} glfw glew_s )
+add_executable(kelp-demo ${KELP_SRC})
+target_link_libraries (kelp-demo ${OPENGL_LIBRARIES} glfw glew_s )
