@@ -6,6 +6,7 @@
 #include "Transform.h"
 #include "Config.h"
 #include "kep/Core.h"
+#include "Texture.h"
 namespace kelp
 {
     enum RenderMode
@@ -25,9 +26,11 @@ namespace kelp
         
         kep::Matrix4 m_modelMat;
         kep::Vector3 m_colour;
+        
+        Texture * m_texture;
 
         
-        Render(Mesh* _mesh, Shader* _shader, RenderMode _renderMode, kep::Vector3 _colour = kep::Vector3(1.0f, 0.0f, 0.0f));
+        Render(Mesh* _mesh, Shader* _shader, Texture * _texture, RenderMode _renderMode, kep::Vector3 _colour = kep::Vector3(1.0f, 0.0f, 0.0f));
         ~Render();
         void init();
         void update();

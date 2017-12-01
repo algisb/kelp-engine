@@ -31,6 +31,8 @@ Core::Core(int _argc, char ** _argv)
     m_shaderMinimal = new ShaderMin();
     m_shaderDefault = new ShaderDefault();
     
+    m_testTexture = new Texture("./textures/uv.png");
+    
     m_world = new World_0(this);
 }
 Core::~Core()

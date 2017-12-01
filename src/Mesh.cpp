@@ -202,7 +202,7 @@ MeshLoad::MeshLoad(const char * _objPath, const char * _mtlDir)
         UNPACK_OBJ(
                     for(size_t i = 0; i<2; i++)
                     {
-                        dataT[dataT_i] = attrib.texcoords[3*idx.texcoord_index+i];
+                        dataT[dataT_i] = attrib.texcoords[2*idx.texcoord_index+i];
                         dataT_i++;
                     }
                   );
@@ -215,7 +215,6 @@ MeshLoad::MeshLoad(const char * _objPath, const char * _mtlDir)
         
         //delete data from heap
         delete[] dataT;
-        
     }
     
     //unbind evrything////////////////////////////////////

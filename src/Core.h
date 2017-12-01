@@ -32,7 +32,7 @@
 #include "component/Transform.h"
 #include "kep/Core.h"
 #include "world/World_0.h"
-
+#include "Texture.h"
 //Fore initialising worlds
 namespace kelp
 {
@@ -50,6 +50,8 @@ namespace kelp
         
         ShaderMin * m_shaderMinimal;
         ShaderDefault * m_shaderDefault;
+        
+        Texture * m_testTexture;
         
         World * m_world;
         Core(int _argc, char ** _argv);

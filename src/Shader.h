@@ -20,7 +20,8 @@ namespace kelp
         int m_shaderViewMatLocation;
         int m_shaderProjMatLocation;
         int m_shaderColourLocation;
-
+        int m_shaderText1SamplerLocation;
+        int m_shaderTexturedFlagLocation;
         Shader(const char * _vertexShaderPath,const char * _fragmentShaderPath);
         virtual ~Shader()=0;
         

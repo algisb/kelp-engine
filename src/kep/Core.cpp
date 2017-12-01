@@ -171,16 +171,16 @@ Quaternion Quaternion::operator * (const Quaternion &_multiplier)
         Quaternion q = *this;
         Quaternion f; 
     f.r = q.r*_multiplier.r - q.i*_multiplier.i -
-        q.j*_multiplier.j - q.k*_multiplier.k;
+          q.j*_multiplier.j - q.k*_multiplier.k;
         
     f.i = q.r*_multiplier.i + q.i*_multiplier.r + 
-        q.j*_multiplier.k - q.k*_multiplier.j;
+          q.j*_multiplier.k - q.k*_multiplier.j;
         
     f.j = q.r*_multiplier.j + q.j*_multiplier.r +
-        q.k*_multiplier.i - q.i*_multiplier.k;
+          q.k*_multiplier.i - q.i*_multiplier.k;
         
     f.k = q.r*_multiplier.k + q.k*_multiplier.r +
-        q.i*_multiplier.j - q.j*_multiplier.i;
+          q.i*_multiplier.j - q.j*_multiplier.i;
         
         return f;
 }

@@ -14,6 +14,9 @@ Shader::Shader(const char * _vertexShaderPath, const char * _fragmentShaderPath)
     m_shaderViewMatLocation = glGetUniformLocation(m_shaderLocation, "viewMat");
     m_shaderProjMatLocation = glGetUniformLocation(m_shaderLocation, "projMat");
     m_shaderColourLocation = glGetUniformLocation(m_shaderLocation, "colour");
+    m_shaderText1SamplerLocation = glGetUniformLocation(m_shaderLocation, "tex1");
+    m_shaderTexturedFlagLocation = glGetUniformLocation(m_shaderLocation, "textured");
+    
 }
 Shader::~Shader()
 {

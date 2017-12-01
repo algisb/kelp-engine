@@ -29,11 +29,14 @@ include_directories ("./external/glfw/include")
 add_subdirectory("./external/glfw")
 add_definitions(-DGLFW_STATIC)
 
-#tinyobjloader-------------------------------------------------------
+#tinyobjloader---------------------------------------------
 include_directories ("./external/tinyobjloader")
+#lodepng---------------------------------------------------
+include_directories ("./external/lodepng")
+
 
 #kelp engine-----------------------------------------------
 include_directories ("./src")
-file(GLOB KELP_SRC "./src/*.cpp" "./src/component/*.cpp" "./src/kep/*.cpp" "./src/world/*.cpp")
+file(GLOB KELP_SRC "./src/*.cpp" "./src/component/*.cpp" "./src/kep/*.cpp" "./src/world/*.cpp" "./external/lodepng/*.cpp")
 add_executable(kelp-demo ${KELP_SRC})
 target_link_libraries (kelp-demo ${OPENGL_LIBRARIES} glfw glew_s )

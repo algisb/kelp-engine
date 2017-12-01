@@ -32,8 +32,8 @@ World_0::World_0(Core * _core) : World(_core)
     
 
     
-    //refEntity = new Entity(this, "Directional Light");
-    //refEntity->addComponent(new LightDirectional(m_core->m_shaderDefault, 0.5f, kep::Vector3(0.0f,0.0f,0.0f), kep::Vector3(0.0f, 1.0f, 1.0f)));
+    refEntity = new Entity(this, "Directional Light");
+    refEntity->addComponent(new LightDirectional(m_core->m_shaderDefault, 0.5f, kep::Vector3(0.0f,0.0f,0.0f), kep::Vector3(0.0f, 1.0f, 1.0f)));
     
     plight = new Entity(this, "Point Light");
     plight->addComponent(new Transform(
@@ -42,7 +42,7 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Vector3(0.2f, 0.2f, 0.2f)
                                         ));
     plight->addComponent(new LightPoint(m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
-    plight->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, RenderMode::SOLID));
+    plight->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
         
     
    //////////////////////////////////////////////////////////////////////////////////////////// 
@@ -52,7 +52,7 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(100.0f, 1.0f, 100.0f)
                                         ));
-    refEntity->addComponent(new Render(m_core->m_plane, m_core->m_shaderDefault, RenderMode::SOLID));
+    refEntity->addComponent(new Render(m_core->m_plane, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
     
     cube = new Entity(this, "cube");
     cube->addComponent(new Transform(
@@ -60,7 +60,7 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
-    cube->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, RenderMode::SOLID));
+    cube->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
     
     sphere = new Entity(this, "sphere", cube);
     sphere->addComponent(new Transform(
@@ -68,7 +68,7 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
-    sphere->addComponent(new Render(m_core->m_sphereSmoothMesh, m_core->m_shaderDefault, RenderMode::SOLID));
+    sphere->addComponent(new Render(m_core->m_sphereSmoothMesh, m_core->m_shaderDefault, NULL, RenderMode::SOLID));
     
     
     wall = new Entity(this, "wall");
@@ -77,7 +77,7 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(100.0f, 10.0f, 1.0f)
                                         ));
-    wall->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, RenderMode::SOLID));
+    wall->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, NULL, RenderMode::SOLID));
     
 
 
