@@ -5,10 +5,12 @@ namespace kep
     class RigidBody
     {
     public:
+        bool externPO;
+        
         real inverseMass;
         
-        Vector3 position;
-        Quaternion orientation;
+        Vector3 * position;
+        Quaternion * orientation;
         
         Vector3 velocity;
         Vector3 angularVelocity;
@@ -27,7 +29,8 @@ namespace kep
         
 
         
-        RigidBody(Vector3 _position = Vector3(0,0,0), Quaternion _orientation = Quaternion(0,0,0,0), real _mass = 1.0f);
+        RigidBody(Vector3 * _position = NULL, Quaternion * _orientation = NULL, real _mass = 1.0f, bool _externPO = false);
+        ~RigidBody();
         void calculateDerivedData();
         void setInertiaTensor(const Matrix3 &_inertiaTensor);
         

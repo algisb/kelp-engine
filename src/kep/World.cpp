@@ -11,7 +11,10 @@ World::World()
 }
 World::~World()
 {
-    
+//     delete m_fReg;
+//     delete m_gGen;
+//     delete m_ldGen;
+//     delete m_adGen;
 }
 void World::update(real _duration)
 {
@@ -21,7 +24,7 @@ void World::update(real _duration)
 }
 void World::addRigidBody(RigidBody * _rigidBody)
 {
-    m_fReg->add(_rigidBody, m_gGen);
+    //m_fReg->add(_rigidBody, m_gGen);
     m_fReg->add(_rigidBody, m_ldGen);
     m_fReg->add(_rigidBody, m_adGen);
     m_rigidBody.push_back(_rigidBody);

@@ -61,7 +61,8 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
     cube->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
-    cube->addComponent(new KePhys(1.0f));
+    KePhys * kePhys = (KePhys*)cube->addComponent(new KePhys(1.0f));
+    kePhys->m_rigidBody->addTorque(kep::Vector3(0,0,100));
     
     sphere = new Entity(this, "sphere", cube);
     sphere->addComponent(new Transform(
