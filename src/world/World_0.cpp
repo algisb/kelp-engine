@@ -15,7 +15,7 @@ World_0::World_0(Core * _core) : World(_core)
     //////////////////////CAM/////////////////////////
     refEntity = new Entity(this, "camera");//TODO: allow it so this can insted be another entity acting as a root node(scenegraph)
     refEntity->addComponent(new Transform(
-                                          kep::Vector3(0.0f, 5.0f, 20.0f),
+                                          kep::Vector3(0.0f, 5.0f, 40.0f),
                                           kep::Quaternion(), 
                                           kep::Vector3(1.0f, 1.0f, .0f)
                                          ));
@@ -56,11 +56,12 @@ World_0::World_0(Core * _core) : World(_core)
     
     cube = new Entity(this, "cube");
     cube->addComponent(new Transform(
-                                        kep::Vector3(0.0f, 1.0f, 0.0f),
+                                        kep::Vector3(0.0f, 20.0f, 0.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
     cube->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
+    cube->addComponent(new KePhys(1.0f));
     
     sphere = new Entity(this, "sphere", cube);
     sphere->addComponent(new Transform(

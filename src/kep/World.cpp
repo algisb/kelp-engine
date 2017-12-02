@@ -9,13 +9,15 @@ World::World()
     m_ldGen = new LinearDrag(0.1f, 0.001f);
     m_adGen = new AngularDrag(0.5, 0.1f);
 }
+World::~World()
+{
+    
+}
 void World::update(real _duration)
 {
     m_fReg->updateForces(_duration);
     for(int i = 0; i < m_rigidBody.size(); i++)
-    {
         m_rigidBody[i]->integrate(_duration);
-    }
 }
 void World::addRigidBody(RigidBody * _rigidBody)
 {

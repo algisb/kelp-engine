@@ -12,6 +12,7 @@ World::World(Core * _core)
     m_renderCamera = NULL;
     m_core = _core;
     int m_numLights = 0;
+    m_physWorld = new kep::World();
 }
 World::~World()
 {
@@ -23,7 +24,6 @@ World::~World()
 void World::update()
 {
     updateV();
-    
     for(int j = 0; j< m_exiledEntities.size(); j++)
     {
         for(int i = 0; i< m_entities.size(); i++)
@@ -47,8 +47,11 @@ void World::update()
     m_newEntities.clear();
     
     
+    
     for(int i = 0; i< m_entities.size(); i++)
         m_entities[i]->update();
+    m_physWorld->update(Time::s_deltaT);
+    
     
     for(int i = 0; i< m_entities.size(); i++)
         m_entities[i]->render();

@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "Entity.h"
-
+#include "kep/World.h"
 
 //Made up of entities
 namespace kelp
@@ -19,6 +19,7 @@ namespace kelp
     public:
         Core * m_core;
         Camera * m_renderCamera;
+        kep::World * m_physWorld;//Physics world
         std::vector<Light*> m_lights;
         std::vector<Entity*> m_entities;
         std::vector<Entity*> m_newEntities;//entities to be added ie. initializer not called yet-- BCUZ ENTITY CANT BE ADDED MID LOOP

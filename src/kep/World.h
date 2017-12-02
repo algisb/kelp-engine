@@ -13,6 +13,7 @@ namespace kep
         AngularDrag * m_adGen;
         
         World();
+        ~World();
         void update(real _duration);
         void addRigidBody(RigidBody * _rigidBody);
     };

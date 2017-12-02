@@ -26,13 +26,13 @@ Entity::~Entity()
 
 void Entity::init()
 {
+    m_transform = getComponent<Transform>();
     for(int i = 0; i< m_newComponents.size(); i++)
     {
         m_newComponents[i]->init();
         m_components.push_back(m_newComponents[i]);
     }
     m_newComponents.clear();
-    m_transform = getComponent<Transform>();
 }
 
 void Entity::update()

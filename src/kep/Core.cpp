@@ -53,10 +53,10 @@ real Vector3::squareMagnitude()
 void Vector3::normalize()
 {
     real m = magnitude();
-    //if(m > 0)
-    //{
+    if(m > 0)
+    {
         (*this) *= ((real)1)/m;
-    //}
+    }
 }
 Vector3 Vector3::normalized()
 {

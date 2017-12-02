@@ -7,7 +7,7 @@
 using namespace kelp;
 Empty::Empty()
 {
-    kekX = -10.0f;
+    kekX = -8.0f;
 }
 Empty::~Empty()
 {
@@ -21,6 +21,17 @@ void Empty::update()
 {
     if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_T, Input::Keyboard::KeyboardAction::HELD))
     {
+//         Entity * refEntity = ((World_0*)(m_owner->m_world))->plight;
+//         refEntity = new Entity(refEntity->m_world, "Point Light");
+//         refEntity->addComponent(new Transform(
+//                                         kep::Vector3(kekX, 8.0f, 2.0f),
+//                                         kep::Quaternion(), 
+//                                         kep::Vector3(0.2f, 0.2f, 0.2f)
+//                                         ));
+//         refEntity->addComponent(new LightPoint(refEntity->m_world->m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
+//         refEntity->addComponent(new Render(refEntity->m_world->m_core->m_sphereMesh, refEntity->m_world->m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
+//         kekX  += -10.0f;
+        
         
         Entity * refEntity = ((World_0*)(m_owner->m_world))->cube;
         kep::Quaternion q;

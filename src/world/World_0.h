@@ -10,6 +10,7 @@
 #include "component/Light.h"
 #include "component/RenderLine.h"
 #include "component/Empty.h"
+#include "component/KePhys.h"
 
 namespace kelp
 {
