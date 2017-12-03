@@ -1,6 +1,9 @@
-#pragma once
+#ifndef KEPWORLD_H_
+#define KEPWORLD_H_
+
 #include "RigidBody.h"
 #include "ForceGenerator.h"
+#include "broadphase/PotencialContact.h"
 namespace kep
 {
     class World
@@ -18,3 +21,5 @@ namespace kep
         void addRigidBody(RigidBody * _rigidBody);
     };
 }
+
+#endif //KEPWORLD_H_

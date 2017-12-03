@@ -17,6 +17,7 @@ namespace kelp
     class World
     {
     public:
+        bool m_init;
         Core * m_core;
         Camera * m_renderCamera;
         kep::World * m_physWorld;//Physics world
@@ -26,7 +27,8 @@ namespace kelp
         std::vector<Entity*> m_exiledEntities;//entities to be deleted on the next frame
         World(Core * _core);
         virtual ~World()=0;
-        virtual void updateV()=0;
+        virtual void initW()=0;
+        virtual void updateW()=0;
         void update();
         int deleteEntity(Entity * _entity);
         int deleteEntityNextFrame(Entity * _entity);

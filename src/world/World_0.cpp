@@ -61,16 +61,18 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
     cube->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
-    KePhys * kePhys = (KePhys*)cube->addComponent(new KePhys(1.0f));
-    kePhys->m_rigidBody->addTorque(kep::Vector3(0,0,100));
+    cube->addComponent(new KePhys(1.0f));
+
     
-    sphere = new Entity(this, "sphere", cube);
+    
+    sphere = new Entity(this, "sphere");
     sphere->addComponent(new Transform(
-                                        kep::Vector3(-5.0f, 0.0f, 0.0f),
+                                        kep::Vector3(0.0f, 1.0f, 0.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
     sphere->addComponent(new Render(m_core->m_sphereSmoothMesh, m_core->m_shaderDefault, NULL, RenderMode::SOLID));
+    sphere->addComponent(new KePhys(1.0f));
     
     
     wall = new Entity(this, "wall");
@@ -90,7 +92,16 @@ World_0::~World_0()
     
 }
 
-void World_0::updateV()
+void World_0::initW()
+{
+    KePhys * kePhys = cube->getComponent<KePhys>();
+    
+    //kePhys->m_rigidBody->addTorque(kep::Vector3(0,0,100));
+    //kePhys->m_rigidBody->addForceAtBodyPoint(kep::Vector3(0,0,-100), kep::Vector3(1,0,0));
+    kePhys->m_rigidBody->addForce(kep::Vector3(0, -100, 0));
+}
+
+void World_0::updateW()
 {
     //empty[0]->getComponent<Transform>()->dump();
 }

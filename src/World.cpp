@@ -13,6 +13,7 @@ World::World(Core * _core)
     m_core = _core;
     int m_numLights = 0;
     m_physWorld = new kep::World();
+    m_init = false;
 }
 World::~World()
 {
@@ -23,7 +24,6 @@ World::~World()
 
 void World::update()
 {
-    updateV();
     for(int j = 0; j< m_exiledEntities.size(); j++)
     {
         for(int i = 0; i< m_entities.size(); i++)
@@ -45,19 +45,21 @@ void World::update()
         m_entities.push_back(m_newEntities[i]);
     }
     m_newEntities.clear();
-    
-    
+    if(!m_init)
+    {
+        m_init = true;
+        initW();
+    }
     
     for(int i = 0; i< m_entities.size(); i++)
         m_entities[i]->update();
     m_physWorld->update(Time::s_deltaT);
-    
+    updateW();
     
     for(int i = 0; i< m_entities.size(); i++)
         m_entities[i]->render();
     RenderLine::renderLines(m_core->m_shaderMinimal, m_renderCamera);
     RenderLine2::renderLines(m_core->m_shaderMinimal, m_renderCamera);
-    
 }
 
 int World::deleteEntity(Entity * _entity)

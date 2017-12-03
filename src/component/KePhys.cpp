@@ -1,3 +1,7 @@
+///
+///  @file KePhys.cpp
+///  @brief links between Kep physics engine to kelp render engine 
+
 #include "KePhys.h"
 #include "Transform.h"
 using namespace kelp;
@@ -10,15 +14,14 @@ KePhys::~KePhys()
 }
 void KePhys::init()
 {
+    //externally defined values can only be hooked after initilization
     m_rigidBody->position = &m_owner->m_transform->m_position;
     m_rigidBody->orientation = &m_owner->m_transform->m_orientation;
+    m_rigidBody->boundingVolume.position = &m_owner->m_transform->m_position;
     m_owner->m_world->m_physWorld->addRigidBody(m_rigidBody);
 }
 void KePhys::update()
 {
-    //m_owner->m_transform->m_position = *m_rigidBody->position;
-    //m_owner->m_transform->m_orientation = *m_rigidBody->orientation;
-    //m_rigidBody->position.dump();
 }
 void KePhys::render()
 {

@@ -25,7 +25,8 @@ namespace kelp
         Entity * sphere;
         World_0(Core * _core);
         ~World_0();
-        void updateV();
+        void initW();
+        void updateW();
     };
     
 };

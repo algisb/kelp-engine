@@ -1,4 +1,6 @@
-#pragma once
+#ifndef FORCEGENERATOR_H_
+#define FORCEGENERATOR_H_
+
 #include "RigidBody.h"
 #include <vector>
 namespace kep 
@@ -6,6 +8,8 @@ namespace kep
     class ForceGenerator
     {
     public:
+        ForceGenerator();
+        virtual ~ForceGenerator()=0;
         virtual void updateForce(RigidBody * _rigidBody, real _duration) = 0;
     };
     
@@ -84,4 +88,4 @@ namespace kep
     };
 
 }
-
+#endif //FORCEGENERATOR_H_

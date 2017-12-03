@@ -1,11 +1,15 @@
-#pragma once
+#ifndef RIGIDBODY_H_
+#define RIGIDBODY_H_
 #include "Core.h"
+#include "broadphase/BoundingSphere.h"
+
+
 namespace kep
 {
     class RigidBody
     {
     public:
-        bool externPO;
+        bool externPO;//externaly defined position and orientation
         
         real inverseMass;
         
@@ -26,6 +30,9 @@ namespace kep
         
         Matrix3 inverseInertiaTensor;
         Matrix3 inverseInertiaTensorWorld;
+        
+        //Collision related
+        BoundingSphere boundingVolume;
         
 
         
@@ -53,3 +60,4 @@ namespace kep
         bool hasFiniteMass();
     };
 }
+#endif //RIGIDBODY_H_

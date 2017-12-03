@@ -11,16 +11,33 @@ World::World()
 }
 World::~World()
 {
-//     delete m_fReg;
-//     delete m_gGen;
-//     delete m_ldGen;
-//     delete m_adGen;
+    delete m_fReg;
+    delete m_gGen;
+    delete m_ldGen;
+    delete m_adGen;
 }
 void World::update(real _duration)
 {
+    std::vector<PotencialContact> potencialContacts;
+    //broadphase collision check
+    for(int i = 0; i < m_rigidBody.size(); i++)
+        for(int j = 0; j < m_rigidBody.size(); j++)
+        {
+            if(i==j)//dont check collision against self
+                continue;
+            if(m_rigidBody[i]->boundingVolume.overlaps(&m_rigidBody[j]->boundingVolume))
+            {
+                potencialContacts.push_back(PotencialContact(m_rigidBody[i], m_rigidBody[j]));
+                printf("we have contact nigga !!\n");
+            }
+            
+        }
+    //fine collision check
+    
     m_fReg->updateForces(_duration);
     for(int i = 0; i < m_rigidBody.size(); i++)
         m_rigidBody[i]->integrate(_duration);
+    
 }
 void World::addRigidBody(RigidBody * _rigidBody)
 {

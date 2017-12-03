@@ -44,8 +44,9 @@ RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, real _mass,
                               0,0,1,0,
                               0,0,0,1
     );
+    boundingVolume = BoundingSphere(position, 1.0f);//TODO: when actual collider present, radius must be calculates to encapsulate the whole collider 
 }
-kep::RigidBody::~RigidBody()
+RigidBody::~RigidBody()
 {
     if(!externPO)
     {
@@ -149,7 +150,7 @@ void RigidBody::addTorque(const Vector3 &_torque)
 void RigidBody::addForceAtPoint(const Vector3 &_force,
                                 const Vector3 &_point)
 {
-    calculateDerivedData();
+    //calculateDerivedData();
     Vector3 pt = _point;
     pt -= *position;
 

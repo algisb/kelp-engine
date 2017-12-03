@@ -1,6 +1,14 @@
 #include "ForceGenerator.h"
 using namespace kep;
 
+ForceGenerator::ForceGenerator()
+{
+}
+ForceGenerator::~ForceGenerator()
+{
+    
+}
+
 
 ForceRegistry::ForceRegistry()
 {
