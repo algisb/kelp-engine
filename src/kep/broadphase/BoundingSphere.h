@@ -1,18 +1,15 @@
 #ifndef BOUNDINGSPHERE_H_
 #define BOUNDINGSPHERE_H_
 #include "../Core.h"
-
 namespace kep
 {
+    class RigidBody;
     class BoundingSphere
     {
     public:
-        bool exterP;
-        Vector3 * position;
+        RigidBody * rigidBody;
         real radius;
-        BoundingSphere();
-        BoundingSphere(Vector3 _position, real _radius);
-        BoundingSphere(Vector3 * _position, real _radius);
+        BoundingSphere(RigidBody * _rigidBody = NULL, real _radius = 1.0f);
         ~BoundingSphere();
         bool overlaps(BoundingSphere *_other);
     };

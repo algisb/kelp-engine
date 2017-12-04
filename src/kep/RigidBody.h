@@ -1,11 +1,10 @@
 #ifndef RIGIDBODY_H_
 #define RIGIDBODY_H_
 #include "Core.h"
-#include "broadphase/BoundingSphere.h"
-
 
 namespace kep
 {
+    class BoundingSphere;
     class RigidBody
     {
     public:
@@ -32,7 +31,7 @@ namespace kep
         Matrix3 inverseInertiaTensorWorld;
         
         //Collision related
-        BoundingSphere boundingVolume;
+        BoundingSphere * boundingVolume;
         
 
         

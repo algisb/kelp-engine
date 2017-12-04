@@ -1,4 +1,5 @@
 #include "World.h"
+#include "broadphase/BoundingSphere.h"
 using namespace kep;
 
 World::World()
@@ -25,10 +26,9 @@ void World::update(real _duration)
         {
             if(i==j)//dont check collision against self
                 continue;
-            if(m_rigidBody[i]->boundingVolume.overlaps(&m_rigidBody[j]->boundingVolume))
+            if(m_rigidBody[i]->boundingVolume->overlaps(m_rigidBody[j]->boundingVolume))
             {
                 potencialContacts.push_back(PotencialContact(m_rigidBody[i], m_rigidBody[j]));
-                printf("we have contact nigga !!\n");
             }
             
         }

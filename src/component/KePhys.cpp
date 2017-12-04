@@ -17,7 +17,6 @@ void KePhys::init()
     //externally defined values can only be hooked after initilization
     m_rigidBody->position = &m_owner->m_transform->m_position;
     m_rigidBody->orientation = &m_owner->m_transform->m_orientation;
-    m_rigidBody->boundingVolume.position = &m_owner->m_transform->m_position;
     m_owner->m_world->m_physWorld->addRigidBody(m_rigidBody);
 }
 void KePhys::update()

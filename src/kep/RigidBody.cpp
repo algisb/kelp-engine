@@ -1,4 +1,5 @@
 #include "RigidBody.h"
+#include "broadphase/BoundingSphere.h"
 using namespace kep;
 
 
@@ -44,7 +45,7 @@ RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, real _mass,
                               0,0,1,0,
                               0,0,0,1
     );
-    boundingVolume = BoundingSphere(position, 1.0f);//TODO: when actual collider present, radius must be calculates to encapsulate the whole collider 
+    boundingVolume = new BoundingSphere(this, 1.0f);//TODO: when actual collider present, radius must be calculates to encapsulate the whole collider 
 }
 RigidBody::~RigidBody()
 {
@@ -53,6 +54,7 @@ RigidBody::~RigidBody()
         delete position;
         delete orientation;
     }
+    delete boundingVolume;
 }
 
 void RigidBody::calculateDerivedData()

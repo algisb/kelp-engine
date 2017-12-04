@@ -4,6 +4,7 @@
 #include "RigidBody.h"
 #include "ForceGenerator.h"
 #include "broadphase/PotencialContact.h"
+#include "broadphase/BoundingSphere.h"
 namespace kep
 {
     class World
