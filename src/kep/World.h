@@ -3,6 +3,7 @@
 
 #include "RigidBody.h"
 #include "ForceGenerator.h"
+#include "collisionDetection/CollisionDetector.h"
 namespace kep
 {
     class World
@@ -13,7 +14,7 @@ namespace kep
         Gravity * gGen;
         LinearDrag * ldGen;
         AngularDrag * adGen;
-        
+        CollisionDetector * cDetec;
         World();
         ~World();
         void update(real _duration);

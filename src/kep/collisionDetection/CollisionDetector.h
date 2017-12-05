@@ -2,6 +2,7 @@
 #define COLLISIONDETECTOR_H_
 #include "../RigidBody.h"
 #include "finephase/CollisionData.h"
+#include "broadphase/PotencialContact.h"
 #include <vector>
 namespace kep
 {
@@ -9,12 +10,12 @@ namespace kep
     {
     public:
         std::vector<RigidBody*> * rigidBodies;
-        CollisionDetector();
+        CollisionDetector(std::vector<RigidBody*> * _rigidBodies);
         ~CollisionDetector();
-        void detect(CollisionData * _collisionData);
+        void detect(CollisionData * _cd);
     private:
-        void broadPhase();
-        void finePhase();
+        void broadPhase(std::vector<PotencialContact> * _pc);
+        void finePhase(CollisionData * _cd, std::vector<PotencialContact> * _pc);
     };
 };
 
