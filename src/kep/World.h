@@ -3,19 +3,16 @@
 
 #include "RigidBody.h"
 #include "ForceGenerator.h"
-#include "broadphase/PotencialContact.h"
-#include "broadphase/BoundingSphere.h"
-#include "finephase/CollisionData.h"
 namespace kep
 {
     class World
     {
     public:
-        std::vector<RigidBody*> m_rigidBody;
-        ForceRegistry * m_fReg;
-        Gravity * m_gGen;
-        LinearDrag * m_ldGen;
-        AngularDrag * m_adGen;
+        std::vector<RigidBody*> rigidBodies;
+        ForceRegistry * fReg;
+        Gravity * gGen;
+        LinearDrag * ldGen;
+        AngularDrag * adGen;
         
         World();
         ~World();
