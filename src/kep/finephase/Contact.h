@@ -10,7 +10,7 @@ namespace kep
         RigidBody * body[2];
         Vector3 position;
         Vector3 normal;
-        real penentration;
+        real penetration;
         
         Contact();
         ~Contact();

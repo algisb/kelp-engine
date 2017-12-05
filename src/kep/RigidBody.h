@@ -4,6 +4,7 @@
 
 namespace kep
 {
+    class Collider;
     class BoundingSphere;
     class RigidBody
     {
@@ -32,10 +33,10 @@ namespace kep
         
         //Collision related
         BoundingSphere * boundingVolume;
-        
+        Collider * collider;
 
         
-        RigidBody(Vector3 * _position = NULL, Quaternion * _orientation = NULL, real _mass = 1.0f, bool _externPO = false);
+        RigidBody(Vector3 * _position, Quaternion * _orientation, bool _externPO, real _mass, Collider * _collider );
         ~RigidBody();
         void calculateDerivedData();
         void setInertiaTensor(const Matrix3 &_inertiaTensor);

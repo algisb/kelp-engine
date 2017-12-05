@@ -3,7 +3,8 @@
 ///  @brief holds all the entities that get created also loads assets and other shared objects
 
 #include "World_0.h"
-#include <Core.h>
+#include "Core.h"
+#include "kep/finephase/SphereCollider.h"
 
 using namespace kelp;
 
@@ -61,7 +62,7 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
     cube->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
-    cube->addComponent(new KePhys(1.0f));
+    cube->addComponent(new KePhys(1.0f, new kep::SphereCollider()));
 
     
     
@@ -72,7 +73,7 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
     sphere->addComponent(new Render(m_core->m_sphereSmoothMesh, m_core->m_shaderDefault, NULL, RenderMode::SOLID));
-    sphere->addComponent(new KePhys(1.0f));
+    sphere->addComponent(new KePhys(1.0f, new kep::SphereCollider()));
     
     
     wall = new Entity(this, "wall");

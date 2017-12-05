@@ -5,6 +5,7 @@
 #include "ForceGenerator.h"
 #include "broadphase/PotencialContact.h"
 #include "broadphase/BoundingSphere.h"
+#include "finephase/CollisionData.h"
 namespace kep
 {
     class World

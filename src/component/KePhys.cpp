@@ -5,9 +5,9 @@
 #include "KePhys.h"
 #include "Transform.h"
 using namespace kelp;
-KePhys::KePhys(float _mass)
+KePhys::KePhys(float _mass, kep::Collider * _collider)
 {
-    m_rigidBody = new kep::RigidBody(NULL, NULL, _mass, true);
+    m_rigidBody = new kep::RigidBody(NULL, NULL, true, _mass, _collider);
 }
 KePhys::~KePhys()
 {

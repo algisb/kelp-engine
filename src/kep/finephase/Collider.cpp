@@ -1,9 +1,9 @@
 #include "Collider.h"
 #include "../RigidBody.h"
 using namespace kep;
-Collider::Collider(RigidBody* _rigidBody, Matrix4 _offset)
+Collider::Collider(Matrix4 _offset)
 {
-    rigidBody = _rigidBody;
+    rigidBody = NULL;
     offset = _offset;
 }
 Collider::~Collider()

@@ -1,9 +1,10 @@
 #include "RigidBody.h"
 #include "broadphase/BoundingSphere.h"
+#include "finephase/SphereCollider.h"
 using namespace kep;
 
 
-RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, real _mass, bool _externPO)
+RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, bool _externPO, real _mass, Collider * _collider)
 {
     externPO = _externPO;
     
@@ -45,7 +46,11 @@ RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, real _mass,
                               0,0,1,0,
                               0,0,0,1
     );
-    boundingVolume = new BoundingSphere(this, 1.0f);//TODO: when actual collider present, radius must be calculates to encapsulate the whole collider 
+    
+    boundingVolume = new BoundingSphere(this, 1.0f);//TODO: when actual collider present, radius must be calculates to encapsulate the collider 
+    collider = _collider;
+    if(collider != NULL) // if you did set it to NULL, kys
+        collider->rigidBody = this;
 }
 RigidBody::~RigidBody()
 {
@@ -55,6 +60,7 @@ RigidBody::~RigidBody()
         delete orientation;
     }
     delete boundingVolume;
+    delete collider;
 }
 
 void RigidBody::calculateDerivedData()

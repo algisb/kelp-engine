@@ -19,7 +19,7 @@ World::~World()
 }
 void World::update(real _duration)
 {
-    std::vector<PotencialContact> potencialContacts;
+    std::vector<PotencialContact> pc;
     //broadphase collision check
     for(int i = 0; i < m_rigidBody.size(); i++)
         for(int j = 0; j < m_rigidBody.size(); j++)
@@ -28,12 +28,17 @@ void World::update(real _duration)
                 continue;
             if(m_rigidBody[i]->boundingVolume->overlaps(m_rigidBody[j]->boundingVolume))
             {
-                potencialContacts.push_back(PotencialContact(m_rigidBody[i], m_rigidBody[j]));
+                pc.push_back(PotencialContact(m_rigidBody[i], m_rigidBody[j]));
             }
             
         }
     //fine collision check
-    
+    CollisionData cd;
+    for(int i = 0; i < pc.size(); i++)
+    {
+        
+    }
+        
     m_fReg->updateForces(_duration);
     for(int i = 0; i < m_rigidBody.size(); i++)
         m_rigidBody[i]->integrate(_duration);

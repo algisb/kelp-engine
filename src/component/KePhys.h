@@ -9,7 +9,7 @@ namespace kelp
     {
     public:
         kep::RigidBody * m_rigidBody;
-        KePhys(float _mass = 1.0f);
+        KePhys(float _mass, kep::Collider * _collider);
         ~KePhys();
         
         void init();

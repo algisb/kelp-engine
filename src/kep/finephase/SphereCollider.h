@@ -6,8 +6,12 @@ namespace kep
     class SphereCollider : public Collider
     {
     public:
-        SphereCollider(RigidBody * _rigidBody = NULL, Matrix4 _offset = Matrix4());
+        real radius;
+        SphereCollider(Matrix4 _offset = Matrix4(), real _radius = 1.0f);
         ~SphereCollider();
+        virtual int collides(Collider * _c, CollisionData * _collisionData);
+        
+        virtual int collides(SphereCollider * _c, CollisionData * _collisionData);
     };
 };
 
