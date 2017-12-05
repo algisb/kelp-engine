@@ -1,8 +1,8 @@
 #include "World.h"
-#include "broadphase/PotencialContact.h"
-#include "broadphase/BoundingSphere.h"
-#include "finephase/CollisionData.h"
-#include "finephase/SphereCollider.h"
+#include "collisionDetection/broadphase/PotencialContact.h"
+#include "collisionDetection/broadphase/BoundingSphere.h"
+#include "collisionDetection/finephase/CollisionData.h"
+#include "collisionDetection/finephase/SphereCollider.h"
 using namespace kep;
 
 World::World()

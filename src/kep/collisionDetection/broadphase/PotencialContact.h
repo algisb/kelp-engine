@@ -1,7 +1,7 @@
 #ifndef POTENCIALCONTACT_H_
 #define PETENCIALCONTACT_H
 
-#include "../RigidBody.h"
+#include "../../RigidBody.h"
 namespace kep
 {
     class PotencialContact 

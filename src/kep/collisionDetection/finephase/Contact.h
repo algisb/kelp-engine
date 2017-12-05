@@ -1,7 +1,7 @@
 #ifndef CONTACT_H_
 #define CONTACT_H_
-#include "../Core.h"
-#include "../RigidBody.h"
+#include "../../Core.h"
+#include "../../RigidBody.h"
 namespace kep
 {
     class Contact

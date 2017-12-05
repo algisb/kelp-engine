@@ -1,6 +1,6 @@
 #ifndef COLLIDER_H_
 #define COLLIDER_H_
-#include "../Core.h"
+#include "../../Core.h"
 #include "CollisionData.h"
 namespace kep
 {

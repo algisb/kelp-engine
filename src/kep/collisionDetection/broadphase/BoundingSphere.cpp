@@ -1,5 +1,5 @@
 #include "BoundingSphere.h"
-#include "../RigidBody.h"
+#include "../../RigidBody.h"
 using namespace kep;
 
 BoundingSphere::BoundingSphere(RigidBody * _rigidBody, real _radius)

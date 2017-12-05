@@ -1,5 +1,5 @@
 #include "Collider.h"
-#include "../RigidBody.h"
+#include "../../RigidBody.h"
 using namespace kep;
 Collider::Collider(Matrix4 _offset)
 {

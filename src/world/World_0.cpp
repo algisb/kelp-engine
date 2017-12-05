@@ -4,7 +4,7 @@
 
 #include "World_0.h"
 #include "Core.h"
-#include "kep/finephase/SphereCollider.h"
+#include "kep/collisionDetection/finephase/SphereCollider.h"
 
 using namespace kelp;
 

@@ -1,6 +1,6 @@
 #ifndef BOUNDINGSPHERE_H_
 #define BOUNDINGSPHERE_H_
-#include "../Core.h"
+#include "../../Core.h"
 namespace kep
 {
     class RigidBody;

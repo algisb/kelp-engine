@@ -37,6 +37,7 @@ include_directories ("./external/lodepng")
 
 #kelp engine-----------------------------------------------
 include_directories ("./src")
-file(GLOB KELP_SRC "./src/*.cpp" "./src/component/*.cpp" "./src/kep/*.cpp" "./src/kep/broadphase/*.cpp" "./src/kep/finephase/*.cpp" "./src/world/*.cpp" "./external/lodepng/*.cpp")
-add_executable(kelp-demo ${KELP_SRC})
+file(GLOB KELP_SRC "./src/*.cpp" "./src/component/*.cpp" "./src/world/*.cpp" "./external/lodepng/*.cpp" )
+file(GLOB KEP_SRC "./src/kep/*.cpp" "./src/kep/collisionDetection/*.cpp" "./src/kep/collisionDetection/broadphase/*.cpp" "./src/kep/collisionDetection/finephase/*.cpp")
+add_executable(kelp-demo ${KELP_SRC} ${KEP_SRC} )
 target_link_libraries (kelp-demo ${OPENGL_LIBRARIES} glfw glew_s )
