@@ -35,13 +35,18 @@ std::string Shader::LoadShader(const char * _shaderPath)
     }
     char tmpChar[256];
     sprintf(tmpChar, "#define MAX_LIGHTS %d \n", MAX_LIGHTS);
+    bool appendDefines = false;
     
-    content.append(tmpChar);
     std::string line;
     while (!fileStream.eof())
     {
         std::getline(fileStream, line);
-        content.append(line + "\n");
+        content.append(line + "\n"); //NOTE: assumed that the first line is the version number (cuz it has to be othervise shader compilation errors)
+        if(!appendDefines)//defines go after the version number
+        {
+            appendDefines = true;
+            content.append(tmpChar);
+        }
     }
 
     fileStream.close();
