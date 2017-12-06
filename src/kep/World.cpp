@@ -12,7 +12,9 @@ World::World()
     gGen = new Gravity(Vector3(0.0f, -9.81f, 0.0f));
     ldGen = new LinearDrag(0.1f, 0.001f);
     adGen = new AngularDrag(0.5, 0.1f);
+    
     cDetec = new CollisionDetector(&rigidBodies);
+    cRes = new CollisionResolver();
 }
 World::~World()
 {
@@ -21,14 +23,15 @@ World::~World()
     delete ldGen;
     delete adGen;
     delete cDetec;
+    delete cRes;
 }
 void World::update(real _duration)
 {
     CollisionData cd;
     cDetec->detect(&cd);
-    //printf("%d\n", cd.contacts.size());
     
-        
+    cRes->resolve(&cd);
+    
     fReg->updateForces(_duration);
     for(int i = 0; i < rigidBodies.size(); i++)
         rigidBodies[i]->integrate(_duration);

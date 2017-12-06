@@ -157,6 +157,7 @@ namespace kep
         Vector3 transformInverseDirection(const Vector3 &_vector) const;
         Vector3 transformDirection(const Vector3 &_vector)const;
         
+        Vector3 getAxisVector(int i) const;
         
         void dump();
         

@@ -34,5 +34,14 @@ int SphereCollider::collides(SphereCollider * _c, CollisionData * _collisionData
     _collisionData->contacts.push_back(contact);
     return 1;
 }
+int SphereCollider::collides(HalfPlaneCollider * _c, CollisionData * _collisionData)
+{
+    printf("in Sphere class\n");
+    return 0;
+}
+int SphereCollider::collides(OBBCollider * _c, CollisionData * _collisionData)
+{
+    return 0;
+}
 
 

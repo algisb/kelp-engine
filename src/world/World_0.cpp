@@ -4,7 +4,9 @@
 
 #include "World_0.h"
 #include "Core.h"
+#include "kep/collisionDetection/finephase/Collider.h"
 #include "kep/collisionDetection/finephase/SphereCollider.h"
+#include "kep/collisionDetection/finephase/HalfPlaneCollider.h"
 
 using namespace kelp;
 
@@ -57,12 +59,12 @@ World_0::World_0(Core * _core) : World(_core)
     
     cube = new Entity(this, "cube");
     cube->addComponent(new Transform(
-                                        kep::Vector3(0.0f, 20.0f, 0.0f),
+                                        kep::Vector3(0.2f, 20.0f, 0.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
     cube->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
-    cube->addComponent(new KePhys(1.0f, new kep::SphereCollider()));
+    cube->addComponent(new KePhys(1.0f, new kep::SphereCollider()));//new kep::SphereCollider()
 
     
     
@@ -73,7 +75,7 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
     sphere->addComponent(new Render(m_core->m_sphereSmoothMesh, m_core->m_shaderDefault, NULL, RenderMode::SOLID));
-    sphere->addComponent(new KePhys(1.0f, new kep::SphereCollider()));
+    sphere->addComponent(new KePhys(0.0f, new kep::SphereCollider()));//new kep::HalfPlaneCollider()
     
     
     wall = new Entity(this, "wall");

@@ -49,7 +49,7 @@ RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, bool _exter
     
     boundingVolume = new BoundingSphere(this, 1.0f);//TODO: when actual collider present, radius must be calculates to encapsulate the collider 
     collider = _collider;
-    if(collider != NULL) // if you did set it to NULL, kys
+    if(collider != NULL) 
         collider->rigidBody = this;
 }
 RigidBody::~RigidBody()
@@ -71,7 +71,9 @@ void RigidBody::calculateDerivedData()
                            *orientation,
                            inverseInertiaTensor,
                            transformMatrix);
-    
+    //collider has a separate transform
+    if(collider != NULL)
+        collider->transform = collider->offset * transformMatrix;
     //transformMatrix = transformMatrix.transpose();//needed because openGL ..
 }
 

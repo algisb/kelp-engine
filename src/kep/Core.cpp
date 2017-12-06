@@ -689,6 +689,11 @@ Vector3 Matrix4::transformDirection(const Vector3 &_vector) const
     );
 }
 
+Vector3 Matrix4::getAxisVector(int i) const
+{
+    return Vector3(data[i], data[i+3], data[i+6]);
+}
+
 void Matrix4::dump()
 {
         printf("%.2f %.2f %.2f %.2f \n%.2f %.2f %.2f %.2f \n%.2f %.2f %.2f %.2f \n%.2f %.2f %.2f %.2f\n",
