@@ -12,8 +12,9 @@ namespace kep
     {
     public:
         RigidBody * rigidBody;//set inside rigidBody constructor
-        Matrix4 offset;
-        Matrix4 transform;
+        Matrix4 offset;//offset from rigidBody position
+        Matrix4 transform;//offset + rigidBody position
+        real maxReach;//used for generating a bounding volume
         
         Collider(Matrix4 _offset = Matrix4());
         virtual ~Collider()=0;

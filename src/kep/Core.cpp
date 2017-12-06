@@ -691,7 +691,7 @@ Vector3 Matrix4::transformDirection(const Vector3 &_vector) const
 
 Vector3 Matrix4::getAxisVector(int i) const
 {
-    return Vector3(data[i], data[i+3], data[i+6]);
+    return Vector3(data[i], data[i+4], data[i+8]);
 }
 
 void Matrix4::dump()

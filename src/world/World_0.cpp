@@ -59,7 +59,7 @@ World_0::World_0(Core * _core) : World(_core)
     
     cube = new Entity(this, "cube");
     cube->addComponent(new Transform(
-                                        kep::Vector3(0.2f, 20.0f, 0.0f),
+                                        kep::Vector3(0.0f, 20.0f, 0.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
@@ -75,7 +75,11 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
     sphere->addComponent(new Render(m_core->m_sphereSmoothMesh, m_core->m_shaderDefault, NULL, RenderMode::SOLID));
-    sphere->addComponent(new KePhys(0.0f, new kep::SphereCollider()));//new kep::HalfPlaneCollider()
+    kep::Matrix4 tmpMat(1,0,0,0,
+                        0,1,0,0,
+                        0,0,1,0,
+                        0,0,0,1);
+    sphere->addComponent(new KePhys(0.0f, new kep::SphereCollider(tmpMat)));//new kep::HalfPlaneCollider()
     
     
     wall = new Entity(this, "wall");

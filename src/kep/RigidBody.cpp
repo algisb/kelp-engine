@@ -47,10 +47,14 @@ RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, bool _exter
                               0,0,0,1
     );
     
-    boundingVolume = new BoundingSphere(this, 1.0f);//TODO: when actual collider present, radius must be calculates to encapsulate the collider 
     collider = _collider;
-    if(collider != NULL) 
+    if(collider != NULL)
+    {
         collider->rigidBody = this;
+        boundingVolume = new BoundingSphere(this, collider->maxReach);//generates
+    }
+    else
+        boundingVolume = new BoundingSphere(this, 1.0f);
 }
 RigidBody::~RigidBody()
 {

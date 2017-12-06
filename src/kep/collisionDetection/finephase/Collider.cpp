@@ -5,6 +5,7 @@ Collider::Collider(Matrix4 _offset)
 {
     rigidBody = NULL;
     offset = _offset;
+    maxReach = 1.0f;
 }
 Collider::~Collider()
 {

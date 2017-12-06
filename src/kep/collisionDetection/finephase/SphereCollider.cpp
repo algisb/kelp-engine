@@ -4,6 +4,7 @@ using namespace kep;
 SphereCollider::SphereCollider(Matrix4 _offset, real _radius) : Collider(_offset)
 {
     radius = _radius;
+    maxReach = radius;
 }
 SphereCollider::~SphereCollider()
 {
@@ -15,8 +16,8 @@ int SphereCollider::collides(Collider * _c, CollisionData * _collisionData)
 
 int SphereCollider::collides(SphereCollider * _c, CollisionData * _collisionData)
 {
-    Vector3 positionOne = *_c->rigidBody->position;
-    Vector3 positionTwo = *rigidBody->position;
+    Vector3 positionOne = _c->rigidBody->collider->transform.getAxisVector(3);
+    Vector3 positionTwo = rigidBody->collider->transform.getAxisVector(3);
     Vector3 midline = positionOne - positionTwo;
     real size = midline.magnitude();
     real totalR = _c->radius+radius;

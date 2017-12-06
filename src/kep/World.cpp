@@ -41,6 +41,8 @@ void World::update(real _deltaT)
         fReg->updateForces(targetTimeStep);
         for(int i = 0; i < rigidBodies.size(); i++)
             rigidBodies[i]->integrate(targetTimeStep);
+        
+        //////////////////////////////////////
         timeStepAccumulator -= targetTimeStep;
     }
 }
