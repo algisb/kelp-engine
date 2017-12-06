@@ -7,6 +7,9 @@ using namespace kep;
 
 World::World()
 {
+    targetTimeStep = 1.0f/60.0f;//physics updates 60 times a second(EVEN IF YOU RUN ON TOASTER)
+    timeStepAccumulator = 0.0f;
+    
     fReg = new ForceRegistry();
     
     gGen = new Gravity(Vector3(0.0f, -9.81f, 0.0f));
@@ -25,17 +28,21 @@ World::~World()
     delete cDetec;
     delete cRes;
 }
-void World::update(real _duration)
+void World::update(real _deltaT)
 {
-    CollisionData cd;
-    cDetec->detect(&cd);
+    timeStepAccumulator += _deltaT;
+    while ( timeStepAccumulator >= targetTimeStep )
+    {
+        CollisionData cd;
+        cDetec->detect(&cd);
     
-    cRes->resolve(&cd);
+        cRes->resolve(&cd);
     
-    fReg->updateForces(_duration);
-    for(int i = 0; i < rigidBodies.size(); i++)
-        rigidBodies[i]->integrate(_duration);
-    
+        fReg->updateForces(targetTimeStep);
+        for(int i = 0; i < rigidBodies.size(); i++)
+            rigidBodies[i]->integrate(targetTimeStep);
+        timeStepAccumulator -= targetTimeStep;
+    }
 }
 void World::addRigidBody(RigidBody * _rigidBody)
 {

@@ -97,14 +97,18 @@ World_0::~World_0()
 
 void World_0::initW()
 {
+    Time::s_deltaT = 0.01666f;//delta time on init is bad
     KePhys * kePhys = cube->getComponent<KePhys>();
     
     //kePhys->m_rigidBody->addTorque(kep::Vector3(0,0,100));
     //kePhys->m_rigidBody->addForceAtBodyPoint(kep::Vector3(0,0,-100), kep::Vector3(1,0,0));
-    kePhys->m_rigidBody->addForce(kep::Vector3(0, -100, 0));
+    kePhys->m_rigidBody->addForce(kep::Vector3(0, -1000, 0));
 }
 
 void World_0::updateW()
 {
+    KePhys * kePhys = cube->getComponent<KePhys>();
+    //kePhys->m_rigidBody->velocity.dump();
+    //kePhys->m_rigidBody->acceleration.dump();
     //empty[0]->getComponent<Transform>()->dump();
 }

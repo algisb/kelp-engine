@@ -183,7 +183,7 @@ void RigidBody::integrate(real _duration)
     //update acceleration
     Vector3 resultAcc = acceleration;
     resultAcc.addScaledVector(forceAccum, inverseMass);
-
+        
     //update linear velocity 
     velocity.addScaledVector(resultAcc, _duration);
     

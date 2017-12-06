@@ -10,6 +10,8 @@ namespace kep
     class World
     {
     public:
+        real targetTimeStep;
+        real timeStepAccumulator;
         std::vector<RigidBody*> rigidBodies;
         ForceRegistry * fReg;
         Gravity * gGen;
@@ -19,7 +21,7 @@ namespace kep
         CollisionResolver * cRes;
         World();
         ~World();
-        void update(real _duration);
+        void update(real _deltaT);
         void addRigidBody(RigidBody * _rigidBody);
     };
 }
