@@ -19,6 +19,7 @@ namespace kep
         
         Collider(Matrix4 _offset = Matrix4());
         virtual ~Collider()=0;
+        virtual void update();
         virtual int collides(Collider * _c, CollisionData * _collisionData)=0;
         
         virtual int collides(SphereCollider * _c, CollisionData * _collisionData)=0;

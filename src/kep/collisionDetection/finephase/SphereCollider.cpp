@@ -39,9 +39,11 @@ int SphereCollider::collides(SphereCollider * _c, CollisionData * _collisionData
 int SphereCollider::collides(HalfPlaneCollider * _c, CollisionData * _collisionData)
 {
     kep::Vector3 normalTr = Matrix3(_c->transform) * _c->normal;
-    Vector3 position = transform.getAxisVector(3);
-    real ballDistance = normalTr * position - radius - _c->transform.getAxisVector(3).magnitude();
-    if (ballDistance >= 0) 
+    Vector3 position = transform.getAxisVector(3) - _c->transform.getAxisVector(3);
+    real ballDistance = normalTr * position - radius;
+    //printf("%f \n", ballDistance);
+    if (ballDistance >= 0 || 
+        abs(ballDistance) > radius)//no contact when on the other side of the plane 
         return 0;
     
     Contact contact;
@@ -60,6 +62,6 @@ int SphereCollider::collides(OBBCollider * _c, CollisionData * _collisionData)
 
 int SphereCollider::collides(MeshCollider * _c, CollisionData * _collisionData)
 {
-    return 0;
+    return collides(this,_collisionData);//defined in MeshCollider
 }
 

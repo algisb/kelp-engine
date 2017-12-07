@@ -78,7 +78,10 @@ void RigidBody::calculateDerivedData()
                            transformMatrix);
     //collider has a separate transform
     if(collider != NULL)
+    {
         collider->transform = collider->offset * transformMatrix;
+        collider->update();
+    }
     //transformMatrix = transformMatrix.transpose();//needed because openGL ..
 }
 

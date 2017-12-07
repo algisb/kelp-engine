@@ -4,7 +4,7 @@ using namespace kep;
 HalfPlaneCollider::HalfPlaneCollider(Matrix4 _offset, Vector3 _normal) : Collider(_offset)
 {
     normal = _normal;
-    maxReach = 1.0f;
+    maxReach = 14.14f;
 }
 HalfPlaneCollider::~HalfPlaneCollider()
 {

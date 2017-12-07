@@ -10,4 +10,7 @@ Collider::Collider(Matrix4 _offset)
 Collider::~Collider()
 {
 }
+void Collider::update()
+{
+}
 

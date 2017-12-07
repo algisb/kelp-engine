@@ -8,6 +8,7 @@
 #include "kep/collisionDetection/finephase/SphereCollider.h"
 #include "kep/collisionDetection/finephase/HalfPlaneCollider.h"
 #include "kep/collisionDetection/finephase/OBBCollider.h"
+#include "kep/collisionDetection/finephase/MeshCollider.h"
 
 using namespace kelp;
 
@@ -59,13 +60,13 @@ World_0::World_0(Core * _core) : World(_core)
                                         ));
     refEntity->addComponent(new Render(m_core->m_plane, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
     
-    cube = new Entity(this, "cube");
+    cube = new Entity(this, "physics sphere");
     refTransform = (Transform*)cube->addComponent(new Transform(
                                         kep::Vector3(0.0f, 20.0f, 0.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
-    cube->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
+    cube->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
     
     
     cube->addComponent(new KePhys(
@@ -73,19 +74,21 @@ World_0::World_0(Core * _core) : World(_core)
     ));
     
     
-    sphere = new Entity(this, "sphere");
+    sphere = new Entity(this, "physics plane");
     refTransform = (Transform*)sphere->addComponent(new Transform(
-                                        kep::Vector3(0.0f, 1.0f, 0.0f),
-                                        kep::Quaternion(kep::Vector3(0,0,1), 20.0f), 
-                                        kep::Vector3(1.0f, 1.0f, 1.0f)
+                                        kep::Vector3(9.0f, 10.0f, 0.0f),//14
+                                        kep::Quaternion(kep::Vector3(0,0,1), 45.0f), 
+                                        kep::Vector3(10.0f, 10.0f, 10.0f)
                                         ));
     sphere->addComponent(new Render(m_core->m_plane, m_core->m_shaderDefault, NULL, RenderMode::SOLID));
     kep::Matrix4 tmpMat(1,0,0,0,
                         0,1,0,0,
                         0,0,1,0,
                         0,0,0,1);
+    
+    kep::MeshCollider * mc = new kep::MeshCollider(kep::Matrix4(), m_core->m_plane->m_dataV, m_core->m_plane->m_dataN, m_core->m_plane->m_numVertices, refTransform->m_scale);
     sphere->addComponent(new KePhys(
-        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, new kep::HalfPlaneCollider()))
+        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))//new kep::HalfPlaneCollider()
     ));
     
     wall = new Entity(this, "wall");
