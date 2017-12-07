@@ -4,7 +4,7 @@
 #include "RigidBody.h"
 #include "ForceGenerator.h"
 #include "collisionDetection/CollisionDetector.h"
-#include "CollisionResolver.h"
+#include "ContactResolver.h"
 namespace kep
 {
     class World
@@ -18,11 +18,11 @@ namespace kep
         LinearDrag * ldGen;
         AngularDrag * adGen;
         CollisionDetector * cDetec;
-        CollisionResolver * cRes;
+        ContactResolver * cRes;
         World();
         ~World();
         void update(real _deltaT);
-        void addRigidBody(RigidBody * _rigidBody);
+        RigidBody * addRigidBody(RigidBody * _rigidBody);
     };
 }
 

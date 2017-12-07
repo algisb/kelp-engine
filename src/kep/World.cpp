@@ -17,10 +17,12 @@ World::World()
     adGen = new AngularDrag(0.5, 0.1f);
     
     cDetec = new CollisionDetector(&rigidBodies);
-    cRes = new CollisionResolver();
+    cRes = new ContactResolver();
 }
 World::~World()
 {
+    for(int i = 0; i < rigidBodies.size(); i++)
+        delete rigidBodies[i];
     delete fReg;
     delete gGen;
     delete ldGen;
@@ -46,10 +48,11 @@ void World::update(real _deltaT)
         timeStepAccumulator -= targetTimeStep;
     }
 }
-void World::addRigidBody(RigidBody * _rigidBody)
+RigidBody * World::addRigidBody(RigidBody * _rigidBody)
 {
     //fReg->add(_rigidBody, gGen);
     fReg->add(_rigidBody, ldGen);
     fReg->add(_rigidBody, adGen);
     rigidBodies.push_back(_rigidBody);
+    return _rigidBody;
 }

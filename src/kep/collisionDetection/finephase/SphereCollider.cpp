@@ -1,4 +1,5 @@
 #include "SphereCollider.h"
+#include "HalfPlaneCollider.h"
 using namespace kep;
 
 SphereCollider::SphereCollider(Matrix4 _offset, real _radius) : Collider(_offset)
@@ -37,12 +38,28 @@ int SphereCollider::collides(SphereCollider * _c, CollisionData * _collisionData
 }
 int SphereCollider::collides(HalfPlaneCollider * _c, CollisionData * _collisionData)
 {
-    printf("in Sphere class\n");
-    return 0;
+    kep::Vector3 normalTr = Matrix3(_c->transform) * _c->normal;
+    Vector3 position = transform.getAxisVector(3);
+    real ballDistance = normalTr * position - radius - _c->transform.getAxisVector(3).magnitude();
+    if (ballDistance >= 0) 
+        return 0;
+    
+    Contact contact;
+    contact.body[0] = rigidBody;
+    contact.body[1] = _c->rigidBody;
+    contact.normal = normalTr;
+    contact.position = position - normalTr * (ballDistance + radius);
+    contact.penetration = -ballDistance;
+    _collisionData->contacts.push_back(contact);
+    return 1;
 }
 int SphereCollider::collides(OBBCollider * _c, CollisionData * _collisionData)
 {
     return 0;
 }
 
+int SphereCollider::collides(MeshCollider * _c, CollisionData * _collisionData)
+{
+    return 0;
+}
 

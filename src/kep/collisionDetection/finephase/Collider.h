@@ -4,6 +4,7 @@
 #include "CollisionData.h"
 namespace kep
 {
+    class MeshCollider;
     class OBBCollider;
     class HalfPlaneCollider;
     class SphereCollider;
@@ -23,6 +24,7 @@ namespace kep
         virtual int collides(SphereCollider * _c, CollisionData * _collisionData)=0;
         virtual int collides(HalfPlaneCollider * _c, CollisionData * _collisionData)=0;
         virtual int collides(OBBCollider * _c, CollisionData * _collisionData)=0;
+        virtual int collides(MeshCollider * _c, CollisionData * _collisionData)=0;
     };
 };
 

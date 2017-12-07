@@ -3,6 +3,7 @@
 #include "Collider.h"
 namespace kep
 {
+    class MeshCollider;
     class OBBCollider;
     class HalfPlaneCollider;
     class SphereCollider : public Collider
@@ -16,6 +17,7 @@ namespace kep
         virtual int collides(SphereCollider * _c, CollisionData * _collisionData);
         virtual int collides(HalfPlaneCollider * _c, CollisionData * _collisionData);
         virtual int collides(OBBCollider * _c, CollisionData* _collisionData);
+        virtual int collides(MeshCollider * _c, CollisionData* _collisionData);
     };
 };
 

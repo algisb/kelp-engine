@@ -55,6 +55,7 @@ RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, bool _exter
     }
     else
         boundingVolume = new BoundingSphere(this, 1.0f);
+    calculateDerivedData();
 }
 RigidBody::~RigidBody()
 {
