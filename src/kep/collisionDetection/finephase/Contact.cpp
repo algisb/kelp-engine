@@ -59,7 +59,9 @@ void Contact::resolve()
     // world space for a unit impulse in the direction of the contact
     // normal.
     Vector3 velocity;
-
+    ///////////////////////////////////////////
+    //IMPULSE resolution///////////////////////AKA micro collision that directy works with velocity instead of force
+    ///////////////////////////////////////////
     real deltaVelocity = 0;
     if(body[0]->hasFiniteMass())
     {
@@ -67,7 +69,7 @@ void Contact::resolve()
         deltaVelWorld = body[0]->inverseInertiaTensorWorld * deltaVelWorld;
         deltaVelWorld = deltaVelWorld % relativeContactPosition[0];
         // Work out the change in velocity in contact coordinates.
-        deltaVelocity += deltaVelWorld * normal;
+        deltaVelocity += deltaVelWorld * normal; //<-------------------------------------cheated will change when working with friction
         // Add the linear component of velocity change.
         deltaVelocity += body[0]->inverseMass;
         
@@ -79,16 +81,10 @@ void Contact::resolve()
     // Check whether we need to consider the second body’s data.
     if (body[1]->hasFiniteMass())
     {
-        // Find the inertia tensor for this body.
-        //body[1]->getInverseInertiaTensorWorld(&inverseInertiaTensor[1]);
-        // Go through the same transformation sequence again.
         Vector3 deltaVelWorld = relativeContactPosition[1] % normal;
         deltaVelWorld = body[1]->inverseInertiaTensorWorld * deltaVelWorld;
         deltaVelWorld = deltaVelWorld % relativeContactPosition[1];
-        // Add the change in velocity due to rotation.
         deltaVelocity += deltaVelWorld * normal;
-        
-        // Add the change in velocity due to linear motion.
         deltaVelocity += body[1]->inverseMass;
         
         //////////////////////////
@@ -98,7 +94,7 @@ void Contact::resolve()
     //printf("%f\n", deltaVelocity);
     Vector3 contactVelocity = contactToWorld.transpose() * velocity;
     //contactVelocity.dump();
-    const float restitution = 1.0f;//TODO: each contact should have its own
+    const float restitution = 0.1f;//TODO: each contact should have its own
     float desiredDeltaVelocity = -contactVelocity.x * (1 + restitution);
     
     Vector3 impulseContact;
@@ -126,7 +122,66 @@ void Contact::resolve()
         body[1]->velocity += velocityChange;
         body[1]->angularVelocity += rotationChange;
     }
+    
+    ////////////////////////////////////////////////////////////
+    //PENETRATION resolution////////////////////////////////////AKA moves the collider back the place where the contact actually occured
+    ////////////////////////////////////////////////////////////
+    float linearInertia[2] = {0.0f, 0.0f};
+    float angularInertia[2] = {0.0f, 0.0f};
+    float totalInertia = 0.0f;
+    
+    float linearMove[2] = {0.0f, 0.0f};
+    float angularMove[2] = {0.0f, 0.0f};
+    for (unsigned i = 0; i < 2; i++)
+    {
+        if (body[i]->hasFiniteMass())
+        {
+            Matrix3 inverseInertiaTensor;
+            Vector3 angularInertiaWorld = relativeContactPosition[i] % normal;
+            angularInertiaWorld = body[i]->inverseInertiaTensorWorld * angularInertiaWorld;
+            angularInertiaWorld = angularInertiaWorld % relativeContactPosition[i];
+            angularInertia[i] = angularInertiaWorld * normal;
+            linearInertia[i] = body[i]->inverseMass;
+            totalInertia += linearInertia[i] + angularInertia[i];
+        }
+    }
+    real inverseInertia = 1 / totalInertia;
+    
+    for (unsigned i = 0; i < 2; i++)
+    {
+        if (body[i]->hasFiniteMass())
+        {
+            linearMove[i] = penetration * linearInertia[i] * inverseInertia;
+            angularMove[i] = penetration * angularInertia[i] * inverseInertia;
+            *body[i]->position += normal * linearMove[i];//<------------------------------------- teleport yours truly to where collision happened
+            
+            Vector3 impulsiveTorque = relativeContactPosition[i] % normal;
+            Vector3 impulsePerMove = body[i]->inverseInertiaTensorWorld * impulsiveTorque;
+            
+            if(angularInertia[i] != 0.0f)
+            {
+                Vector3 rotationPerMove = impulsePerMove * (1.0f/angularInertia[i]);
+                Vector3 rotation = rotationPerMove * angularMove[i];
+                body[i]->orientation->rotateByVector(rotation);//-------------------------------------rotate to where collision happened
+            }
+            
+            
+        }
+    }
+    
 
+    
+    //linearMove[1] = -penetration * linearInertia[1] * inverseInertia;
+    
+    //angularMove[1] = -penetration * angularInertia[1] * inverseInertia;
+    
+    
+    
+    //*body[1]->position += normal * linearMove[1];
+
+
+
+    
 
 
 

@@ -19,6 +19,24 @@ void Empty::init()
 
 void Empty::update()
 {
+    Entity * refEntity = ((World_0*)(m_owner->m_world))->cube;
+    KePhys * p =refEntity->getComponent<KePhys>();
+    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_O, Input::Keyboard::KeyboardAction::HELD))
+    {
+        p->m_rigidBody->addForce(kep::Vector3(10,0,0));
+    }
+    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_I, Input::Keyboard::KeyboardAction::HELD))
+    {
+        p->m_rigidBody->addForce(kep::Vector3(-10,0,0));
+    }
+    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_L, Input::Keyboard::KeyboardAction::HELD))
+    {
+        p->m_rigidBody->addForce(kep::Vector3(0,0,10));
+    }
+    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_P, Input::Keyboard::KeyboardAction::HELD))
+    {
+        p->m_rigidBody->addForce(kep::Vector3(0,0,-10));
+    }
     if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_T, Input::Keyboard::KeyboardAction::HELD))
     {
 //         Entity * refEntity = ((World_0*)(m_owner->m_world))->plight;
