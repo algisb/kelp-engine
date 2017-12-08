@@ -93,7 +93,7 @@ World_0::World_0(Core * _core) : World(_core)
     
     sphere = new Entity(this, "physics plane");
     refTransform = (Transform*)sphere->addComponent(new Transform(
-                                        kep::Vector3(10.0f, 10.0f, 10.0f),//14
+                                        kep::Vector3(15.0f, 10.0f, 10.0f),//14
                                         kep::Quaternion(kep::Vector3(0,0,1), 0.0f), 
                                         kep::Vector3(10.0f, 10.0f, 10.0f)
                                         ));
@@ -108,14 +108,29 @@ World_0::World_0(Core * _core) : World(_core)
         m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))//new kep::HalfPlaneCollider()
     ));
     
-    //camera->m_parent = cube;
-    refEntity = new Entity(this, "m4a1s rifle", camera);
-    refEntity->addComponent(new Transform(
-                                        kep::Vector3(0.0f, -1.0f, 0.0f),//14
-                                        kep::Quaternion(kep::Vector3(0,1,0), 180.0f), 
+    
+    refEntity = new Entity(this, "physics sphere");
+    refTransform = (Transform*)refEntity->addComponent(new Transform(
+                                        kep::Vector3(0.0f, 12.0f, 0.0f),
+                                        kep::Quaternion(kep::Vector3(0,0,1), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
-    refEntity->addComponent(new Render(m_core->m_m4a1s, m_core->m_shaderDefault, m_core->m_m4a1sTexture, RenderMode::SOLID));
+     refEntity->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
+    
+    mc = new kep::MeshCollider(kep::Matrix4(), m_core->m_cubeMesh->m_dataV, m_core->m_cubeMesh->m_dataN, m_core->m_cubeMesh->m_numVertices, refTransform->m_scale);
+    refEntity->addComponent(new KePhys(
+        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))//TODO: rigidbodies with mass 0 should not be check for collision againsts other bodies with mass 0 
+    ));
+    
+    
+    //camera->m_parent = cube;
+//     refEntity = new Entity(this, "m4a1s rifle", camera);
+//     refEntity->addComponent(new Transform(
+//                                         kep::Vector3(0.0f, -1.0f, 0.0f),//14
+//                                         kep::Quaternion(kep::Vector3(0,1,0), 180.0f), 
+//                                         kep::Vector3(1.0f, 1.0f, 1.0f)
+//                                         ));
+//     refEntity->addComponent(new Render(m_core->m_m4a1s, m_core->m_shaderDefault, m_core->m_m4a1sTexture, RenderMode::SOLID));
     
 }
 World_0::~World_0()
@@ -128,15 +143,19 @@ void World_0::initW()
     Time::s_deltaT = 0.01666f;//delta time on init is bad
     KePhys * kePhys = cube->getComponent<KePhys>();
     
-    //kePhys->m_rigidBody->addTorque(kep::Vector3(0,0,100));
+    kePhys->m_rigidBody->addTorque(kep::Vector3(0,0,1000));
     //kePhys->m_rigidBody->addForceAtBodyPoint(kep::Vector3(0,0,-100), kep::Vector3(1,0,0));
     //kePhys->m_rigidBody->addForce(kep::Vector3(0, -100, 0));
+    //kePhys->m_rigidBody->addForce(kep::Vector3(500, 0, 0));
+    //kePhys->m_rigidBody->addForce(kep::Vector3(500, 0, 0))
 }
 
 void World_0::updateW()
 {
-    //KePhys * kePhys = cube->getComponent<KePhys>();
+    KePhys * kePhys = cube->getComponent<KePhys>();
+    
     //kePhys->m_rigidBody->velocity.dump();
     //kePhys->m_rigidBody->acceleration.dump();
     //empty[0]->getComponent<Transform>()->dump();
+    //kePhys->m_rigidBody->angularVelocity.dump();
 }

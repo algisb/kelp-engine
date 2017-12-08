@@ -43,7 +43,7 @@ Gravity::Gravity(const Vector3 & _gravity)
 void Gravity::updateForce(RigidBody * _rigidBody, real _duration)
 {
     if(_rigidBody->hasFiniteMass())
-        _rigidBody->addForce(m_gravity * _rigidBody->getMass());
+        _rigidBody->addForce((m_gravity)* _rigidBody->getMass());
 }
 
 //Drag

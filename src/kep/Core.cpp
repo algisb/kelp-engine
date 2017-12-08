@@ -385,6 +385,25 @@ void Matrix3::setOrientation(const Quaternion &_q)
     data[8] = 1 - (2*_q.i*_q.i + 2*_q.j*_q.j);
 }
 
+
+void Matrix3::setComponents(const Vector3 &_comp0, const Vector3 &_comp1, const Vector3 &_comp2)
+{
+    data[0] = _comp0.x;
+    data[1] = _comp1.x;
+    data[2] = _comp2.x;
+    data[3] = _comp0.y;
+    data[4] = _comp1.y;
+    data[5] = _comp2.y;
+    data[6] = _comp0.z;
+    data[7] = _comp1.z;
+    data[8] = _comp2.z;
+
+}
+Vector3 Matrix3::getAxisVector(int i) const
+{
+    return Vector3(data[i], data[i+3], data[i+6]);
+}
+
 void Matrix3::dump()
 {
     printf("%f %f %f \n%f %f %f \n%f %f %f \n",

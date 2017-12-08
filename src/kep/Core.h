@@ -121,9 +121,10 @@ namespace kep
         void setInverse(const Matrix3 & _m);
         Matrix3 inverse() const;
         void invert();
-        
         void setOrientation(const Quaternion &_q);
         
+        void setComponents(const Vector3 &_comp0, const Vector3 &_comp1, const Vector3 &_comp2);
+        Vector3 getAxisVector(int i) const;
         void dump();
     };
     

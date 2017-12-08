@@ -12,8 +12,13 @@ namespace kep
         Vector3 normal;
         real penetration;
         
+        Matrix3 contactToWorld;
+        
         Contact();
         ~Contact();
+        void calculateContactBasis();
+        void resolve();
+
     };
 };
 

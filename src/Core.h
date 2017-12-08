@@ -46,7 +46,8 @@ namespace kelp
         MeshLoad * m_monkeyMesh;
         
         MeshLoad * m_externalMesh;
-        MeshLoad * m_m4a1s;
+        //MeshLoad * m_m4a1s;
+        MeshLoad * m_dungeon;
         
         ShaderMin * m_shaderMinimal;
         ShaderDefault * m_shaderDefault;
