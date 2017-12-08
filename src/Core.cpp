@@ -25,13 +25,14 @@ Core::Core(int _argc, char ** _argv)
     m_sphereMesh = new MeshLoad("./models/sphereUV.obj", "./models/");
     m_cubeMesh = new MeshLoad("./models/cube.obj", "./models/");
     m_highPolyMesh = new MeshLoad("./models/peps.obj", "./models/");
-    m_sphereSmoothMesh = new MeshLoad("./models/sphereUVsmooth.obj", "./models/");
     m_monkeyMesh = new MeshLoad("./models/monkey.obj", "./models/");
+    m_m4a1s = new MeshLoad("./models/m4a1s.obj", "./models/");
     
     m_shaderMinimal = new ShaderMin();
     m_shaderDefault = new ShaderDefault();
     
     m_testTexture = new Texture("./textures/uv.png");
+    m_m4a1sTexture = new Texture("./textures/m4a1s.png");
     
     m_world = new World_0(this);
 }
@@ -40,6 +41,9 @@ Core::~Core()
     delete m_plane;
     delete m_sphereMesh;
     delete m_cubeMesh;
+    delete m_highPolyMesh;
+    delete m_monkeyMesh;
+    delete m_m4a1s;
     
     delete m_shaderMinimal;
     delete m_shaderDefault;

@@ -56,6 +56,7 @@ void Empty::update()
 //                                 true
 //                             ));
 //         c->setAsRenderCamera();
+        
         //refEntity
         //Entity * en = ((World_0*)(m_owner->m_world))->plight;
         //en->deleteComponent<LightPoint>();

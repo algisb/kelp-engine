@@ -47,7 +47,7 @@ void main()
         vec3 texColour = vec3(0.5f, 0.5f, 0.5f);
         if(textured == 1)
         {
-            texColour = vec3(texture(tex1, vec2(vTextCoordOut.x, vTextCoordOut.y)));
+            texColour = vec3(texture(tex1, vec2(vTextCoordOut.x, -vTextCoordOut.y)));
         }
             
         switch(light[i].type)

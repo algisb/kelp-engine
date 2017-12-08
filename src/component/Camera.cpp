@@ -24,8 +24,8 @@ void Camera::update()
 {
     if(m_possessed)
         possessedControls();
-    m_transform->m_orientation.normalize();
-    m_viewMat.setOrientationAndPos(m_transform->m_orientation, m_transform->m_position);
+    //m_transform->m_orientation.normalize();
+    m_viewMat = m_transform->m_modelMat; //setOrientationAndPos(m_transform->m_orientation, m_transform->m_position);
     m_viewMat.invert();
     m_viewMat = m_viewMat.transpose(); //cuz opengl is idgaf-major
     

@@ -23,6 +23,7 @@ namespace kelp
         Entity * plight;
         Entity * cube;
         Entity * sphere;
+        Entity * camera;
         World_0(Core * _core);
         ~World_0();
         void initW();
