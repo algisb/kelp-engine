@@ -12,8 +12,8 @@ void ContactResolver::resolve(CollisionData * _cd)//TODO: for now its does fucka
     for(uint64_t i = 0; i<_cd->contacts.size();i++)
     {
         Contact * c = &_cd->contacts[i];
-        c->body[0]->addForce(c->normal * 100.0f);
-        c->body[1]->addForce(c->normal * -1.0f * 100.0f);
+        c->body[0]->addForce(c->normal * 200.0f);
+        c->body[1]->addForce(c->normal * -1.0f * 200.0f);
     }
 }
 

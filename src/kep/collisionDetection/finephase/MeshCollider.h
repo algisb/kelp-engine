@@ -15,7 +15,16 @@ namespace kep
                  kep::Vector3 _n = kep::Vector3(0.0f ,0.0f, 0.0f));
         ~Triangle();
     };
-    
+    class Ray
+    {
+    public:
+        kep::Vector3 s;
+        kep::Vector3 d;
+        Ray(kep::Vector3 _source = kep::Vector3(0.0f, 0.0f, 0.0f), kep::Vector3 _direction = kep::Vector3(0.0f, 0.0f, 1.0f));
+        ~Ray();
+        
+    };
+
     
     class MeshCollider : public Collider
     {
@@ -25,17 +34,20 @@ namespace kep
         Triangle * triangles;
         Triangle * tTriangles;
         
-        MeshCollider(Matrix4 _offset, float * _dataV, float * _dataN, int _numVertex, kep::Vector3 _scale);
+        Matrix4 scaleMat;
+        
+        MeshCollider(Matrix4 _offset, float * _dataV, float * _dataN, int _numVertex, Vector3 _scale);
         ~MeshCollider();
         void update();
-        int spherePlane(kep::Vector3 _spherePosition,
+        int spherePlane(Vector3 _spherePosition,
                         float _sphereRadius,
-                        kep::Vector3 _planeNormal,
-                        kep::Vector3 _planePosition,
+                        Vector3 _planeNormal,
+                        Vector3 _planePosition,
                         
-                        kep::Vector3 * _contactPosition,
+                        Vector3 * _contactPosition,
                         float * _penetration);
-        
+        int rayTriangleMT97(Ray * _ray, Triangle * _triangle,  Vector3 * o_point);
+        int inTriangle(Triangle _t,  Vector3 _p);
         virtual int collides(Collider * _c, CollisionData * _collisionData);
         
         virtual int collides(SphereCollider * _c, CollisionData * _collisionData);

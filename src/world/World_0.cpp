@@ -76,8 +76,8 @@ World_0::World_0(Core * _core) : World(_core)
     
     sphere = new Entity(this, "physics plane");
     refTransform = (Transform*)sphere->addComponent(new Transform(
-                                        kep::Vector3(9.0f, 10.0f, 0.0f),//14
-                                        kep::Quaternion(kep::Vector3(0,0,1), 45.0f), 
+                                        kep::Vector3(10.0f, 10.0f, 10.0f),//14
+                                        kep::Quaternion(kep::Vector3(0,0,1), 0.0f), 
                                         kep::Vector3(10.0f, 10.0f, 10.0f)
                                         ));
     sphere->addComponent(new Render(m_core->m_plane, m_core->m_shaderDefault, NULL, RenderMode::SOLID));
@@ -90,6 +90,8 @@ World_0::World_0(Core * _core) : World(_core)
     sphere->addComponent(new KePhys(
         m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))//new kep::HalfPlaneCollider()
     ));
+    
+
     
     wall = new Entity(this, "wall");
     wall->addComponent(new Transform(
@@ -115,7 +117,7 @@ void World_0::initW()
     
     //kePhys->m_rigidBody->addTorque(kep::Vector3(0,0,100));
     //kePhys->m_rigidBody->addForceAtBodyPoint(kep::Vector3(0,0,-100), kep::Vector3(1,0,0));
-    kePhys->m_rigidBody->addForce(kep::Vector3(0, -1000, 0));
+    //kePhys->m_rigidBody->addForce(kep::Vector3(0, -100, 0));
 }
 
 void World_0::updateW()

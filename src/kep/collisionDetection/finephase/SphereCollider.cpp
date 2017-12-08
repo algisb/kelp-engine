@@ -50,7 +50,7 @@ int SphereCollider::collides(HalfPlaneCollider * _c, CollisionData * _collisionD
     contact.body[0] = rigidBody;
     contact.body[1] = _c->rigidBody;
     contact.normal = normalTr;
-    contact.position = position - normalTr * (ballDistance + radius);
+    contact.position = transform.getAxisVector(3) - normalTr * (ballDistance + radius);
     contact.penetration = -ballDistance;
     _collisionData->contacts.push_back(contact);
     return 1;
