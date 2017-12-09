@@ -119,27 +119,27 @@ void Camera::possessedControls()
             m_transform->m_orientation *= q;
         }
     }
-//     else
-//     {
-// 
-//         float tmpAng = m_pitchAngle;
-//         tmpAng += -rotSpd * Input::Mouse::dy;
-//         
-//         if(tmpAng < 90.0f && tmpAng > -90.0f)
-//         {
-//             m_pitchAngle = tmpAng;
-//             kep::Quaternion q;
-//             q.setEuler(m_left, rotSpd * Input::Mouse::dy);
-//             m_transform->m_orientation *= q;
-//         }
-//         
-//         
-//         //Mouse rotation
-//         kep::Quaternion q;
-//         q.setEuler(m_up, rotSpd * Input::Mouse::dx);
-//         m_transform->m_orientation *= q;
-//         
-//     }
+    else
+    {
+        const float mouseRotSpd = rotSpd *0.1f;
+        float tmpAng = m_pitchAngle;
+        tmpAng += -mouseRotSpd * Input::Mouse::dy;
+        
+        if(tmpAng < 90.0f && tmpAng > -90.0f)
+        {
+            m_pitchAngle = tmpAng;
+            kep::Quaternion q;
+            q.setEuler(m_left, -mouseRotSpd * Input::Mouse::dy);
+            m_transform->m_orientation *= q;
+        }
+        
+        
+        //Mouse rotation
+        kep::Quaternion q;
+        q.setEuler(m_up, mouseRotSpd * Input::Mouse::dx);
+        m_transform->m_orientation *= q;
+        
+    }
 
 }
 void Camera::setAsRenderCamera()
