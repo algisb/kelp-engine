@@ -63,22 +63,23 @@ void Contact::resolve()
     //IMPULSE resolution///////////////////////AKA micro collision that directy works with velocity instead of force
     ///////////////////////////////////////////
     real deltaVelocity = 0;
+    real velocityFromAcc = 0;//for resting contatcs
+
     if(body[0]->hasFiniteMass())
     {
         Vector3 deltaVelWorld = relativeContactPosition[0] % normal;
         deltaVelWorld = body[0]->inverseInertiaTensorWorld * deltaVelWorld;
         deltaVelWorld = deltaVelWorld % relativeContactPosition[0];
-        // Work out the change in velocity in contact coordinates.
         deltaVelocity += deltaVelWorld * normal; //<-------------------------------------cheated will change when working with friction
-        // Add the linear component of velocity change.
         deltaVelocity += body[0]->inverseMass;
         
         ///////////////////////////
         velocity += body[0]->angularVelocity % relativeContactPosition[0];
         velocity += body[0]->velocity;
+        ///////////////////////////
+        velocityFromAcc += body[0]->lastFrameAcceleration * normal;//for resting contacts
         
     }
-    // Check whether we need to consider the second body’s data.
     if (body[1]->hasFiniteMass())
     {
         Vector3 deltaVelWorld = relativeContactPosition[1] % normal;
@@ -90,12 +91,24 @@ void Contact::resolve()
         //////////////////////////
         velocity += body[1]->angularVelocity % relativeContactPosition[1];
         velocity += body[1]->velocity;
+        ///////////////////////////
+        velocityFromAcc -= body[1]->lastFrameAcceleration * normal;
     }
     //printf("%f\n", deltaVelocity);
     Vector3 contactVelocity = contactToWorld.transpose() * velocity;
-    //contactVelocity.dump();
-    const float restitution = 0.1f;//TODO: each contact should have its own
-    float desiredDeltaVelocity = -contactVelocity.x * (1 + restitution);
+    contactVelocity.dump();
+    const real restitution = 0.2f;//TODO: each contact should have its own  //HARDCODED
+    const real velocityLimit = 2.0f;                                        //HARDCODED
+    real modRestitution = restitution;
+    if (real_abs(contactVelocity.x) < velocityLimit)
+    {
+        modRestitution = 0.0f;
+    }
+
+    
+    real desiredDeltaVelocity = -contactVelocity.x - restitution * (contactVelocity.x - velocityFromAcc);
+
+    //float desiredDeltaVelocity = -contactVelocity.x * (1 + restitution);
     
     Vector3 impulseContact;
     impulseContact.x = desiredDeltaVelocity / deltaVelocity;
@@ -157,9 +170,9 @@ void Contact::resolve()
             
             Vector3 impulsiveTorque = relativeContactPosition[i] % normal;
             Vector3 impulsePerMove = body[i]->inverseInertiaTensorWorld * impulsiveTorque;
-            
-            if(angularInertia[i] != 0.0f)
+            if(angularInertia[i] != 0.0f && (angularInertia[i] > 0.0001f || angularInertia[i] < -0.0001f))//actually not need as we only have sphere colliders, might cause jerky effects
             {
+                //printf("%f\n", angularInertia[i]);
                 Vector3 rotationPerMove = impulsePerMove * (1.0f/angularInertia[i]);
                 Vector3 rotation = rotationPerMove * angularMove[i];
                 body[i]->orientation->rotateByVector(rotation);//-------------------------------------rotate to where collision happened

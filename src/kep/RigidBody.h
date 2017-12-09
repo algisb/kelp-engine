@@ -20,7 +20,7 @@ namespace kep
         Vector3 angularVelocity;
         
         Vector3 acceleration;
-
+        Vector3 lastFrameAcceleration;
         
         Vector3 forceAccum;
         Vector3 torqueAccum;
