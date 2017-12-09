@@ -51,7 +51,7 @@ void Contact::calculateContactBasis()
     // Make a matrix from the three vectors.
     contactToWorld.setComponents(normal, contactTangent[0],contactTangent[1]);
 }
-void Contact::resolve()
+void Contact::resolve(real _duration)
 {
     calculateContactBasis();
     Vector3 relativeContactPosition[2] = {position - *body[0]->position, position - *body[1]->position};
@@ -77,7 +77,7 @@ void Contact::resolve()
         velocity += body[0]->angularVelocity % relativeContactPosition[0];
         velocity += body[0]->velocity;
         ///////////////////////////
-        velocityFromAcc += body[0]->lastFrameAcceleration * normal;//for resting contacts
+        velocityFromAcc += body[0]->lastFrameAcceleration * _duration * normal;//for resting contacts
         
     }
     if (body[1]->hasFiniteMass())
@@ -92,21 +92,20 @@ void Contact::resolve()
         velocity += body[1]->angularVelocity % relativeContactPosition[1];
         velocity += body[1]->velocity;
         ///////////////////////////
-        velocityFromAcc -= body[1]->lastFrameAcceleration * normal;
+        velocityFromAcc -= body[1]->lastFrameAcceleration * _duration * normal;
     }
     //printf("%f\n", deltaVelocity);
     Vector3 contactVelocity = contactToWorld.transpose() * velocity;
-    contactVelocity.dump();
+    //contactVelocity.dump();
     const real restitution = 0.2f;//TODO: each contact should have its own  //HARDCODED
-    const real velocityLimit = 2.0f;                                        //HARDCODED
+    const real velocityLimit = 0.25f;                                        //HARDCODED
     real modRestitution = restitution;
     if (real_abs(contactVelocity.x) < velocityLimit)
     {
         modRestitution = 0.0f;
     }
-
     
-    real desiredDeltaVelocity = -contactVelocity.x - restitution * (contactVelocity.x - velocityFromAcc);
+    real desiredDeltaVelocity = -contactVelocity.x - modRestitution * (contactVelocity.x - velocityFromAcc);
 
     //float desiredDeltaVelocity = -contactVelocity.x * (1 + restitution);
     
@@ -170,13 +169,13 @@ void Contact::resolve()
             
             Vector3 impulsiveTorque = relativeContactPosition[i] % normal;
             Vector3 impulsePerMove = body[i]->inverseInertiaTensorWorld * impulsiveTorque;
-            if(angularInertia[i] != 0.0f && (angularInertia[i] > 0.0001f || angularInertia[i] < -0.0001f))//actually not need as we only have sphere colliders, might cause jerky effects
-            {
-                //printf("%f\n", angularInertia[i]);
-                Vector3 rotationPerMove = impulsePerMove * (1.0f/angularInertia[i]);
-                Vector3 rotation = rotationPerMove * angularMove[i];
-                body[i]->orientation->rotateByVector(rotation);//-------------------------------------rotate to where collision happened
-            }
+//             if(angularInertia[i] != 0.0f && (angularInertia[i] > 0.0001f || angularInertia[i] < -0.0001f))//actually not need as we only have sphere colliders, might cause jerky effects
+//             {
+//                 //printf("%f\n", angularInertia[i]);
+//                 Vector3 rotationPerMove = impulsePerMove * (1.0f/angularInertia[i]);
+//                 Vector3 rotation = rotationPerMove * angularMove[i];
+//                 body[i]->orientation->rotateByVector(rotation);//-------------------------------------rotate to where collision happened
+//             }
             
             
         }

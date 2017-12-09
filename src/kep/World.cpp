@@ -36,14 +36,14 @@ void World::update(real _deltaT)
     timeStepAccumulator += _deltaT;
     while ( timeStepAccumulator >= targetTimeStep )
     {
-        CollisionData cd;
-        cDetec->detect(&cd);
-    
-        cRes->resolve(&cd);
-    
         fReg->updateForces(targetTimeStep);
         for(int i = 0; i < rigidBodies.size(); i++)
             rigidBodies[i]->integrate(targetTimeStep);
+        
+        CollisionData cd;
+        cDetec->detect(&cd);
+    
+        cRes->resolve(&cd, targetTimeStep);
         
         //////////////////////////////////////
         timeStepAccumulator -= targetTimeStep;

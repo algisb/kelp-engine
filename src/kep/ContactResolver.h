@@ -8,7 +8,7 @@ namespace kep
     public:
         ContactResolver();
         ~ContactResolver();
-        void resolve(CollisionData * _cd);
+        void resolve(CollisionData * _cd, real _duration);
     };
 };
 

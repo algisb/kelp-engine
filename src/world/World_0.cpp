@@ -79,7 +79,7 @@ World_0::World_0(Core * _core) : World(_core)
     
     cube = new Entity(this, "physics sphere");
     refTransform = (Transform*)cube->addComponent(new Transform(
-                                        kep::Vector3(0.0f, 24.0f, 0.0f),
+                                        kep::Vector3(0.0f, 22.0f, 0.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
@@ -87,8 +87,11 @@ World_0::World_0(Core * _core) : World(_core)
     
     
     cube->addComponent(new KePhys(
-        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 1.0f, new kep::SphereCollider()))
+        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 10.0f, new kep::SphereCollider()))
     ));
+    
+    
+
     
     refEntity = new Entity(this, "physics sphere");
     refTransform = (Transform*)refEntity->addComponent(new Transform(
@@ -100,7 +103,7 @@ World_0::World_0(Core * _core) : World(_core)
     
     
     refEntity->addComponent(new KePhys(
-        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 1.0f, new kep::SphereCollider()))
+        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 100.0f, new kep::SphereCollider()))
     ));
     
     

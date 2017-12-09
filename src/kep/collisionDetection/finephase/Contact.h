@@ -17,7 +17,7 @@ namespace kep
         Contact();
         ~Contact();
         void calculateContactBasis();
-        void resolve();
+        void resolve(real _duration);
 
     };
 };
