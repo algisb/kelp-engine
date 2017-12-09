@@ -18,6 +18,7 @@ namespace kelp
         kep::Vector3 m_front;
         kep::Vector3 m_left;
         float m_pitchAngle;
+        float m_yawAngle;
         bool m_possessed;
         
         Camera(kep::Vector3 _up, kep::Matrix4 _projectionMat, bool _possessed);

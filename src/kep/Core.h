@@ -91,6 +91,7 @@ namespace kep
         void rotateByVector(const Vector3 &_vector);
         void addScaledVector(const Vector3 &_vector, real _scale);
         void setEuler(Vector3 _axis, real _angle);
+        static Quaternion toQuaternion(real _pitch, real _roll, real _yaw);
     };
     
     class Matrix4;

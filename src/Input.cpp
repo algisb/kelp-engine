@@ -6,11 +6,14 @@
 
 using namespace kelp;
 
+GLFWwindow * Input::window = NULL; // Needs to be set
 
 std::vector<int> Input::Keyboard::s_keys = std::vector<int>();
 std::vector<int> Input::Keyboard::s_keys_p = std::vector<int>();//pressed
 std::vector<int> Input::Keyboard::s_keys_r = std::vector<int>();//released
 std::vector<int> Input::Keyboard::s_keys_h = std::vector<int>();//held-down
+
+
 bool Input::Keyboard::s_initInput = false;
 
 void Input::Keyboard::init()
@@ -207,16 +210,142 @@ bool Input::Keyboard::is(KeyboardKey _kk, KeyboardAction _ka)
 }
 
 
+std::vector<int> Input::Mouse::s_keys = std::vector<int>();
+std::vector<int> Input::Mouse::s_keys_p = std::vector<int>();//pressed
+std::vector<int> Input::Mouse::s_keys_r = std::vector<int>();//released
+std::vector<int> Input::Mouse::s_keys_h = std::vector<int>();//held-down
+
+bool Input::Mouse::s_initInput = false;
+double Input::Mouse::x = 0;
+double Input::Mouse::y = 0;
+
+double Input::Mouse::xLastFrame = 0;
+double Input::Mouse::yLastFrame = 0;
+
+double Input::Mouse::dx = 0;
+double Input::Mouse::dy = 0;
+bool Input::Mouse::joyStickMode = false;
+
+void Input::Mouse::init()
+{
+    s_keys.push_back(MOUSE_BUTTON_1      );
+    s_keys.push_back(MOUSE_BUTTON_2      );
+    s_keys.push_back(MOUSE_BUTTON_3      );
+    s_keys.push_back(MOUSE_BUTTON_4      );
+    s_keys.push_back(MOUSE_BUTTON_5      );
+    s_keys.push_back(MOUSE_BUTTON_6      );
+    s_keys.push_back(MOUSE_BUTTON_7      );
+    s_keys.push_back(MOUSE_BUTTON_8      );
+    s_keys.push_back(MOUSE_BUTTON_LAST   );
+    s_keys.push_back(MOUSE_BUTTON_LEFT   );
+    s_keys.push_back(MOUSE_BUTTON_RIGHT  );
+    s_keys.push_back(MOUSE_BUTTON_MIDDLE );
+
+    s_initInput = true;
+    glfwSetCursorPos(window,Config::s_windowWidth/2, Config::s_windowHeight/2);
+}
+
+void Input::Mouse::update(int _key, int _action)
+{
+    if(!s_initInput)
+        init();
+    for(int i = 0; i < s_keys.size(); i++)
+        if(_key == s_keys[i])
+        {
+            switch(_action)
+            {
+                case GLFW_PRESS:
+                    s_keys_p.push_back(_key);
+                    s_keys_h.push_back(_key);
+                    break;
+                case GLFW_RELEASE:
+                    s_keys_r.push_back(_key);
+                    for(int j = 0; j < s_keys_h.size(); j++)
+                        if(s_keys_h[j] == _key)
+                            s_keys_h.erase(s_keys_h.begin() + j);
+                    break;
+            }
+            break;
+        }
+}
+
+void Input::Mouse::clear()
+{    
+    s_keys_p.clear();
+    s_keys_r.clear();
+}
+
+void Input::Mouse::printKeyList()
+{
+    for(int i = 0; i < s_keys_p.size(); i++)
+        printf("%d pressed\n", s_keys_p[i]);
+    
+    for(int i = 0; i < s_keys_r.size(); i++)
+        printf("%d released\n", s_keys_r[i]);
+    
+    for(int i = 0; i < s_keys_h.size(); i++)
+        printf("%d held\n", s_keys_h[i]);
+}
+
+bool Input::Mouse::is(MouseButton _mb, MouseAction _ma)
+{
+    switch(_ma)
+    {
+        case MouseAction::PRESSED :
+            for(int i = 0; i < s_keys_p.size(); i++)
+                if(s_keys_p[i] == _mb)
+                    return true;
+            break;
+            
+        case MouseAction::RELEASED :
+            for(int i = 0; i < s_keys_r.size(); i++)
+                if(s_keys_r[i] == _mb)
+                    return true;
+            break;
+            
+        case MouseAction::HELD :
+            for(int i = 0; i < s_keys_h.size(); i++)
+                if(s_keys_h[i] == _mb)
+                    return true;
+            break;
+    }
+    return false;
+}
+
+void Input::Mouse::setMouseJoystickMode()
+{
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // cursor mode for mouse cam controls//GLFW_CURSOR_DISABLED
+    joyStickMode = true;
+    
+}
+
+void Input::Mouse::setMOuseNormalMode()
+{
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); // cursor in normal mode
+    joyStickMode = false;
+}
+
 
 
 ////////////////////////////////////////////////////////////////
-void Input::update(int _key, int _scancode, int _action, int _mods)
+void Input::update()
 {
-    Keyboard::update(_key, _action);
+    glfwGetCursorPos(window, &Mouse::x, &Mouse::y);
+    Mouse::dx = Mouse::x - Mouse::xLastFrame;
+    Mouse::dy = Mouse::y - Mouse::yLastFrame;
+    
+    Mouse::xLastFrame = Mouse::x;
+    Mouse::yLastFrame = Mouse::y;
+    //printf(" %f %f \n", Mouse::dx, Mouse::dy);
 }
 void Input::clear()
 {
     Keyboard::clear();
+    Mouse::clear();
+//     if(Mouse::joyStickMode)
+//         glfwSetCursorPos(window,Config::s_windowWidth/2, Config::s_windowHeight/2);
 }
+
+
 
 

@@ -13,10 +13,14 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
-    
-    kelp::Input::update(key, scancode, action, mods);
+    kelp::Input::Keyboard::update(key, action);
         
 }
+static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    kelp::Input::Mouse::update(button, action);
+}
+
 static void error_callback(int error, const char *description)
 {
     fputs(description, stderr);
@@ -51,6 +55,9 @@ int main(int _argc, char ** _argv)
 
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
+
+    
     
     glewExperimental = GL_TRUE;
     glewInit();
@@ -58,11 +65,13 @@ int main(int _argc, char ** _argv)
     printf( "RENDERER = %s\n", glGetString( GL_RENDERER ) ) ;
     printf( "VERSION = %s\n", glGetString( GL_VERSION ) ) ;
     //////////////////////////////////////////////////////////////
+    kelp::Input::window = window;
     kelp::Core * core = new kelp::Core(_argc, _argv);
     while (!glfwWindowShouldClose(window))
     {
         kelp::Time::calc();//start timer
         glfwPollEvents();
+        kelp::Input::update();
 
         core->update();
         

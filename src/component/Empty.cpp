@@ -37,6 +37,20 @@ void Empty::update()
     {
         p->m_rigidBody->addForce(kep::Vector3(0,0,-10));
     }
+    
+    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_Q, Input::Keyboard::KeyboardAction::PRESSED))
+    {
+        if(!Input::Mouse::joyStickMode)
+            Input::Mouse::setMouseJoystickMode();
+        else
+            Input::Mouse::setMOuseNormalMode();
+    }
+    if(Input::Mouse::is(Input::Mouse::MouseButton::MOUSE_BUTTON_LEFT, Input::Mouse::MouseAction::PRESSED))
+    {
+        printf("left click(Inside empty)\n");
+
+    }
+    
     if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_T, Input::Keyboard::KeyboardAction::HELD))
     {
 //         Entity * refEntity = ((World_0*)(m_owner->m_world))->plight;

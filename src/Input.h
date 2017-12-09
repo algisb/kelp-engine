@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <GLFW/glfw3.h>
-
+#include "Config.h"
 
 
 
@@ -15,7 +15,9 @@ namespace kelp
 
     class Input
     {
+        
         public:
+            static GLFWwindow * window; //pointer to the window where we get input from
             class Keyboard
             {
             public:
@@ -163,11 +165,52 @@ namespace kelp
                 
                 static bool is(KeyboardKey _kk, KeyboardAction _ka);
             };
-            /////////////////////////////////////////////////
-            //TODO
+
             class Mouse
             {
-            public:
+                public:
+                enum MouseButton
+                {
+                      MOUSE_BUTTON_1      = GLFW_MOUSE_BUTTON_1     ,
+                      MOUSE_BUTTON_2      = GLFW_MOUSE_BUTTON_2     ,
+                      MOUSE_BUTTON_3      = GLFW_MOUSE_BUTTON_3     ,
+                      MOUSE_BUTTON_4      = GLFW_MOUSE_BUTTON_4     ,
+                      MOUSE_BUTTON_5      = GLFW_MOUSE_BUTTON_5     ,
+                      MOUSE_BUTTON_6      = GLFW_MOUSE_BUTTON_6     ,
+                      MOUSE_BUTTON_7      = GLFW_MOUSE_BUTTON_7     ,
+                      MOUSE_BUTTON_8      = GLFW_MOUSE_BUTTON_8     ,
+                      MOUSE_BUTTON_LAST   = GLFW_MOUSE_BUTTON_LAST  ,
+                      MOUSE_BUTTON_LEFT   = GLFW_MOUSE_BUTTON_LEFT  ,
+                      MOUSE_BUTTON_RIGHT  = GLFW_MOUSE_BUTTON_RIGHT ,
+                      MOUSE_BUTTON_MIDDLE = GLFW_MOUSE_BUTTON_MIDDLE
+                };
+                enum MouseAction
+                {
+                    PRESSED,
+                    RELEASED,
+                    HELD
+                };
+                static std::vector<int> s_keys;
+                static std::vector<int> s_keys_p;//pressed
+                static std::vector<int> s_keys_r;//released
+                static std::vector<int> s_keys_h;//held-down
+                static bool s_initInput;
+                static double x;
+                static double y;
+                static double xLastFrame;
+                static double yLastFrame;
+                static double dx;
+                static double dy;
+                static bool joyStickMode;
+                
+                static void init();
+                static void update(int _key, int _action);
+                static void clear();
+                static void printKeyList();
+                static void setMouseJoystickMode();
+                static void setMOuseNormalMode();
+                //static void set        
+                static bool is(MouseButton _mb, MouseAction _ma);
                 
             };
             
@@ -177,7 +220,7 @@ namespace kelp
                 
             };
             /////////////////////////////////////////////////
-            static void update(int _key, int _scancode, int _action, int _mods);
+            static void update();
             static void clear();
             
     };

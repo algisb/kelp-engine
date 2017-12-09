@@ -232,6 +232,24 @@ setEuler(Vector3 _axis, real _angle)
     k = _axis.z*sin(ang/2);
 }
 
+Quaternion Quaternion::toQuaternion(real _pitch, real _roll, real _yaw)
+{
+    Quaternion q;
+        // Abbreviations for the various angular functions
+    real cy = cos(_yaw * 0.5f);
+    real sy = sin(_yaw * 0.5f);
+    real cr = cos(_roll * 0.5f);
+    real sr = sin(_roll * 0.5f);
+    real cp = cos(_pitch * 0.5f);
+    real sp = sin(_pitch * 0.5f);
+
+    q.r = cy * cr * cp + sy * sr * sp;
+    
+    q.i = cy * sr * cp - sy * cr * sp;
+    q.j = cy * cr * sp + sy * sr * cp;
+    q.k = sy * cr * cp - cy * sr * sp;
+    return q;
+}
 
 
 Matrix3::~Matrix3()
