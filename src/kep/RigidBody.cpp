@@ -4,9 +4,10 @@
 using namespace kep;
 
 
-RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, bool _externPO, real _mass, Collider * _collider)
+RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, bool _externPO, real _mass, Collider * _collider, bool _noRotation)
 {
     externPO = _externPO;
+    noRotation = _noRotation;
     
     if(!externPO)
     {
@@ -200,7 +201,8 @@ void RigidBody::integrate(real _duration)
     Vector3 angularAcceleration = inverseInertiaTensorWorld * torqueAccum;
     angularVelocity.addScaledVector(angularAcceleration, _duration);
     
-    orientation->addScaledVector(angularVelocity, _duration);
+    if(!noRotation)
+        orientation->addScaledVector(angularVelocity, _duration);
     //add drag
     //velocity *= real_pow(damping, _duration);//real_pow(m_damping, _duration);
     

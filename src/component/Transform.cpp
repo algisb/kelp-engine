@@ -29,7 +29,7 @@ void Transform::update()
                                            0.0f, 0.0f, 0.0f, 1.0f);
     Entity * par = m_owner->m_parent;
     if(par != NULL)
-        m_modelMat = par->m_transform->m_modelMat * m_modelMat;
+        m_modelMat = par->m_transform->m_modelMatUnscaled * m_modelMat;
 }
 
 void Transform::dump()

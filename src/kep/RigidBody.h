@@ -10,7 +10,7 @@ namespace kep
     {
     public:
         bool externPO;//externaly defined position and orientation
-        
+        bool noRotation;
         real inverseMass;
         
         Vector3 * position;
@@ -36,7 +36,7 @@ namespace kep
         Collider * collider;
 
         
-        RigidBody(Vector3 * _position, Quaternion * _orientation, bool _externPO, real _mass, Collider * _collider );
+        RigidBody(Vector3 * _position, Quaternion * _orientation, bool _externPO, real _mass, Collider * _collider, bool _noRotation = false);
         ~RigidBody();
         void calculateDerivedData();
         void setInertiaTensor(const Matrix3 &_inertiaTensor);

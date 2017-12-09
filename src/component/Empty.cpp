@@ -5,9 +5,11 @@
 #include <Core.h>
 
 using namespace kelp;
-Empty::Empty()
+Empty::Empty(Entity * _playerCamera, Entity * _playerBody)
 {
     kekX = -8.0f;
+    m_playerBodyEntity = _playerBody;
+    m_playerCameraEntity = _playerCamera;
 }
 Empty::~Empty()
 {
@@ -15,101 +17,70 @@ Empty::~Empty()
 
 void Empty::init()
 {
+    m_playerCameraComp = m_playerCameraEntity->getComponent<Camera>();
+    m_playerPhysicsComp = m_playerBodyEntity->getComponent<KePhys>();
+    m_playerCameraComp->m_possessed = false;//no longer use internal controls
+    Input::Mouse::setMouseJoystickMode();
+    
 }
 
 void Empty::update()
 {
-    Entity * refEntity = ((World_0*)(m_owner->m_world))->cube;
-    KePhys * p =refEntity->getComponent<KePhys>();
-    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_O, Input::Keyboard::KeyboardAction::HELD))
-    {
-        p->m_rigidBody->addForce(kep::Vector3(10,0,0));
-    }
-    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_I, Input::Keyboard::KeyboardAction::HELD))
-    {
-        p->m_rigidBody->addForce(kep::Vector3(-10,0,0));
-    }
-    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_L, Input::Keyboard::KeyboardAction::HELD))
-    {
-        p->m_rigidBody->addForce(kep::Vector3(0,0,10));
-    }
-    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_P, Input::Keyboard::KeyboardAction::HELD))
-    {
-        p->m_rigidBody->addForce(kep::Vector3(0,0,-10));
-    }
-    
-    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_Q, Input::Keyboard::KeyboardAction::PRESSED))
-    {
-        if(!Input::Mouse::joyStickMode)
-            Input::Mouse::setMouseJoystickMode();
-        else
-            Input::Mouse::setMOuseNormalMode();
-    }
-    if(Input::Mouse::is(Input::Mouse::MouseButton::MOUSE_BUTTON_LEFT, Input::Mouse::MouseAction::PRESSED))
-    {
-        printf("left click(Inside empty)\n");
-
-    }
-    
-    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_T, Input::Keyboard::KeyboardAction::HELD))
-    {
-//         Entity * refEntity = ((World_0*)(m_owner->m_world))->plight;
-//         refEntity = new Entity(refEntity->m_world, "Point Light");
-//         refEntity->addComponent(new Transform(
-//                                         kep::Vector3(kekX, 8.0f, 2.0f),
-//                                         kep::Quaternion(), 
-//                                         kep::Vector3(0.2f, 0.2f, 0.2f)
-//                                         ));
-//         refEntity->addComponent(new LightPoint(refEntity->m_world->m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
-//         refEntity->addComponent(new Render(refEntity->m_world->m_core->m_sphereMesh, refEntity->m_world->m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
-//         kekX  += -10.0f;
+        const float rotSpd = 70.0f * Time::s_deltaT;
+        const float mouseRotSpd = rotSpd *0.1f;
+        //pitch///////////////////////////////////////
+        float tmpAng = m_playerCameraComp->m_pitchAngle;
+        tmpAng += -mouseRotSpd * Input::Mouse::dy;
+        
+        if(tmpAng < 90.0f && tmpAng > -90.0f)//pitch clamp
+        {
+            m_playerCameraComp->m_pitchAngle = tmpAng;
+            kep::Quaternion q;
+            q.setEuler(m_playerCameraComp->m_left, -mouseRotSpd * Input::Mouse::dy);
+            m_playerCameraComp->m_transform->m_orientation *= q;
+        }
         
         
-        Entity * refEntity = ((World_0*)(m_owner->m_world))->cube;
+        //yaw/////////////////////////////////////
+        m_playerCameraComp->m_yawAngle += mouseRotSpd * Input::Mouse::dx;
         kep::Quaternion q;
-        q.setEuler(kep::Vector3(0,1,0), 2.0f);
-        refEntity->m_transform->m_orientation *= q;
+        q.setEuler(m_playerCameraComp->m_up, mouseRotSpd * Input::Mouse::dx);
+        m_playerCameraComp->m_transform->m_orientation *= q;
+    
+        kep::Quaternion moveQuat;
+        moveQuat.setEuler(m_playerCameraComp->m_up, m_playerCameraComp->m_yawAngle);
+        kep::Matrix3 moveMat;
+        moveMat.setOrientation(moveQuat);
+        kep::Vector3 moveDir(0,0,-1);
+        moveDir = moveMat * moveDir;
         
-//         Entity * refEntity = NULL;
-//         refEntity = new Entity(m_owner->m_world, "camera");//TODO: allow it so this can insted be another entity acting as a root node(scenegraph)
-//         refEntity->addComponent(new Transform(
-//                                           kep::Vector3(0.0f, 5.0f, 20.0f),
-//                                           kep::Quaternion(kep::Vector3(0,1,0), 45.0f), 
-//                                           kep::Vector3(1.0f, 1.0f, .0f)
-//                                          ));
-//         Camera *c = (Camera*)refEntity->addComponent(
-//                             new Camera(kep::Vector3(0.0f, 1.0f, 0.0f),
-//                             kep::perspectiveProjection(
-//                                 45.0f, 
-//                                 Config::s_windowWidth, 
-//                                 Config::s_windowHeight, 
-//                                 1.0f, 
-//                                 1000.0f).transpose(),
-//                                 true
-//                             ));
-//         c->setAsRenderCamera();
+    
+        float moveF = 10.0f;  
+        if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_W, Input::Keyboard::KeyboardAction::HELD))
+        {
+            m_playerPhysicsComp->m_rigidBody->addForce(moveDir * moveF);
+        }
+        if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_S, Input::Keyboard::KeyboardAction::HELD))
+        {
+            m_playerPhysicsComp->m_rigidBody->addForce(moveDir * moveF * -1.0f);
+            //m_playerPhysicsComp->m_rigidBody->velocity += moveDir * moveF * -1.0f;
+        }
+        if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_A, Input::Keyboard::KeyboardAction::HELD))
+        {
+            m_playerPhysicsComp->m_rigidBody->addForce(m_playerCameraComp->m_left* moveF);
+        }
+        if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_D, Input::Keyboard::KeyboardAction::HELD))
+        {
+            m_playerPhysicsComp->m_rigidBody->addForce(m_playerCameraComp->m_left* moveF *-1.0f);
+        }
+        if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_SPACE, Input::Keyboard::KeyboardAction::PRESSED))
+        {
+            //m_playerPhysicsComp->m_rigidBody->addForce(kep::Vector3(0,1,0) * 1000.0f);
+            m_playerPhysicsComp->m_rigidBody->velocity += kep::Vector3(0,20,0);
+            //printf("jump\n");
+        }
+        //printf("vel: %f \n", m_playerPhysicsComp->m_rigidBody->velocity.magnitude());
         
-        //refEntity
-        //Entity * en = ((World_0*)(m_owner->m_world))->plight;
-        //en->deleteComponent<LightPoint>();
-        //m_owner->m_world->deleteEntity( ((World_0*)(m_owner->m_world))->wall );
-    }
-    if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_Y, Input::Keyboard::KeyboardAction::PRESSED))
-    {
-//         Entity * en = ((World_0*)(m_owner->m_world))->wall;
-//         en = new Entity(m_owner->m_world, "wall");
-//         en->addComponent(new Transform(
-//                                         kep::Vector3(0.0f, 10.0f, kekX),//-10.0f
-//                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
-//                                         kep::Vector3(100.0f, 10.0f, 1.0f)
-//                                         ));
-        //en->addComponent(new Render(m_owner->m_world->m_core->m_cubeMesh, m_owner->m_world->m_core->m_shaderDefault, RenderMode::SOLID));
-        //kekX += -10.0f;
-        //Entity * en = ((World_0*)(m_owner->m_world))->plight;
-        //en->addComponent(new LightPoint(m_owner->m_world->m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
-        //en->addComponent(new Render(m_owner->m_world->m_core->m_cubeMesh, m_owner->m_world->m_core->m_shaderDefault, RenderMode::SOLID));
-        
-    }
 }
 void Empty::render()
 {
