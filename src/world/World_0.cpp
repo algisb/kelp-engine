@@ -18,25 +18,7 @@ World_0::World_0(Core * _core) : World(_core)
     Transform * refTransform = NULL;
     refEntity = new Entity(this, "empty");//empty structure for having global components and testing stuff
     refEntity->addComponent(new Empty());
-    //////////////////////CAM/////////////////////////
-    camera = new Entity(this, "camera");//TODO: allow it so this can insted be another entity acting as a root node(scenegraph)
-    camera->addComponent(new Transform(
-                                    kep::Vector3(0.0f, 5.0f, 40.0f),
-                                    kep::Quaternion(), 
-                                    kep::Vector3(1.0f, 1.0f, 1.0f)
-                                    ));
-    
-    
-    camera->addComponent(
-                            new Camera(kep::Vector3(0.0f, 1.0f, 0.0f),
-                            kep::perspectiveProjection(
-                                45.0f, 
-                                Config::s_windowWidth, 
-                                Config::s_windowHeight, 
-                                1.0f, 
-                                1000.0f).transpose(),
-                                true
-                            ));
+
 
     
 
@@ -73,22 +55,6 @@ World_0::World_0(Core * _core) : World(_core)
     
 
     
-    
-    
-    
-    
-    cube = new Entity(this, "physics sphere");
-    refTransform = (Transform*)cube->addComponent(new Transform(
-                                        kep::Vector3(0.0f, 22.0f, 0.0f),
-                                        kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
-                                        kep::Vector3(1.0f, 1.0f, 1.0f)
-                                        ));
-    cube->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
-    
-    
-    cube->addComponent(new KePhys(
-        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 1.0f, new kep::SphereCollider()))
-    ));
     
     
 
@@ -141,15 +107,46 @@ World_0::World_0(Core * _core) : World(_core)
         m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))//TODO: rigidbodies with mass 0 should not be check for collision againsts other bodies with mass 0 
     ));
     
+    cube = new Entity(this, "physics sphere");
+    refTransform = (Transform*)cube->addComponent(new Transform(
+                                        kep::Vector3(0.0f, 22.0f, 0.0f),
+                                        kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
+                                        kep::Vector3(1.0f, 1.0f, 1.0f)
+                                        ));
+    cube->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
     
-    //camera->m_parent = cube;
-//     refEntity = new Entity(this, "m4a1s rifle", camera);
-//     refEntity->addComponent(new Transform(
-//                                         kep::Vector3(0.0f, -1.0f, 0.0f),//14
-//                                         kep::Quaternion(kep::Vector3(0,1,0), 180.0f), 
-//                                         kep::Vector3(1.0f, 1.0f, 1.0f)
-//                                         ));
-//     refEntity->addComponent(new Render(m_core->m_m4a1s, m_core->m_shaderDefault, m_core->m_m4a1sTexture, RenderMode::SOLID));
+    
+    cube->addComponent(new KePhys(
+        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 1.0f, new kep::SphereCollider()))
+    ));
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //////////////////////CAM/////////////////////////
+    camera = new Entity(this, "camera");//TODO: allow it so this can insted be another entity acting as a root node(scenegraph)
+    camera->addComponent(new Transform(
+                                    kep::Vector3(0.0f, 2.0f, 30.0f),
+                                    kep::Quaternion(), 
+                                    kep::Vector3(1.0f, 1.0f, 1.0f)
+                                    ));
+    
+    
+    camera->addComponent(
+                            new Camera(kep::Vector3(0.0f, 1.0f, 0.0f),
+                            kep::perspectiveProjection(
+                                45.0f, 
+                                Config::s_windowWidth, 
+                                Config::s_windowHeight, 
+                                1.0f, 
+                                1000.0f).transpose(),
+                                true
+                            ));
     
 }
 World_0::~World_0()
@@ -162,7 +159,7 @@ void World_0::initW()
     Time::s_deltaT = 0.01666f;//delta time on init is bad
     KePhys * kePhys = cube->getComponent<KePhys>();
     
-    kePhys->m_rigidBody->addTorque(kep::Vector3(0,0,1000));
+    //kePhys->m_rigidBody->addTorque(kep::Vector3(0,0,1000));
     //kePhys->m_rigidBody->addForceAtBodyPoint(kep::Vector3(0,0,-100), kep::Vector3(1,0,0));
     //kePhys->m_rigidBody->addForce(kep::Vector3(0, -1000, 0));
     //kePhys->m_rigidBody->addForce(kep::Vector3(500, 0, 0));

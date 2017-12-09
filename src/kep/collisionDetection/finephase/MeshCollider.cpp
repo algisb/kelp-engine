@@ -169,10 +169,11 @@ int MeshCollider::inTriangle(Triangle _t,  Vector3 _p)// total 63 flops
 
 int MeshCollider::collides(Collider* _c, CollisionData* _collisionData)
 {
-    return collides(this, _collisionData);
+    return _c->collides(this, _collisionData);
 }
 int MeshCollider::collides(SphereCollider* _c, CollisionData* _collisionData)
 {
+    //printf("pre\n");
     int totalContacts = 0;
     for(int i = 0 ; i < numTriangles; i++)
     {
@@ -189,7 +190,7 @@ int MeshCollider::collides(SphereCollider* _c, CollisionData* _collisionData)
         
         if(test == 0)
             continue;
- //       printf("pre\n");
+        
         if(inTriangle(tTriangles[i], contactPosition) == 0)
             continue;
  //       printf("aft\n");
@@ -203,7 +204,6 @@ int MeshCollider::collides(SphereCollider* _c, CollisionData* _collisionData)
         //Ray rc = Ray(spherePosition ,kep::Vector3(0,-1, 0));//(contactPosition-spherePosition).normalized()
         //if(rayTriangleMT97(&rc, &tTriangles[i], &cp) == 0)
         //    continue;
-        
         Contact contact;
         contact.body[1] = rigidBody;
         contact.body[0] = _c->rigidBody;

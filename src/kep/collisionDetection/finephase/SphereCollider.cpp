@@ -1,5 +1,7 @@
 #include "SphereCollider.h"
 #include "HalfPlaneCollider.h"
+#include "MeshCollider.h"
+
 using namespace kep;
 
 SphereCollider::SphereCollider(Matrix4 _offset, real _radius) : Collider(_offset)
@@ -57,11 +59,12 @@ int SphereCollider::collides(HalfPlaneCollider * _c, CollisionData * _collisionD
 }
 int SphereCollider::collides(OBBCollider * _c, CollisionData * _collisionData)
 {
+
     return 0;
 }
 
 int SphereCollider::collides(MeshCollider * _c, CollisionData * _collisionData)
 {
-    return collides(this,_collisionData);//defined in MeshCollider
+    return _c->collides(this,_collisionData);//defined in MeshCollider
 }
 
