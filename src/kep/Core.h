@@ -125,6 +125,9 @@ namespace kep
         
         void setComponents(const Vector3 &_comp0, const Vector3 &_comp1, const Vector3 &_comp2);
         Vector3 getAxisVector(int i) const;
+        void setSkewSymmetric(const Vector3& _vector);
+        void operator*=(const Matrix3 &_o);
+        void operator+=(const Matrix3 &_o);
         void dump();
     };
     

@@ -412,8 +412,50 @@ void Matrix3::dump()
            data[6], data[7], data[8]
     );
 }
-                 
-                 
+void Matrix3::setSkewSymmetric(const Vector3& _vector)
+{
+    data[0] = data[4] = data[8] = 0;
+    data[1] = -_vector.z;
+    data[2] = _vector.y;
+    data[3] = _vector.z;
+    data[5] = -_vector.x;
+    data[6] = -_vector.y;
+    data[7] = _vector.x;
+}
+void Matrix3::operator*=(const Matrix3 &_o)
+{
+    real t1;
+    real t2;
+    real t3;
+
+    t1 = data[0]*_o.data[0] + data[1]*_o.data[3] + data[2]*_o.data[6];
+    t2 = data[0]*_o.data[1] + data[1]*_o.data[4] + data[2]*_o.data[7];
+    t3 = data[0]*_o.data[2] + data[1]*_o.data[5] + data[2]*_o.data[8];
+    data[0] = t1;
+    data[1] = t2;
+    data[2] = t3;
+
+    t1 = data[3]*_o.data[0] + data[4]*_o.data[3] + data[5]*_o.data[6];
+    t2 = data[3]*_o.data[1] + data[4]*_o.data[4] + data[5]*_o.data[7];
+    t3 = data[3]*_o.data[2] + data[4]*_o.data[5] + data[5]*_o.data[8];
+    data[3] = t1;
+    data[4] = t2;
+    data[5] = t3;
+
+    t1 = data[6]*_o.data[0] + data[7]*_o.data[3] + data[8]*_o.data[6];
+    t2 = data[6]*_o.data[1] + data[7]*_o.data[4] + data[8]*_o.data[7];
+    t3 = data[6]*_o.data[2] + data[7]*_o.data[5] + data[8]*_o.data[8];
+    
+    data[6] = t1;
+    data[7] = t2;
+    data[8] = t3;
+}     
+void Matrix3::operator+=(const Matrix3 &_o)
+{
+    data[0] += _o.data[0]; data[1] += _o.data[1]; data[2] += _o.data[2];
+    data[3] += _o.data[3]; data[4] += _o.data[4]; data[5] += _o.data[5];
+    data[6] += _o.data[6]; data[7] += _o.data[7]; data[8] += _o.data[8];
+}           
                  
 
 Matrix4::Matrix4(

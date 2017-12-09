@@ -109,12 +109,84 @@ void Contact::resolve(real _duration)
 
     //float desiredDeltaVelocity = -contactVelocity.x * (1 + restitution);
     
-    Vector3 impulseContact;
-    impulseContact.x = desiredDeltaVelocity / deltaVelocity;
+    //////////////////////////////////////////////////////////
+    //FRICTION handling
+    //////////////////////////////////////////////////////////
+//     const real friction = -0.1f;
+// 
+     Vector3 impulseContact;
+// 
+//     
+//     // The equivalent of a cross product in matrices is multiplication
+//     // by a skew-symmetric matrix - we build the matrix for converting
+//     // between linear and angular quantities.
+//     real inverseMass = 0.0f;
+//     Matrix3 deltaVelWorld;
+//     
+//     if (body[0]->hasFiniteMass())
+//     {
+//         inverseMass += body[0]->inverseMass;
+//         Matrix3 impulseToTorque;
+//         impulseToTorque.setSkewSymmetric(relativeContactPosition[0]);
+//         // Build the matrix to convert contact impulse to change in velocity
+//         // in world coordinates.
+//         deltaVelWorld = impulseToTorque;
+//         deltaVelWorld *= body[0]->inverseInertiaTensorWorld;
+//         deltaVelWorld *= impulseToTorque;
+//         deltaVelWorld *= -1;
+//     }
+//     // Check whether we need to add body 2’s data.
+//     if (body[1]->hasFiniteMass())
+//     {
+//         // Add to the inverse mass.
+//         inverseMass += body[1]->inverseMass;
+//         // Set the cross product matrix.
+//         Matrix3 impulseToTorque;
+//         impulseToTorque.setSkewSymmetric(relativeContactPosition[1]);
+//         // Calculate the velocity change matrix.
+//         Matrix3 deltaVelWorld2 = impulseToTorque;
+//         deltaVelWorld2 *= body[1]->inverseInertiaTensorWorld;
+//         deltaVelWorld2 *= impulseToTorque;
+//         deltaVelWorld2 *= -1;
+//         // Add to the total delta velocity.
+//         deltaVelWorld += deltaVelWorld2;
+//     }
+// 
+//     // Do a change of basis to convert into contact coordinates.
+//     Matrix3 deltaVelocityM = contactToWorld.transpose();
+//     deltaVelocityM *= deltaVelWorld;
+//     deltaVelocityM *= contactToWorld;
+//     // Add in the linear velocity change.
+//     deltaVelocityM.data[0] += inverseMass;
+//     deltaVelocityM.data[4] += inverseMass;
+//     deltaVelocityM.data[8] += inverseMass;
+//     // Invert to get the impulse needed per unit velocity.
+//     Matrix3 impulseMatrix = deltaVelocityM.inverse();
+//     // Find the target velocities to kill.
+//     Vector3 velKill(desiredDeltaVelocity,
+//                     -contactVelocity.y,
+//                     -contactVelocity.z);
+//     // Find the impulse to kill target velocities.
+//     impulseContact = impulseMatrix * velKill;
+//     // Check for exceeding friction.
+//     real planarImpulse = real_sqrt(impulseContact.y*impulseContact.y + impulseContact.z*impulseContact.z);
+//     if (planarImpulse > impulseContact.x * friction)
+//     {
+//         // We need to use dynamic friction.
+//         impulseContact.y /= planarImpulse;
+//         impulseContact.z /= planarImpulse;
+//         impulseContact.x = deltaVelocityM.data[0] + deltaVelocityM.data[1] * friction * impulseContact.y + deltaVelocityM.data[2] * friction * impulseContact.z;
+//         impulseContact.x = desiredDeltaVelocity / impulseContact.x;
+//         impulseContact.y *= friction * impulseContact.x;
+//         impulseContact.z *= friction * impulseContact.x;
+//      }
+
+    /////////////////////////////////////////////////////////////
+    
+    
+    impulseContact.x = desiredDeltaVelocity / deltaVelocity; //enough for contatcts without friction
     impulseContact.y = 0;
     impulseContact.z = 0;
-    
-    
     Vector3 impulse = contactToWorld * impulseContact;
     
     if(body[0]->hasFiniteMass())

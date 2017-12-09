@@ -37,9 +37,9 @@ RigidBody::RigidBody(Vector3 * _position, Quaternion * _orientation, bool _exter
         inverseMass = 0.0f;
     
     //TODO this will depend on the shape of the object 
-    inverseInertiaTensor = Matrix3(1,0,0,
-                                   0,1,0,
-                                   0,0,1);
+    inverseInertiaTensor = Matrix3(_mass,0,0,
+                                   0,_mass,0,
+                                   0,0,_mass);
     
     transformMatrix = Matrix4(1,0,0,0,
                               0,1,0,0,
