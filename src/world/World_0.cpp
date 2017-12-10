@@ -27,7 +27,7 @@ World_0::World_0(Core * _core) : World(_core)
     
     plight = new Entity(this, "Point Light");
     plight->addComponent(new Transform(
-                                        kep::Vector3(-4.0f, 8.0f, 2.0f),
+                                        kep::Vector3(-4.0f, 10.0f, 10.0f),
                                         kep::Quaternion(), 
                                         kep::Vector3(0.2f, 0.2f, 0.2f)
                                         ));
@@ -35,16 +35,59 @@ World_0::World_0(Core * _core) : World(_core)
     plight->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
         
     
-   //NON-PHYSICAL ENTITIES///////////////////////////////////////////////////////////////////////
+    refEntity = new Entity(this, "Point Light");
+    refEntity->addComponent(new Transform(
+                                        kep::Vector3(170.0f, 10.0f, 170.0f),
+                                        kep::Quaternion(), 
+                                        kep::Vector3(0.2f, 0.2f, 0.2f)
+                                        ));
+    refEntity->addComponent(new LightPoint(m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
+    refEntity->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
+    
+    refEntity = new Entity(this, "Point Light");
+    refEntity->addComponent(new Transform(
+                                        kep::Vector3(-170.0f, 10.0f, -170.0f),
+                                        kep::Quaternion(), 
+                                        kep::Vector3(0.2f, 0.2f, 0.2f)
+                                        ));
+    refEntity->addComponent(new LightPoint(m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
+    refEntity->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
+    
+    
+    refEntity->addComponent(new LightPoint(m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
+    refEntity->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
+    
+    refEntity = new Entity(this, "Point Light");
+    refEntity->addComponent(new Transform(
+                                        kep::Vector3(170.0f, 10.0f, -170.0f),
+                                        kep::Quaternion(), 
+                                        kep::Vector3(0.2f, 0.2f, 0.2f)
+                                        ));
+    refEntity->addComponent(new LightPoint(m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
+    refEntity->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
+    
+    refEntity->addComponent(new LightPoint(m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
+    refEntity->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
+    
+    refEntity = new Entity(this, "Point Light");
+    refEntity->addComponent(new Transform(
+                                        kep::Vector3(-170.0f, 10.0f, 170.0f),
+                                        kep::Quaternion(), 
+                                        kep::Vector3(0.2f, 0.2f, 0.2f)
+                                        ));
+    refEntity->addComponent(new LightPoint(m_core->m_shaderDefault, 50.0f, kep::Vector3(0.0f, 0.0f, 0.0f)));
+    refEntity->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderMinimal, NULL, RenderMode::SOLID));
+    
+   /////////////////////////////////////////////////////////////////////////
     refEntity = new Entity(this, "plane");
     refTransform = (Transform*)refEntity->addComponent(new Transform(
                                         kep::Vector3(0.0f, 0.0f, 0.0f),
                                         kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
-                                        kep::Vector3(100.0f, 1.0f, 100.0f)
+                                        kep::Vector3(10.0f, 10.0f, 10.0f)
                                         ));
-    refEntity->addComponent(new Render(m_core->m_plane, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
+    refEntity->addComponent(new Render(m_core->m_sandBox, m_core->m_shaderDefault, NULL, RenderMode::SOLID));
     
-    mc = new kep::MeshCollider(kep::Matrix4(), m_core->m_plane->m_dataV, m_core->m_plane->m_dataN, m_core->m_plane->m_numVertices, refTransform->m_scale);
+    mc = new kep::MeshCollider(kep::Matrix4(), m_core->m_sandBox->m_dataV, m_core->m_sandBox->m_dataN, m_core->m_sandBox->m_numVertices, refTransform->m_scale);
     refEntity->addComponent(new KePhys(
         m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))//new kep::HalfPlaneCollider()
     ));
@@ -96,20 +139,21 @@ World_0::World_0(Core * _core) : World(_core)
         m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))//TODO: rigidbodies with mass 0 should not be check for collision againsts other bodies with mass 0 
     ));
     
-    
-    refEntity = new Entity(this, "physics sphere");
-    refTransform = (Transform*)refEntity->addComponent(new Transform(
-                                        kep::Vector3(0.0f, 20.0f, 10.0f),
-                                        kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
-                                        kep::Vector3(1.0f, 1.0f, 1.0f)
-                                        ));
-    refEntity->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
-    
-    
-    refEntity->addComponent(new KePhys(
-        m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 1.0f, new kep::SphereCollider(kep::Matrix4())))
-    ));
-    
+    for(int i = 0; i < 20; i++)
+    {
+        refEntity = new Entity(this, "physics sphere");
+        refTransform = (Transform*)refEntity->addComponent(new Transform(
+                                            kep::Vector3((float)i+2, 20.0f, 10.0f),
+                                            kep::Quaternion(kep::Vector3(0,1,0), 0.0f), 
+                                            kep::Vector3(1.0f, 1.0f, 1.0f)
+                                            ));
+        refEntity->addComponent(new Render(m_core->m_sphereMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
+        
+        
+        refEntity->addComponent(new KePhys(
+            m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 1.0f, new kep::SphereCollider(kep::Matrix4())))
+        ));
+    }
     empty[2] = new Entity(this, "physics sphere");
     refTransform = (Transform*)empty[2]->addComponent(new Transform(
                                         kep::Vector3(-5.0f, 24.0f, 10.0f),
@@ -127,6 +171,9 @@ World_0::World_0(Core * _core) : World(_core)
     
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
+    
+    
+    ////////////////////////Player body//////////////////////////////////////////
     empty[0] = new Entity(this, "player body");
     refTransform = (Transform*)empty[0]->addComponent(new Transform(
                                         kep::Vector3(0.0f, 10.0f, 20.0f),
@@ -161,6 +208,24 @@ World_0::World_0(Core * _core) : World(_core)
                             ));
     refEntity = new Entity(this, "empty");//empty structure for having global components and testing stuff
     refEntity->addComponent(new Empty(empty[1], empty[0], empty[2]));
+    
+    ///////////////////rifle/////////////////////////////////
+    refEntity = new Entity(this, "m4a1s rifle", empty[1]);
+    refTransform = (Transform*)refEntity->addComponent(new Transform(
+                                        kep::Vector3(0.0f, 0.0f, 0.0f),
+                                        kep::Quaternion(kep::Vector3(0,1,0), 180.0f), 
+                                        kep::Vector3(1.0f, 1.0f, 1.0f)
+                                        ));
+     refEntity->addComponent(new Render(m_core->m_m4a1s, m_core->m_shaderDefault, m_core->m_m4a1sTexture, RenderMode::SOLID, kep::Vector3(), true));
+     //crosshair////////////////////
+     refEntity = new Entity(this, "crosshair");
+     
+     refEntity->addComponent(new RenderLine2(kep::Vector3(0,0.1f,-10.0f), kep::Vector3(0,0.2f,-10.0f)));
+     refEntity->addComponent(new RenderLine2(kep::Vector3(0,-0.1f,-10.0f), kep::Vector3(0,-0.2f,-10.0f)));
+     
+     refEntity->addComponent(new RenderLine2(kep::Vector3(0.1f,0.0f,-10.0f), kep::Vector3(0.2f,0.0f,-10.0f)));
+     refEntity->addComponent(new RenderLine2(kep::Vector3(-0.1f,0.0f,-10.0f), kep::Vector3(-0.2f,0.0f,-10.0f)));
+    
     
 }
 World_0::~World_0()

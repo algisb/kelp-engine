@@ -26,14 +26,15 @@ Core::Core(int _argc, char ** _argv)
     m_cubeMesh = new MeshLoad("./models/cube.obj", "./models/");
     m_highPolyMesh = new MeshLoad("./models/peps.obj", "./models/");
     m_monkeyMesh = new MeshLoad("./models/monkey.obj", "./models/");
-    //m_m4a1s = new MeshLoad("./models/m4a1s.obj", "./models/");
+    m_m4a1s = new MeshLoad("./models/m4a1s.obj", "./models/");
     m_dungeon = new MeshLoad("./models/dungeon.obj", "./models/");
+    m_sandBox = new MeshLoad("./models/sandbox.obj", "./models/");
     
     m_shaderMinimal = new ShaderMin();
     m_shaderDefault = new ShaderDefault();
     
     m_testTexture = new Texture("./textures/uv.png");
-    //m_m4a1sTexture = new Texture("./textures/m4a1s.png");
+    m_m4a1sTexture = new Texture("./textures/m4a1s.png");
     
     m_world = new World_0(this);
 }
@@ -44,14 +45,15 @@ Core::~Core()
     delete m_cubeMesh;
     delete m_highPolyMesh;
     delete m_monkeyMesh;
-    //delete m_m4a1s;
+    delete m_m4a1s;
     delete m_dungeon;
+    delete m_sandBox;
     
     delete m_shaderMinimal;
     delete m_shaderDefault;
     
     delete m_testTexture;
-   // delete m_m4a1sTexture;
+    delete m_m4a1sTexture;
     
     delete m_world;
 }

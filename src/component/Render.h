@@ -18,6 +18,7 @@ namespace kelp
     {
     public:
 
+        bool m_disableDepth;
         Mesh * m_mesh;
         Shader * m_shader;
         Transform * m_transform;
@@ -30,7 +31,7 @@ namespace kelp
         Texture * m_texture;
 
         
-        Render(Mesh* _mesh, Shader* _shader, Texture * _texture, RenderMode _renderMode, kep::Vector3 _colour = kep::Vector3(1.0f, 0.0f, 0.0f));
+        Render(Mesh* _mesh, Shader* _shader, Texture * _texture, RenderMode _renderMode, kep::Vector3 _colour = kep::Vector3(1.0f, 0.0f, 0.0f), bool _disableDepth = false);
         ~Render();
         void init();
         void update();

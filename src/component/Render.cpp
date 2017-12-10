@@ -8,13 +8,14 @@
 
 using namespace kelp;
 
-Render::Render(Mesh * _mesh, Shader * _shader, Texture * _texture, RenderMode _renderMode, kep::Vector3 _colour) : Component()
+Render::Render(Mesh * _mesh, Shader * _shader, Texture * _texture, RenderMode _renderMode, kep::Vector3 _colour, bool _disableDepth) : Component()
 {
     m_mesh = _mesh;
     m_shader = _shader;
     m_renderMode = _renderMode;
     m_colour = _colour;
     m_texture = _texture;
+    m_disableDepth = _disableDepth;
 
 }
 Render::~Render()
@@ -68,8 +69,18 @@ void Render::render()
             glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
             break;
     }
+    if(m_disableDepth)
+    {
+        glPushAttrib(GL_ALL_ATTRIB_BITS);//param can just be replaced with GL_DEPTH_BUFFER_BIT but yolo
+        glClear(GL_DEPTH_BUFFER_BIT);
+    }
+        //glDisable(GL_DEPTH_TEST);
     glBindVertexArray( m_mesh->m_vao );
     glDrawArrays(GL_TRIANGLES, 0, m_mesh->m_numVertices);
     glBindVertexArray( 0 );
+    if(m_disableDepth)
+    {
+        glPopAttrib();
+    }
 
 }
