@@ -46,15 +46,27 @@ namespace kelp
         MeshLoad * m_monkeyMesh;
         MeshLoad * m_sandBox;
         
+        MeshLoad * m_trexBodyMesh;
+        MeshLoad * m_trexTeehMesh;
+        MeshLoad * m_trexClawsMesh;
+        
         MeshLoad * m_externalMesh;
         MeshLoad * m_m4a1s;
         MeshLoad * m_dungeon;
         
+        
+        
         ShaderMin * m_shaderMinimal;
         ShaderDefault * m_shaderDefault;
         
+        
+        
         Texture * m_testTexture;
         Texture * m_m4a1sTexture;
+        
+        Texture * m_trexBodyTexture;
+        Texture * m_trexClawTexture;
+        
         
         World * m_world;
         Core(int _argc, char ** _argv);

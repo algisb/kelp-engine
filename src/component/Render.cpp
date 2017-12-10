@@ -71,7 +71,8 @@ void Render::render()
     }
     if(m_disableDepth)
     {
-        glPushAttrib(GL_ALL_ATTRIB_BITS);//param can just be replaced with GL_DEPTH_BUFFER_BIT but yolo
+        glPushAttrib(GL_DEPTH_BUFFER_BIT);//param can just be replaced with GL_DEPTH_BUFFER_BIT but yolo
+        //glDepthMask(false);
         glClear(GL_DEPTH_BUFFER_BIT);
     }
         //glDisable(GL_DEPTH_TEST);
@@ -80,7 +81,9 @@ void Render::render()
     glBindVertexArray( 0 );
     if(m_disableDepth)
     {
+        //glClear(GL_DEPTH_BUFFER_BIT);
         glPopAttrib();
+        //glDepthMask(true);
     }
 
 }

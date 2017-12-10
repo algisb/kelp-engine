@@ -30,11 +30,18 @@ Core::Core(int _argc, char ** _argv)
     m_dungeon = new MeshLoad("./models/dungeon.obj", "./models/");
     m_sandBox = new MeshLoad("./models/sandbox.obj", "./models/");
     
+    m_trexBodyMesh = new MeshLoad("./models/trex-body.obj", "./models/");
+    m_trexTeehMesh = new MeshLoad("./models/trex-teeth.obj", "./models/");
+    m_trexClawsMesh = new MeshLoad("./models/trex-claws.obj", "./models/");
+    
     m_shaderMinimal = new ShaderMin();
     m_shaderDefault = new ShaderDefault();
     
     m_testTexture = new Texture("./textures/uv.png");
     m_m4a1sTexture = new Texture("./textures/m4a1s.png");
+    
+    m_trexBodyTexture = new Texture("./textures/trexBody.png");
+    m_trexClawTexture = new Texture("./textures/trexClaw.png");
     
     m_world = new World_0(this);
 }
@@ -49,11 +56,18 @@ Core::~Core()
     delete m_dungeon;
     delete m_sandBox;
     
+    delete m_trexBodyMesh;
+    delete m_trexTeehMesh;
+    delete m_trexClawsMesh;
+    
     delete m_shaderMinimal;
     delete m_shaderDefault;
     
     delete m_testTexture;
     delete m_m4a1sTexture;
+    
+    delete m_trexBodyTexture;
+    delete m_trexClawTexture;
     
     delete m_world;
 }

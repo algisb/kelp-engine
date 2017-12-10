@@ -171,6 +171,39 @@ World_0::World_0(Core * _core) : World(_core)
     
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
+    /////////THE T-REX/////////////////////////
+    const kep::Vector3 boyePos(0.0f, 3.5f, 40.0f);
+    refEntity = new Entity(this, "good boye");
+    refTransform = (Transform*)refEntity->addComponent(new Transform(
+                                        boyePos,
+                                        kep::Quaternion(kep::Vector3(0,1,0), 180.0f), 
+                                        kep::Vector3(1.0f, 1.0f, 1.0f)
+                                        ));
+    refEntity->addComponent(new Render(m_core->m_trexBodyMesh, m_core->m_shaderDefault, m_core->m_trexBodyTexture, RenderMode::SOLID));
+    refEntity = new Entity(this, "good boye teeth");
+    refTransform = (Transform*)refEntity->addComponent(new Transform(
+                                        boyePos,
+                                        kep::Quaternion(kep::Vector3(0,1,0), 180.0f), 
+                                        kep::Vector3(1.0f, 1.0f, 1.0f)
+                                        ));
+    refEntity->addComponent(new Render(m_core->m_trexTeehMesh, m_core->m_shaderDefault, m_core->m_trexClawTexture, RenderMode::SOLID));
+
+    refEntity = new Entity(this, "good boye teeth");
+    refTransform = (Transform*)refEntity->addComponent(new Transform(
+                                        boyePos,
+                                        kep::Quaternion(kep::Vector3(0,1,0), 180.0f), 
+                                        kep::Vector3(1.0f, 1.0f, 1.0f)
+                                        ));
+    refEntity->addComponent(new Render(m_core->m_trexClawsMesh, m_core->m_shaderDefault, m_core->m_trexClawTexture, RenderMode::SOLID));
+    
+    
+    refEntity = new Entity(this, "good boye 2");
+    refTransform = (Transform*)refEntity->addComponent(new Transform(
+                                        kep::Vector3(0.0f,5.0f,-8.0f),
+                                        kep::Quaternion(kep::Vector3(0,1,0), 90.0f), 
+                                        kep::Vector3(0.1f, 0.1f, 0.1f)
+                                        ));
+    refEntity->addComponent(new Render(m_core->m_m4a1s, m_core->m_shaderMinimal, NULL, RenderMode::WIRE));
     
     
     ////////////////////////Player body//////////////////////////////////////////
@@ -216,15 +249,18 @@ World_0::World_0(Core * _core) : World(_core)
                                         kep::Quaternion(kep::Vector3(0,1,0), 180.0f), 
                                         kep::Vector3(1.0f, 1.0f, 1.0f)
                                         ));
-     refEntity->addComponent(new Render(m_core->m_m4a1s, m_core->m_shaderDefault, m_core->m_m4a1sTexture, RenderMode::SOLID, kep::Vector3(), true));
-     //crosshair////////////////////
-     refEntity = new Entity(this, "crosshair");
+    refEntity->addComponent(new Render(m_core->m_m4a1s, m_core->m_shaderDefault, m_core->m_m4a1sTexture, RenderMode::SOLID, kep::Vector3(), true));
+    //crosshair////////////////////
+    refEntity = new Entity(this, "crosshair");
+
+    refEntity->addComponent(new RenderLine2(kep::Vector3(0,0.1f,-10.0f), kep::Vector3(0,0.2f,-10.0f)));
+    refEntity->addComponent(new RenderLine2(kep::Vector3(0,-0.1f,-10.0f), kep::Vector3(0,-0.2f,-10.0f)));
+
+    refEntity->addComponent(new RenderLine2(kep::Vector3(0.1f,0.0f,-10.0f), kep::Vector3(0.2f,0.0f,-10.0f)));
+    refEntity->addComponent(new RenderLine2(kep::Vector3(-0.1f,0.0f,-10.0f), kep::Vector3(-0.2f,0.0f,-10.0f)));
      
-     refEntity->addComponent(new RenderLine2(kep::Vector3(0,0.1f,-10.0f), kep::Vector3(0,0.2f,-10.0f)));
-     refEntity->addComponent(new RenderLine2(kep::Vector3(0,-0.1f,-10.0f), kep::Vector3(0,-0.2f,-10.0f)));
      
-     refEntity->addComponent(new RenderLine2(kep::Vector3(0.1f,0.0f,-10.0f), kep::Vector3(0.2f,0.0f,-10.0f)));
-     refEntity->addComponent(new RenderLine2(kep::Vector3(-0.1f,0.0f,-10.0f), kep::Vector3(-0.2f,0.0f,-10.0f)));
+
     
     
 }
