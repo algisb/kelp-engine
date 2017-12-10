@@ -12,8 +12,8 @@ World::World()
     
     fReg = new ForceRegistry();
     
-    gGen = new Gravity(Vector3(0.0f, -9.81f, 0.0f));
-    ldGen = new LinearDrag(0.1f, 0.001f);
+    gGen = new Gravity(Vector3(0.0f, -29.81f, 0.0f));
+    ldGen = new LinearDrag(0.5f, 0.001f);
     //adGen = new AngularDrag(0.5, 0.1f);
     adGen = new AngularDrag(0.1f, 0.001f);
     

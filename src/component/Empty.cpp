@@ -54,24 +54,37 @@ void Empty::update()
         kep::Vector3 moveDir(0,0,-1);
         moveDir = moveMat * moveDir;
         
-    
-        float moveF = 10.0f;  
+        
+        const float maxVel = 10.0f;
+        const float moveF = 10.0f;  
+        //float maxVel = 10.0f;
+        const float moveDirVelComp = (m_playerPhysicsComp->m_rigidBody->velocity * moveDir);
+        
+        //printf("comp: %f\n", moveDirVelComp);
         if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_W, Input::Keyboard::KeyboardAction::HELD))
         {
-            m_playerPhysicsComp->m_rigidBody->addForce(moveDir * moveF);
+            if(moveDirVelComp < maxVel)
+                m_playerPhysicsComp->m_rigidBody->velocity += moveDir * (maxVel/10.0f);
+            //m_playerPhysicsComp->m_rigidBody->addForce(moveDir * moveF);
         }
         if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_S, Input::Keyboard::KeyboardAction::HELD))
         {
-            m_playerPhysicsComp->m_rigidBody->addForce(moveDir * moveF * -1.0f);
-            //m_playerPhysicsComp->m_rigidBody->velocity += moveDir * moveF * -1.0f;
+            if(moveDirVelComp > -maxVel)
+                m_playerPhysicsComp->m_rigidBody->velocity += moveDir * (maxVel/10.0f) * -1.0f;
+            //m_playerPhysicsComp->m_rigidBody->addForce(moveDir * moveF * -1.0f);
+            
         }
         if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_A, Input::Keyboard::KeyboardAction::HELD))
         {
-            m_playerPhysicsComp->m_rigidBody->addForce(m_playerCameraComp->m_left* moveF);
+            if(m_playerPhysicsComp->m_rigidBody->velocity *m_playerCameraComp->m_left < maxVel)
+                m_playerPhysicsComp->m_rigidBody->velocity += m_playerCameraComp->m_left * (maxVel/10.0f);
+            //m_playerPhysicsComp->m_rigidBody->addForce(m_playerCameraComp->m_left* moveF);
         }
         if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_D, Input::Keyboard::KeyboardAction::HELD))
         {
-            m_playerPhysicsComp->m_rigidBody->addForce(m_playerCameraComp->m_left* moveF *-1.0f);
+            if(m_playerPhysicsComp->m_rigidBody->velocity *m_playerCameraComp->m_left > -maxVel)
+                m_playerPhysicsComp->m_rigidBody->velocity += m_playerCameraComp->m_left * (maxVel/10.0f) * -1.0f;
+            //m_playerPhysicsComp->m_rigidBody->addForce(m_playerCameraComp->m_left* moveF *-1.0f);
         }
         if(Input::Keyboard::is(Input::Keyboard::KeyboardKey::KEY_SPACE, Input::Keyboard::KeyboardAction::PRESSED))
         {
@@ -79,7 +92,14 @@ void Empty::update()
             m_playerPhysicsComp->m_rigidBody->velocity += kep::Vector3(0,20,0);
             //printf("jump\n");
         }
+        
+        lastFrameVel = m_playerPhysicsComp->m_rigidBody->velocity;
         //printf("vel: %f \n", m_playerPhysicsComp->m_rigidBody->velocity.magnitude());
+        
+//         printf("vel: %f\n", m_playerPhysicsComp->m_rigidBody->velocity.magnitude());
+//         kep::Vector3 tmpAcc = kep::Vector3(m_playerPhysicsComp->m_rigidBody->lastFrameAcceleration.x, 0.0f, m_playerPhysicsComp->m_rigidBody->lastFrameAcceleration.z);
+//         printf("acc: %f\n",tmpAcc.magnitude());
+//         printf("\n");
         
 }
 void Empty::render()

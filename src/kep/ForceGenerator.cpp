@@ -57,12 +57,15 @@ void LinearDrag::updateForce(RigidBody * _rigidBody, real _duration)
     Vector3 force;
     force = _rigidBody->velocity;
     
-     real dragCoeff  = force.magnitude();
-     dragCoeff = m_k1 * dragCoeff + m_k2 * dragCoeff * dragCoeff;
-     force.normalize();
-     force *= -dragCoeff;
-    
+    real dragCoeff  = force.magnitude();
+
+    dragCoeff = m_k1 * dragCoeff + m_k2 * dragCoeff * dragCoeff;
+    force.normalize();
+    force *= -dragCoeff;
     _rigidBody->addForce(force);
+
+
+    
     
 }
 

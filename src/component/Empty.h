@@ -14,6 +14,7 @@ namespace kelp
         
         KePhys * m_playerPhysicsComp;
         Camera * m_playerCameraComp;
+        kep::Vector3 lastFrameVel;
         
         Empty(Entity * _playerCamera, Entity * _playerBody);
         ~Empty();
