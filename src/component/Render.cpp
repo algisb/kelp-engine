@@ -69,7 +69,7 @@ void Render::render()
             glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
             break;
     }
-    if(m_disableDepth)
+    if(m_disableDepth) //TODO needs fixing, if the the render componenets is not added las you get some weird stuffe hapening
     {
         glPushAttrib(GL_DEPTH_BUFFER_BIT);//param can just be replaced with GL_DEPTH_BUFFER_BIT but yolo
         //glDepthMask(false);

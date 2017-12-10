@@ -139,6 +139,38 @@ World_0::World_0(Core * _core) : World(_core)
         m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))//TODO: rigidbodies with mass 0 should not be check for collision againsts other bodies with mass 0 
     ));
     
+    for(int i = 0; i<5; i++)
+    {
+        refEntity = new Entity(this, "physics cube mesh");
+        refTransform = (Transform*)refEntity->addComponent(new Transform(
+                                            kep::Vector3(-30.0f*(float)i-10.0f, 12.0f, 0.0f),
+                                            kep::Quaternion(kep::Vector3(0,0,1), 0.0f), 
+                                            kep::Vector3(10.0f, 1.0f, 10.0f)
+                                            ));
+        refEntity->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
+        
+        mc = new kep::MeshCollider(kep::Matrix4(), m_core->m_cubeMesh->m_dataV, m_core->m_cubeMesh->m_dataN, m_core->m_cubeMesh->m_numVertices, refTransform->m_scale);
+        refEntity->addComponent(new KePhys(
+            m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))
+        ));
+    }
+    
+    for(int i = 0; i<5; i++)
+    {
+        refEntity = new Entity(this, "physics cube mesh");
+        refTransform = (Transform*)refEntity->addComponent(new Transform(
+                                            kep::Vector3(-50.0, 12.0f + i*10.0f, 20.0f + i*30.0f),
+                                            kep::Quaternion(kep::Vector3(0,0,1), 0.0f), 
+                                            kep::Vector3(10.0f, 1.0f, 10.0f)
+                                            ));
+        refEntity->addComponent(new Render(m_core->m_cubeMesh, m_core->m_shaderDefault, m_core->m_testTexture, RenderMode::SOLID));
+        
+        mc = new kep::MeshCollider(kep::Matrix4(), m_core->m_cubeMesh->m_dataV, m_core->m_cubeMesh->m_dataN, m_core->m_cubeMesh->m_numVertices, refTransform->m_scale);
+        refEntity->addComponent(new KePhys(
+            m_physWorld->addRigidBody(new kep::RigidBody(&refTransform->m_position, &refTransform->m_orientation, true, 0.0f, mc))
+        ));
+    }
+    
     for(int i = 0; i < 20; i++)
     {
         refEntity = new Entity(this, "physics sphere");
