@@ -1,0 +1,3 @@
+<map id="kelp::World_0" name="kelp::World_0">
+<area shape="rect" id="node2" href="$classkelp_1_1World.html" title="{kelp::World\n|+ m_init\l+ m_core\l+ m_renderCamera\l+ m_physWorld\l+ m_lights\l+ m_entities\l+ m_newEntities\l+ m_exiledEntities\l|+ World()\l+ ~World()\l+ initW()\l+ updateW()\l+ update()\l+ deleteEntity()\l+ deleteEntityNextFrame()\l}" alt="" coords="5,5,176,273"/>
+</map>

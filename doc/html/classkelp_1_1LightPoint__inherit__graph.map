@@ -1,0 +1,4 @@
+<map id="kelp::LightPoint" name="kelp::LightPoint">
+<area shape="rect" id="node2" href="$classkelp_1_1Light.html" title="{kelp::Light\n|+ m_shader\l+ m_strength\l+ m_colour\l+ m_enabled\l+ m_shaderStrengthLocation\l+ m_shaderColourLocation\l+ m_shaderEnabledLocation\l+ m_shaderTypeLocation\l+ m_shaderNumLightsLocation\l|+ Light()\l+ ~Light()\l+ init()\l+ update()\l+ render()\l}" alt="" coords="5,204,204,457"/>
+<area shape="rect" id="node3" href="$classkelp_1_1Component.html" title="{kelp::Component\n|+ m_owner\l+ m_enabled\l|+ Component()\l+ ~Component()\l+ init()\l+ update()\l+ render()\l}" alt="" coords="45,5,164,156"/>
+</map>

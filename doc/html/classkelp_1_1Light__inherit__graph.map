@@ -1,0 +1,5 @@
+<map id="kelp::Light" name="kelp::Light">
+<area shape="rect" id="node3" href="$classkelp_1_1LightDirectional.html" title="{kelp::LightDirectional\n|+ m_direction\l+ m_shaderDirectionLocation\l|+ LightDirectional()\l+ ~LightDirectional()\l+ init()\l+ update()\l+ render()\l}" alt="" coords="5,505,195,656"/>
+<area shape="rect" id="node4" href="$classkelp_1_1LightPoint.html" title="{kelp::LightPoint\n|+ m_transform\l+ m_shaderPositionLocation\l|+ LightPoint()\l+ ~LightPoint()\l+ init()\l+ update()\l+ render()\l}" alt="" coords="219,505,403,656"/>
+<area shape="rect" id="node2" href="$classkelp_1_1Component.html" title="{kelp::Component\n|+ m_owner\l+ m_enabled\l|+ Component()\l+ ~Component()\l+ init()\l+ update()\l+ render()\l}" alt="" coords="146,5,265,156"/>
+</map>
