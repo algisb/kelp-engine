@@ -11,12 +11,14 @@ namespace kelp
         float kekX;
         Entity * m_playerCameraEntity;
         Entity * m_playerBodyEntity;
+        Entity * m_projectileEntity;
         
         KePhys * m_playerPhysicsComp;
         Camera * m_playerCameraComp;
+        KePhys * m_projectileEntityPhysicsComp;
         kep::Vector3 lastFrameVel;
         
-        Empty(Entity * _playerCamera, Entity * _playerBody);
+        Empty(Entity * _playerCamera, Entity * _playerBody, Entity * _projectileEntity);
         ~Empty();
         void init();
         void update();

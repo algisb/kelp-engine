@@ -30,8 +30,8 @@ int SphereCollider::collides(SphereCollider * _c, CollisionData * _collisionData
     }
     
     Contact contact;
-    contact.body[0] = _c->rigidBody;
-    contact.body[1] = rigidBody;
+    contact.body[0] = rigidBody;
+    contact.body[1] = _c->rigidBody;
     contact.normal = midline * (((real)1.0)/size);
     contact.position = positionOne + midline * (real)0.5;
     contact.penetration = (totalR - size);

@@ -5,11 +5,12 @@
 #include <Core.h>
 
 using namespace kelp;
-Empty::Empty(Entity * _playerCamera, Entity * _playerBody)
+Empty::Empty(Entity * _playerCamera, Entity * _playerBody, Entity * _projectileEntity)
 {
     kekX = -8.0f;
     m_playerBodyEntity = _playerBody;
     m_playerCameraEntity = _playerCamera;
+    m_projectileEntity = _projectileEntity;
 }
 Empty::~Empty()
 {
@@ -19,6 +20,7 @@ void Empty::init()
 {
     m_playerCameraComp = m_playerCameraEntity->getComponent<Camera>();
     m_playerPhysicsComp = m_playerBodyEntity->getComponent<KePhys>();
+    m_projectileEntityPhysicsComp = m_projectileEntity->getComponent<KePhys>();
     m_playerCameraComp->m_possessed = false;//no longer use internal controls
     Input::Mouse::setMouseJoystickMode();
     
@@ -92,8 +94,29 @@ void Empty::update()
             m_playerPhysicsComp->m_rigidBody->velocity += kep::Vector3(0,20,0);
             //printf("jump\n");
         }
-        
-        lastFrameVel = m_playerPhysicsComp->m_rigidBody->velocity;
+        if(Input::Mouse::is(Input::Mouse::MouseButton::MOUSE_BUTTON_LEFT, Input::Mouse::MouseAction::PRESSED))
+        {
+            if(m_projectileEntityPhysicsComp!=NULL)
+            {
+                kep::Vector3 * v = &m_projectileEntityPhysicsComp->m_rigidBody->velocity;
+                kep::Vector3 * p = m_projectileEntityPhysicsComp->m_rigidBody->position;
+                
+                *p = *m_playerPhysicsComp->m_rigidBody->position + m_playerCameraComp->m_transform->m_position + m_playerCameraComp->m_front * 3.0f;
+                *v = m_playerCameraComp->m_front * 100.0f;
+                
+            }
+            printf("pew pew\n");
+        }
+        //printf("pos: %f %f \n", Input::Mouse::x, Input::Mouse::y);
+//         if(m_playerPhysicsComp->m_rigidBody->velocity.magnitude() != 0.0f)
+//             if(lastFrameVel.magnitude() < m_playerPhysicsComp->m_rigidBody->velocity.magnitude())
+//             {
+//                 if(m_playerPhysicsComp->m_rigidBody->velocity.magnitude() < 4.0f)
+//                 {
+//                     m_playerPhysicsComp->m_rigidBody->velocity = kep::Vector3();
+//                 }
+//             }
+//         lastFrameVel = m_playerPhysicsComp->m_rigidBody->velocity;
         //printf("vel: %f \n", m_playerPhysicsComp->m_rigidBody->velocity.magnitude());
         
 //         printf("vel: %f\n", m_playerPhysicsComp->m_rigidBody->velocity.magnitude());

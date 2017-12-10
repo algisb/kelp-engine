@@ -15,7 +15,6 @@ Transform::~Transform()
 
 void Transform::init()
 {
-    
 }
 
 void Transform::update()
