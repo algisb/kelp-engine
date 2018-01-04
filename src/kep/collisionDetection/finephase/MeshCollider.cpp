@@ -87,7 +87,7 @@ int MeshCollider::spherePlane(Vector3 _spherePosition,
     Vector3 position = _spherePosition - _planePosition;
     real ballDistance = _planeNormal * position - _sphereRadius;
     if (ballDistance >= 0 ||
-        abs(ballDistance) > _sphereRadius)//no contacts generated if on the other side of the plane 
+        std::abs(ballDistance) > _sphereRadius)//no contacts generated if on the other side of the plane 
         return 0;
     
     //*_contactPosition = position - _planeNormal * (ballDistance + _sphereRadius);

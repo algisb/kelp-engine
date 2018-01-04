@@ -45,7 +45,7 @@ int SphereCollider::collides(HalfPlaneCollider * _c, CollisionData * _collisionD
     real ballDistance = normalTr * position - radius;
     //printf("%f \n", ballDistance);
     if (ballDistance >= 0 || 
-        abs(ballDistance) > radius)//no contact when on the other side of the plane 
+        std::abs(ballDistance) > radius)//no contact when on the other side of the plane 
         return 0;
     
     Contact contact;
