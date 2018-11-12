@@ -1,2 +1,2 @@
 # Kelp Engine
-![Screenshot](http://www.algirdasbalciunas.com/32.png)
+![Screenshot](https://raw.githubusercontent.com/algisb/kelp-engine/master/build/bin/textures/trexClaw.png)
